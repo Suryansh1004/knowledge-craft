@@ -46,25 +46,23 @@ const chatbotFlow = ai.defineFlow(
       { role: 'user' as const, parts: [{ text: input.newMessage }] },
     ];
 
-    // Optional: Add a system prompt if desired.
-    // Example:
-    // const systemMessage = { role: 'system', parts: [{ text: 'You are a friendly assistant for Knowledge Craft.' }] };
-    // const messagesWithSystem = [systemMessage, ...messagesForLlm];
-    // Note: For Gemini API, a system prompt can be the first user message with instructions, or some models support a dedicated 'system' role.
-    // For simplicity, we are not using a system prompt here.
+    // Log the messages being sent to the LLM for debugging
+    console.log('Chatbot Flow: Sending messages to LLM:', JSON.stringify(messagesForLlm, null, 2));
 
     const llmResponse = await ai.generate({
       messages: messagesForLlm,
+      // model: 'googleai/gemini-2.0-flash', // Explicitly defining, though default should work
       // config: { temperature: 0.7 }, // Optional: adjust temperature
     });
 
     const responseText = llmResponse.text; // Correct: Genkit 1.x uses property access
 
     if (responseText === undefined || responseText === null || responseText.trim() === "") {
-      console.warn("Chatbot LLM returned an empty, null, undefined, or non-text response.");
+      console.warn("Chatbot LLM returned an empty, null, undefined, or non-text response. LLM Response object:", JSON.stringify(llmResponse, null, 2));
       return { aiResponse: "I'm sorry, I couldn't generate a response at this moment." };
     }
     
     return { aiResponse: responseText };
   }
 );
+
