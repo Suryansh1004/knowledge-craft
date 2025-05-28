@@ -75,7 +75,7 @@ export function FloatingChatbot() {
     setInputValue('');
     setIsLoading(true);
 
-    // Prepare history, excluding the latest user message we just added to display
+    // Prepare history - messages variable here refers to state before this update
     const historyForAI = mapDisplayMessagesToChatMessages(messages);
 
     try {
@@ -92,12 +92,12 @@ export function FloatingChatbot() {
         setMessages(prev => [...prev, { 
           id: Date.now().toString() + '-error', 
           sender: 'ai', 
-          text: `Sorry, an error occurred: ${result.error}`,
+          text: `⚠️ Error: ${result.error || 'An unknown error occurred.'}`,
           timestamp: new Date()
         }]);
          toast({
           title: "Chatbot Error",
-          description: result.error,
+          description: result.error || 'An unknown error occurred.',
           variant: "destructive",
         });
       }
@@ -106,7 +106,7 @@ export function FloatingChatbot() {
       setMessages(prev => [...prev, { 
         id: Date.now().toString() + '-fail', 
         sender: 'ai', 
-        text: "Sorry, I couldn't connect to the chatbot.",
+        text: "⚠️ Connection Error: Sorry, I couldn't connect to the chatbot.",
         timestamp: new Date()
       }]);
       toast({
