@@ -78,8 +78,8 @@ export default async function BlogPage({ params }: BlogPageParams) {
               <Image
                 src={blog.image}
                 alt={blog.title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
                 priority
                 data-ai-hint={blog.data_ai_hint as string || "blog post image"}
               />

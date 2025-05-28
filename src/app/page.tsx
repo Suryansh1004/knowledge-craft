@@ -72,9 +72,8 @@ export default function HomePage() {
                <Image 
                 src="https://placehold.co/500x400/4DD0E1/FFFFFF?text=Why+Knowledge+Craft" 
                 alt="Why Knowledge Craft" 
-                layout="fill" 
-                objectFit="cover" 
-                className="rounded-xl shadow-xl"
+                fill
+                className="object-cover rounded-xl shadow-xl"
                 data-ai-hint="team collaboration"
                 />
             </div>

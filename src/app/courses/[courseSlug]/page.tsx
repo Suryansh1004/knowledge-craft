@@ -50,8 +50,8 @@ export default async function CoursePage({ params }: CoursePageParams) {
             <Image
               src={course.image}
               alt={course.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              className="object-cover"
               priority
               data-ai-hint={course.data_ai_hint as string}
             />
