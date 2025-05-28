@@ -22,10 +22,12 @@ import { Logo } from '@/components/Logo';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
+import { ThemeToggleButton } from './ThemeToggleButton';
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/courses', label: 'Courses' },
+  { href: '/blog', label: 'Blog' },
   { href: '/coding-problems', label: 'Practice' },
   { href: '/forum', label: 'Forum' },
 ];
@@ -68,11 +70,12 @@ export function Header() {
             <NavLinkItem key={link.href} href={link.href} label={link.label} />
           ))}
         </nav>
-        <div className="flex items-center space-x-2 md:space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-3">
           <div className="relative hidden sm:block">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search..." className="pl-8 sm:w-[200px] md:w-[250px] lg:w-[300px] rounded-full" />
+            <Input type="search" placeholder="Search..." className="pl-8 sm:w-[150px] md:w-[200px] lg:w-[250px] rounded-full" />
           </div>
+          <ThemeToggleButton />
           {!loading && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
