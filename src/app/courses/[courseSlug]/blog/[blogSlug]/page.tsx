@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 import { CalendarDays, User, Tag, Edit3, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface BlogPageParams {
   params: {
@@ -173,4 +173,3 @@ export async function generateMetadata({ params }: BlogPageParams) {
     description: blog.excerpt || blog.content.substring(0, 160),
   };
 }
-

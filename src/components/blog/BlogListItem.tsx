@@ -1,9 +1,7 @@
 // src/components/blog/BlogListItem.tsx
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Blog } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, CalendarDays, User } from 'lucide-react';
 import { format } from 'date-fns';
@@ -15,19 +13,7 @@ interface BlogListItemProps {
 
 export function BlogListItem({ blog, courseSlug }: BlogListItemProps) {
   return (
-    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg flex flex-col h-full">
-      {blog.image && (
-        <Link href={`/courses/${courseSlug}/blog/${blog.slug}`} className="block">
-          <Image
-            src={blog.image}
-            alt={blog.title}
-            width={800}
-            height={400}
-            className="w-full h-48 object-cover"
-            data-ai-hint={blog.data_ai_hint as string || "technology article"}
-          />
-        </Link>
-      )}
+    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg flex flex-col h-full">
       <CardHeader>
         <div className="flex items-center space-x-2 text-xs text-muted-foreground mb-2">
           <div className="flex items-center">
@@ -46,8 +32,8 @@ export function BlogListItem({ blog, courseSlug }: BlogListItemProps) {
         </Link>
       </CardHeader>
       <CardContent className="flex-grow">
-        <CardDescription className="text-sm text-muted-foreground line-clamp-3">
-          {blog.excerpt || blog.content.substring(0, 150) + '...'}
+        <CardDescription className="text-sm text-muted-foreground line-clamp-4">
+          {blog.excerpt || blog.content.substring(0, 200) + '...'}
         </CardDescription>
         {blog.tags && blog.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
