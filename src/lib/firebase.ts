@@ -4,12 +4,13 @@ import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "YOUR_API_KEY",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "YOUR_AUTH_DOMAIN",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "YOUR_PROJECT_ID",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "YOUR_STORAGE_BUCKET",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "YOUR_MESSAGING_SENDER_ID",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "YOUR_APP_ID",
+  apiKey: "AIzaSyCcRWQmLbZDNA11cD1fBYye1kAV2cPaCoA",
+  authDomain: "knowledge-craft-f1ce2.firebaseapp.com",
+  projectId: "knowledge-craft-f1ce2",
+  storageBucket: "knowledge-craft-f1ce2.appspot.com", // Corrected storageBucket to .appspot.com as per standard
+  messagingSenderId: "867074024145",
+  appId: "1:867074024145:web:8a47d4e39394a49bb7dbf0",
+  measurementId: "G-9N32HTVS0W"
 };
 
 let app: FirebaseApp;
