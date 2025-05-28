@@ -1,7 +1,7 @@
 // src/components/coding/Compiler.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,7 +28,7 @@ function SubmitButton({ status } : { status?: string | null }) {
   } else if (status === "Accepted") {
     icon = <CheckCircle className="mr-2 h-4 w-4 text-green-500" />;
     text = "Accepted!";
-  } else if (status && status !== "Submitted") {
+  } else if (status && status !== "Submitted" && status !== "Accepted") { // e.g. "Error", "Wrong Answer"
     icon = <XCircle className="mr-2 h-4 w-4 text-red-500" />;
     text = "Try Again";
   }
@@ -49,18 +49,29 @@ export function Compiler({ problem }: CompilerProps) {
   const [state, formAction] = useFormState(submitCodingProblem, null);
   const { toast } = useToast();
   
-  useState(() => {
-    if(state?.message) {
-        toast({
-            title: state.status === "Accepted" ? "Success!" : (state.status === "Submitted" ? "Submitted" : "Result"),
-            description: state.message,
-            variant: state.status === "Accepted" ? "default" : (state.status === "Submitted" ? "default" : "destructive"),
-        });
+  useEffect(() => {
+    if (!state) return; 
+
+    if (state.error && state.status === "Error") {
+      toast({
+        title: "Error",
+        description: state.error,
+        variant: "destructive",
+      });
+    } else if (state.message && state.status === "Submitted") {
+      toast({
+        title: "Submitted!",
+        description: state.message,
+        variant: "default",
+      });
+    } else if (state.message && state.status === "Accepted") { 
+       toast({
+        title: "Accepted!",
+        description: state.message,
+        variant: "default", 
+      });
     }
-    if(state?.error) {
-        toast({ title: "Error", description: state.error, variant: "destructive" });
-    }
-  });
+  }, [state, toast]);
 
   return (
     <Card className="shadow-xl w-full">
@@ -92,6 +103,7 @@ export function Compiler({ problem }: CompilerProps) {
             className="min-h-[300px] md:min-h-[400px] font-mono text-sm bg-muted/30 border-border focus:border-primary"
           />
           {state?.fieldErrors?.code && <p className="text-xs text-destructive mt-1">{state.fieldErrors.code.join(", ")}</p>}
+           {state?.error && !state.fieldErrors && <p className="text-sm text-destructive mt-2">{state.error}</p>}
         </CardContent>
         <CardFooter className="justify-end">
           <SubmitButton status={state?.status} />
