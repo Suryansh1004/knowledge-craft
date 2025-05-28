@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -17,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'LearnHub - Master Tech Skills at Your Own Pace',
-  description: 'LearnHub offers comprehensive courses in various tech stacks. Start learning today and advance your career.',
+  title: 'Knowledge Craft - Master Tech Skills at Your Own Pace',
+  description: 'Knowledge Craft offers comprehensive courses in various tech stacks. Start learning today and advance your career.',
 };
 
 export default function RootLayout({
@@ -41,3 +42,4 @@ export default function RootLayout({
     </html>
   );
 }
+

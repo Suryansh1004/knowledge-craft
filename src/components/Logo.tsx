@@ -1,3 +1,4 @@
+
 // src/components/Logo.tsx
 import Link from 'next/link';
 import { BookOpenCheck } from 'lucide-react';
@@ -10,7 +11,7 @@ export function Logo({ className }: LogoProps) {
   return (
     <Link href="/" className={`flex items-center gap-2 text-2xl font-bold text-primary ${className}`}>
       <BookOpenCheck className="h-8 w-8" />
-      <span>LearnHub</span>
+      <span>Knowledge Craft</span>
     </Link>
   );
 }

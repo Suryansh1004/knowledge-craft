@@ -1,3 +1,4 @@
+
 // src/app/page.tsx
 import { CourseCard } from '@/components/home/CourseCard';
 import { HeroSection } from '@/components/home/HeroSection';
@@ -38,10 +39,10 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-                Why Choose <span className="text-primary">LearnHub?</span>
+                Why Choose <span className="text-primary">Knowledge Craft?</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                LearnHub is dedicated to providing high-quality, accessible, and practical tech education. We empower you to achieve your career goals with skills that matter.
+                Knowledge Craft is dedicated to providing high-quality, accessible, and practical tech education. We empower you to achieve your career goals with skills that matter.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start">
@@ -69,8 +70,8 @@ export default function HomePage() {
             </div>
             <div className="relative h-80 md:h-96">
                <Image 
-                src="https://placehold.co/500x400/4DD0E1/FFFFFF?text=Why+LearnHub" 
-                alt="Why LearnHub" 
+                src="https://placehold.co/500x400/4DD0E1/FFFFFF?text=Why+Knowledge+Craft" 
+                alt="Why Knowledge Craft" 
                 layout="fill" 
                 objectFit="cover" 
                 className="rounded-xl shadow-xl"
@@ -85,3 +86,4 @@ export default function HomePage() {
     </div>
   );
 }
+

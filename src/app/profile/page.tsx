@@ -1,3 +1,4 @@
+
 // src/app/profile/page.tsx
 "use client"; 
 
@@ -80,7 +81,7 @@ export default function ProfilePage() {
               </div>
             )}
              {!user.organization && !user.yearOfPassout && (
-              <p className="text-center text-muted-foreground italic">Complete your profile to get the most out of LearnHub!</p>
+              <p className="text-center text-muted-foreground italic">Complete your profile to get the most out of Knowledge Craft!</p>
             )}
           </CardContent>
         </Card>
@@ -92,3 +93,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+

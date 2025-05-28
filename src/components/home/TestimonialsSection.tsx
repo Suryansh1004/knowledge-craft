@@ -1,3 +1,4 @@
+
 // src/components/home/TestimonialsSection.tsx
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,7 +19,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
             What Our <span className="text-primary">Learners Say</span>
           </h2>
           <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hear from students who have transformed their careers with LearnHub.
+            Hear from students who have transformed their careers with Knowledge Craft.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

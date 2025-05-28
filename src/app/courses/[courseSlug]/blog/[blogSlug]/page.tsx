@@ -1,3 +1,4 @@
+
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 import { courses as allCourses } from '@/data/courses';
 import { blogs as allBlogs } from '@/data/blogs';
@@ -150,7 +151,7 @@ export default async function BlogPage({ params }: BlogPageParams) {
               </Avatar>
               <div>
                 <h4 className="font-semibold text-foreground">{blog.author}</h4>
-                <p className="text-xs text-muted-foreground">Tech Enthusiast & Writer @ LearnHub</p>
+                <p className="text-xs text-muted-foreground">Tech Enthusiast & Writer @ Knowledge Craft</p>
                 <Button variant="link" size="sm" className="p-0 h-auto text-accent mt-1">View Profile</Button>
               </div>
             </CardContent>
@@ -168,7 +169,8 @@ export async function generateMetadata({ params }: BlogPageParams) {
   if (!blog) return { title: "Blog Post Not Found" };
 
   return {
-    title: `${blog.title} | LearnHub`,
+    title: `${blog.title} | Knowledge Craft`,
     description: blog.excerpt || blog.content.substring(0, 160),
   };
 }
+

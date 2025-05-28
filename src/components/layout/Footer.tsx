@@ -1,3 +1,4 @@
+
 // src/components/layout/Footer.tsx
 import Link from 'next/link';
 import { Github, Linkedin, Twitter, BookOpenCheck } from 'lucide-react';
@@ -46,7 +47,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">&copy; {currentYear} LearnHub. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">&copy; {currentYear} Knowledge Craft. All rights reserved.</p>
           <p className="text-sm text-muted-foreground mt-2 md:mt-0">
             Designed by an expert.
           </p>

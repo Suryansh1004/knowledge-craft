@@ -1,3 +1,4 @@
+
 // src/app/forum/[topicSlug]/page.tsx
 import { forumTopics as allTopics, forumPosts as allPostsData } from "@/data/forum";
 import type { ForumTopic, ForumPost } from "@/types";
@@ -86,7 +87,8 @@ export async function generateMetadata({ params }: ForumTopicPageParams) {
   if (!topic) return { title: "Topic Not Found" };
 
   return {
-    title: `${topic.title} | LearnHub Forum`,
+    title: `${topic.title} | Knowledge Craft Forum`,
     description: topic.description,
   };
 }
+
