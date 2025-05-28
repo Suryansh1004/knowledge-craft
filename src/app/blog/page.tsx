@@ -1,9 +1,13 @@
+
 // src/app/blog/page.tsx
 import { blogs as allBlogs } from '@/data/blogs';
 import { courses as allCourses } from '@/data/courses';
 import { BlogListItem } from '@/components/blog/BlogListItem';
 import type { Course } from '@/types';
 import type { Metadata } from 'next';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { PlusCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Blog | Knowledge Craft',
@@ -17,11 +21,18 @@ export default function AllBlogsPage() {
 
   return (
     <div className="container mx-auto py-12 px-4 md:px-6">
-      <div className="mb-12 text-center">
-        <h1 className="text-4xl font-bold text-primary mb-4">Knowledge Craft Blog</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Explore insights, tutorials, and news from our diverse range of tech courses and topics.
-        </p>
+      <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+        <div className="text-center md:text-left">
+          <h1 className="text-4xl font-bold text-primary mb-2">Knowledge Craft Blog</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            Explore insights, tutorials, and news from our diverse range of tech courses and topics.
+          </p>
+        </div>
+        <Button asChild className="shadow-sm">
+          <Link href="/blog/new">
+            <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
+          </Link>
+        </Button>
       </div>
 
       {allBlogs.length > 0 ? (
