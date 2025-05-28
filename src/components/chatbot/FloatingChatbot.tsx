@@ -75,7 +75,6 @@ export function FloatingChatbot() {
     setInputValue('');
     setIsLoading(true);
 
-    // Prepare history - messages variable here refers to state before this update
     const historyForAI = mapDisplayMessagesToChatMessages(messages);
 
     try {
@@ -88,21 +87,21 @@ export function FloatingChatbot() {
           timestamp: new Date() 
         }]);
       } else if (result.error) {
-        console.error("Chatbot error:", result.error);
+        console.error("Chatbot server-side error:", result.error); // Clarified log
         setMessages(prev => [...prev, { 
           id: Date.now().toString() + '-error', 
           sender: 'ai', 
-          text: `⚠️ Error: ${result.error || 'An unknown error occurred.'}`,
+          text: `⚠️ Error: ${result.error || 'An unknown server error occurred.'}`,
           timestamp: new Date()
         }]);
          toast({
           title: "Chatbot Error",
-          description: result.error || 'An unknown error occurred.',
+          description: result.error || 'An unknown server error occurred.',
           variant: "destructive",
         });
       }
     } catch (error: any) {
-      console.error("Failed to send message:", error);
+      console.error("Failed to send message (client-side exception):", error);
       setMessages(prev => [...prev, { 
         id: Date.now().toString() + '-fail', 
         sender: 'ai', 

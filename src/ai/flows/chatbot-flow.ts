@@ -46,29 +46,25 @@ const chatbotFlow = ai.defineFlow(
       { role: 'user' as const, parts: [{ text: input.newMessage }] },
     ];
 
-    // Optional: Add a system prompt if desired, though for basic chat, the model might infer its role.
-    // If you want to give specific instructions to the chatbot, add a system message at the beginning.
+    // Optional: Add a system prompt if desired.
     // Example:
-    // const systemMessage = { role: 'system', parts: [{ text: 'You are a friendly and helpful assistant for Knowledge Craft.' }] };
+    // const systemMessage = { role: 'system', parts: [{ text: 'You are a friendly assistant for Knowledge Craft.' }] };
     // const messagesWithSystem = [systemMessage, ...messagesForLlm];
-    // Note: Gemini API typically uses {role: 'user'} and {role: 'model'}. A system message can be the first user message with instructions.
+    // Note: For Gemini API, a system prompt can be the first user message with instructions, or some models support a dedicated 'system' role.
+    // For simplicity, we are not using a system prompt here.
 
     const llmResponse = await ai.generate({
-      messages: messagesForLlm, // Pass the structured messages array
-      config: {
-        // temperature: 0.7, // Optional: adjust temperature for creativity vs. factuality
-      },
-      // No need for output: { schema: ... } here if we are just taking the raw text response
+      messages: messagesForLlm,
+      // config: { temperature: 0.7 }, // Optional: adjust temperature
     });
 
-    const responseText = llmResponse.text; // Corrected to use property access for Genkit 1.x
-    if (responseText === undefined || responseText === null || responseText.trim() === "") { // Check for undefined, null, or empty string
-      // Handle cases where the model might not return text (e.g., safety reasons, or unexpected output)
-      console.warn("Chatbot LLM returned an empty, null, or undefined response or non-text output.");
-      return { aiResponse: "I'm sorry, I couldn't generate a response right now." };
+    const responseText = llmResponse.text; // Correct: Genkit 1.x uses property access
+
+    if (responseText === undefined || responseText === null || responseText.trim() === "") {
+      console.warn("Chatbot LLM returned an empty, null, undefined, or non-text response.");
+      return { aiResponse: "I'm sorry, I couldn't generate a response at this moment." };
     }
     
     return { aiResponse: responseText };
   }
 );
-
