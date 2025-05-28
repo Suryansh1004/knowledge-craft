@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from "next-themes";
+import { FloatingChatbot } from '@/components/chatbot/FloatingChatbot'; // Added import
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -44,6 +45,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <Toaster />
+            <FloatingChatbot /> {/* Added chatbot component */}
           </AuthProvider>
         </ThemeProvider>
       </body>
