@@ -1,7 +1,8 @@
 // src/components/auth/ProfileForm.tsx
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,7 +28,7 @@ function SubmitButton() {
 }
 
 export function ProfileForm({ user, action }: ProfileFormProps) {
-  const [state, formAction] = useFormState(action, undefined);
+  const [state, formAction] = useActionState(action, undefined);
   const { toast } = useToast();
 
   useEffect(() => {

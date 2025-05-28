@@ -1,7 +1,8 @@
 // src/components/auth/AuthForm.tsx
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ import Link from "next/link";
 
 interface AuthFormProps {
   mode: "login" | "signup";
-  action: (prevState: any, formData: FormData) => Promise<{ message?: string; error?: string; fieldErrors?: any }>;
+  action: (prevState: any, formData: FormData) => Promise<{ message?: string; error?: string; fieldErrors?: any; redirectTo?: string }>;
 }
 
 function SubmitButton({ mode }: { mode: "login" | "signup" }) {
@@ -31,7 +32,7 @@ function SubmitButton({ mode }: { mode: "login" | "signup" }) {
 }
 
 export function AuthForm({ mode, action }: AuthFormProps) {
-  const [state, formAction] = useFormState(action, undefined);
+  const [state, formAction] = useActionState(action, undefined);
   const router = useRouter();
   const { toast } = useToast();
 
