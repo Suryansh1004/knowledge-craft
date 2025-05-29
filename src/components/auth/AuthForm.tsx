@@ -32,7 +32,7 @@ function SubmitButton({ mode }: { mode: "login" | "signup" }) {
 }
 
 export function AuthForm({ mode, action }: AuthFormProps) {
-  const [state, formAction] = useActionState(action, undefined);
+  const [state, formAction] = useActionState(action, null); // Updated to useActionState from React
   const router = useRouter();
   const { toast } = useToast();
 
@@ -41,7 +41,7 @@ export function AuthForm({ mode, action }: AuthFormProps) {
       toast({ title: "Success", description: state.message });
       router.push(state.redirectTo || "/"); // Redirect to home or specified page
     }
-    if (state?.error) {
+    if (state?.error && !state?.fieldErrors) {
       toast({ title: "Error", description: state.error, variant: "destructive" });
     }
   }, [state, router, toast]);
@@ -61,6 +61,8 @@ export function AuthForm({ mode, action }: AuthFormProps) {
           email: user.email,
           displayName: user.displayName || user.email?.split('@')[0],
           photoURL: user.photoURL,
+          roles: ['user'], // Default role for Google sign-in
+          createdAt: new Date().toISOString(), // Add a creation timestamp
         });
       }
       toast({ title: "Success", description: "Logged in with Google successfully!" });

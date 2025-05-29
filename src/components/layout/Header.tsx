@@ -1,10 +1,9 @@
-
 // src/components/layout/Header.tsx
 "use client";
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search } from 'lucide-react';
+import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit } from 'lucide-react'; // Added FileText, Edit
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -62,6 +61,8 @@ export function Header() {
     </Link>
   );
 
+  const isBlogger = user?.roles?.includes('blogger');
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
@@ -98,6 +99,17 @@ export function Header() {
                 <DropdownMenuItem asChild>
                   <Link href="/profile">Profile</Link>
                 </DropdownMenuItem>
+                {isBlogger && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
+                  </DropdownMenuItem>
+                )}
+                {!isBlogger && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/apply-blogger"><FileText className="mr-2 h-4 w-4" />Apply for Blogger</Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-red-500 hover:!text-red-500 hover:!bg-red-500/10 cursor-pointer">
                   <LogOut className="mr-2 h-4 w-4" />
                   Logout
@@ -114,7 +126,8 @@ export function Header() {
               </Button>
             </div>
           ) : (
-            <UserCircle className="h-6 w-6 animate-pulse" />
+            // Skeleton or loader for user avatar while loading
+             <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
           )}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -128,6 +141,16 @@ export function Header() {
                 {navLinks.map((link) => (
                   <NavLinkItem key={link.href} href={link.href} label={link.label} />
                 ))}
+                 {isBlogger && (
+                    <Button variant="outline" asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
+                    </Button>
+                  )}
+                  {!isBlogger && user && ( // Show apply only if logged in and not a blogger
+                     <Button variant="outline" asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                       <Link href="/apply-blogger"><FileText className="mr-2 h-4 w-4" />Apply for Blogger</Link>
+                     </Button>
+                  )}
                 <div className="relative mt-4">
                   <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input type="search" placeholder="Search..." className="pl-8 w-full rounded-full" />

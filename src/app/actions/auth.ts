@@ -45,8 +45,9 @@ export async function signupWithEmail(prevState: any, formData: FormData) {
     await setDoc(userRef, {
       uid: user.uid,
       email: user.email,
-      // Initialize other fields if necessary
       displayName: user.email?.split('@')[0] || 'New User', // Default display name
+      roles: ['user'], // Default role
+      createdAt: new Date().toISOString(), // Add a creation timestamp
     });
 
     return { message: "Signup successful! Redirecting..." };

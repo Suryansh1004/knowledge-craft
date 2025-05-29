@@ -1,11 +1,10 @@
-
 // src/app/actions/blog.ts
 'use server';
 
 import { z } from 'zod';
 import { auth, db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import type { Blog } from '@/types'; // Assuming Blog type is appropriate
+import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
+import type { Blog, UserProfile } from '@/types';
 
 // Zod schema for validating blog post input
 const CreateBlogSchema = z.object({
@@ -25,6 +24,17 @@ export async function createBlogPost(prevState: any, formData: FormData) {
     return { error: "You must be logged in to create a blog post." };
   }
 
+  // Check user role
+  const userDocRef = doc(db, "users", currentUser.uid);
+  const userDoc = await getDoc(userDocRef);
+  if (!userDoc.exists()) {
+    return { error: "User profile not found." };
+  }
+  const userProfile = userDoc.data() as UserProfile;
+  if (!userProfile.roles?.includes('blogger')) {
+    return { error: "You are not authorized to publish blog posts. Please apply to become a blogger." };
+  }
+
   const validatedFields = CreateBlogSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
@@ -37,6 +47,17 @@ export async function createBlogPost(prevState: any, formData: FormData) {
   }
 
   const { title, slug, content, courseId, excerpt, tags, image, authorImage } = validatedFields.data;
+
+  // Check for duplicate slug
+  const blogsCollectionRef = collection(db, "blogs");
+  const slugQuery = query(blogsCollectionRef, where("slug", "==", slug));
+  const slugQuerySnapshot = await getDocs(slugQuery);
+  if (!slugQuerySnapshot.empty) {
+    return { 
+      error: "This slug is already in use. Please choose a unique slug.",
+      fieldErrors: { slug: ["This slug is already in use. Please choose a unique slug."] }
+    };
+  }
 
   try {
     const blogData: Omit<Blog, 'id' | 'createdAt'> & { authorId: string; createdAt: any } = { // `any` for serverTimestamp
@@ -53,7 +74,6 @@ export async function createBlogPost(prevState: any, formData: FormData) {
       createdAt: serverTimestamp(),
     };
 
-    const blogsCollectionRef = collection(db, "blogs");
     await addDoc(blogsCollectionRef, blogData);
 
     return { message: "Blog post created successfully!" };
