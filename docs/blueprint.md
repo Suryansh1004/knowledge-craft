@@ -1,4 +1,4 @@
-# **App Name**: LearnHub
+# **App Name**: Knowledge Craft
 
 ## Core Features:
 
