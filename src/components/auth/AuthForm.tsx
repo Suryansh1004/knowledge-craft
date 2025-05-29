@@ -1,3 +1,4 @@
+
 // src/components/auth/AuthForm.tsx
 "use client";
 
@@ -52,6 +53,9 @@ export function AuthForm({ mode, action }: AuthFormProps) {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       
+      // Speculative delay: Wait for a moment before Firestore operations
+      await new Promise(resolve => setTimeout(resolve, 500)); 
+
       // Check if user exists in Firestore, if not, create them
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
