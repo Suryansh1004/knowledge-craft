@@ -3,6 +3,7 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAnalytics } from "firebase/analytics";
 
 // IMPORTANT: Ensure this apiKey is the correct "Web API Key" from your Firebase project settings.
 // Firebase Console > Project Settings (gear icon) > General tab > Your apps > Web API Key.
@@ -25,5 +26,5 @@ if (!getApps().length) {
 
 const auth: Auth = getAuth(app);
 const db: Firestore = getFirestore(app);
-
-export { app, auth, db };
+const analytics = getAnalytics(app);
+export { app, auth, db, analytics };
