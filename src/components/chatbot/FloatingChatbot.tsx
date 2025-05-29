@@ -83,7 +83,7 @@ export function FloatingChatbot() {
         setMessages(prev => [...prev, { 
           id: Date.now().toString() + '-ai', 
           sender: 'ai', 
-          text: result.aiResponse,
+          text: result.aiResponse ?? "No response",
           timestamp: new Date() 
         }]);
       } else if (result.error) {
