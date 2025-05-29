@@ -70,7 +70,7 @@ export default function HomePage() {
             </div>
             <div className="relative h-80 md:h-96">
                <Image 
-                src="https://placehold.co/500x400/4DD0E1/FFFFFF?text=Why+Knowledge+Craft" 
+                src="https://placehold.co/500x400.png" 
                 alt="Why Knowledge Craft" 
                 fill
                 className="object-cover rounded-xl shadow-xl"
