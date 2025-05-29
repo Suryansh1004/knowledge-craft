@@ -2,7 +2,7 @@
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react'; // Ensure React is imported for useState
+import React, { useEffect, useRef, useState } from 'react';
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { courses as allCourses } from '@/data/courses';
@@ -14,10 +14,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { RelatedBlogs } from '@/components/blog/RelatedBlogs';
 import { format } from 'date-fns';
-import { CalendarDays, User, Tag, Edit3, MessageSquare, Loader2, Send } from 'lucide-react';
+import { CalendarDays, User, Tag, MessageSquare, Loader2, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Ensured CardHeader, CardTitle are imported
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { createBlogComment } from '@/app/actions/blog';
 
@@ -37,8 +37,6 @@ async function getCourseBySlug(slug: string): Promise<Course | undefined> {
 async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType | undefined> {
   return allBlogs.find(blog => blog.slug === slug && blog.courseId === courseId);
 }
-
-// generateStaticParams function REMOVED as it conflicts with "use client"
 
 function CommentSubmitButton() {
   const { pending } = useFormStatus();
@@ -107,8 +105,6 @@ export default function BlogPage({ params }: { params: BlogPageParams['params'] 
   const courseBlogsForSuggestions = allBlogs.filter(b => b.courseId === course.id);
 
   const renderMarkdown = (markdown: string) => {
-    // Basic markdown to HTML conversion
-    // For a production app, use a robust library like 'marked' or 'react-markdown'
     let html = markdown
       .replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold my-3 text-foreground">$1</h3>')
       .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold my-4 text-primary">$1</h2>')
@@ -118,7 +114,7 @@ export default function BlogPage({ params }: { params: BlogPageParams['params'] 
       .replace(/```javascript\n([\s\S]*?)\n```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code class="language-javascript">$1</code></pre>')
       .replace(/```([\s\S]*?)```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code>$1</code></pre>')
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
-      .replace(/\n/g, '<br />'); // Simple newline to <br>
+      .replace(/\n/g, '<br />');
     return { __html: html };
   };
 
@@ -221,6 +217,8 @@ export default function BlogPage({ params }: { params: BlogPageParams['params'] 
     </div>
   );
 }
+
+// generateStaticParams function has been removed.
 
 export async function generateMetadata({ params }: { params: BlogPageParams['params']}) {
   const course = await getCourseBySlug(params.courseSlug);
