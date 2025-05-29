@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import type { Metadata } from 'next'; // Import Metadata type
 
 // Define the full props structure for the page component and metadata function
-interface BlogPageServerProps {
+interface BlogPageParams {
   params: {
     courseSlug: string;
     blogSlug: string;
@@ -33,7 +33,7 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
 }
 
 // Server Component for the page
-export default async function BlogPage({ params }: BlogPageServerProps) {
+export default async function BlogPage({ params }: BlogPageParams) {
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {

@@ -8,7 +8,7 @@ import { getFirestore, Firestore } from 'firebase/firestore';
 // Firebase Console > Project Settings (gear icon) > General tab > Your apps > Web API Key.
 // An "invalid API key" error usually means this key is incorrect for the project.
 const firebaseConfig = {
-  apiKey: "AIzaSyDyXB1fz0vB2mLcgHlxMvib5K5bfSpTzLg", // Updated API Key
+  apiKey: "AIzaSyDyXB1fz0vB2mLcgHlxMvib5K5bfSpTzLg", // This is the NEW key.
   authDomain: "knowledge-craft-f1ce2.firebaseapp.com",
   projectId: "knowledge-craft-f1ce2",
   storageBucket: "knowledge-craft-f1ce2.firebasestorage.app", // User-provided value
@@ -28,4 +28,3 @@ const auth: Auth = getAuth(app);
 const db: Firestore = getFirestore(app);
 
 export { app, auth, db };
-
