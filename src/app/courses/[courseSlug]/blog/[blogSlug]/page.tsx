@@ -8,16 +8,14 @@ import { notFound } from 'next/navigation';
 import { RelatedBlogs } from '@/components/blog/RelatedBlogs';
 import { BlogPageClient } from '@/components/blog/BlogPageClient';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Ensure CardHeader and CardTitle are imported
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 
 // Define the props type directly for the page component and metadata function
-type BlogPageProps = {
-  params: {
-    courseSlug: string;
-    blogSlug: string;
-  };
+type PageParams = {
+  courseSlug: string;
+  blogSlug: string;
 };
 
 // Mock function to get course by slug (remains the same)
@@ -31,7 +29,7 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
 }
 
 // Server Component for the page
-export default async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params }: { params: PageParams }) {
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {
@@ -61,13 +59,14 @@ export default async function BlogPage({ params }: BlogPageProps) {
               allBlogsForCourse={courseBlogsForSuggestions}
             />
           </Suspense>
+           {/* Author card was moved to BlogPageClient, can be here too if static */}
         </aside>
       </div>
     </div>
   );
 }
 
-export async function generateMetadata({ params }: BlogPageProps) {
+export async function generateMetadata({ params }: { params: PageParams }) {
   const course = await getCourseBySlug(params.courseSlug);
   if (!course) return { title: "Blog Post Not Found" };
   const blog = await getBlogBySlug(params.blogSlug, course.id);
