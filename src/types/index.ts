@@ -8,6 +8,13 @@ export interface UserProfile extends FirebaseUser {
   // Any other custom fields
 }
 
+export type EditableUserProfile = {
+  displayName?: string;
+  organization?: string;
+  yearOfPassout?: number;
+  roles?: string[];
+};
+
 export interface Course {
   data_ai_hint: string;
   id: string;

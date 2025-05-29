@@ -9,7 +9,7 @@ import {
   updateProfile as updateFirebaseProfile
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import type { UserProfile } from "@/types";
+import type { EditableUserProfile, UserProfile } from "@/types";
 
 const emailPasswordSchema = z.object({
   email: z.string().email(),
@@ -100,7 +100,7 @@ export async function updateUserProfile(userId: string, prevState: any, formData
   const { displayName, organization, yearOfPassout } = validatedFields.data;
   
   try {
-    const updateData: Partial<UserProfile> = {};
+    const updateData: Partial<EditableUserProfile> = {};
     if (displayName) updateData.displayName = displayName;
     if (organization) updateData.organization = organization;
     if (yearOfPassout) updateData.yearOfPassout = yearOfPassout;
