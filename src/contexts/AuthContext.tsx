@@ -30,36 +30,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [initialProfileCheckDone, setInitialProfileCheckDone] =
     useState(false);
 
-  const fetchUserProfile = useCallback(
-    async (firebaseUser: FirebaseUser) => {
-      try {
-        const userDocRef = doc(db, "users", firebaseUser.uid);
-        const userDocSnap = await getDoc(userDocRef);
-
-        if (userDocSnap.exists()) {
-          const userProfileData = userDocSnap.data();
-          setUser({
-            uid: firebaseUser.uid,
-            email: firebaseUser.email || "",
-            displayName: firebaseUser.displayName || "",
-            photoURL: firebaseUser.photoURL || "",
-            ...userProfileData,
-          });
-        } else {
-          setUser({
-            uid: firebaseUser.uid,
-            email: firebaseUser.email || "",
-            displayName: firebaseUser.displayName || "",
-            photoURL: firebaseUser.photoURL || "",
-          });
+    const fetchUserProfile = useCallback(
+      async (firebaseUser: FirebaseUser) => {
+        try {
+          const userDocRef = doc(db, "users", firebaseUser.uid);
+          const userDocSnap = await getDoc(userDocRef);
+    
+          if (userDocSnap.exists()) {
+            const userProfileData = userDocSnap.data();
+            setUser({
+              ...firebaseUser,
+              ...userProfileData, // custom fields from Firestore
+            });
+          } else {
+            setUser(firebaseUser); // ✅ just pass the full user
+          }
+    
+          setInitialProfileCheckDone(true);
+        } catch (err) {
+          console.error("Failed to fetch Firestore user profile:", err);
         }
-        setInitialProfileCheckDone(true);
-      } catch (err) {
-        console.error("Failed to fetch Firestore user profile:", err);
-      }
-    },
-    []
-  );
+      },
+      []
+    );
+    
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
