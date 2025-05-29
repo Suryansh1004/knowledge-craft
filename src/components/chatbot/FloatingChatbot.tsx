@@ -55,7 +55,7 @@ export function FloatingChatbot() {
   const mapDisplayMessagesToChatMessages = (displayMessages: DisplayMessage[]): ChatMessage[] => {
     return displayMessages.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.text }],
+      content: [{ text: msg.text }],
     }));
   };
 

@@ -15,7 +15,7 @@ import {z} from 'genkit';
 
 const ChatMessageSchema = z.object({
   role: z.enum(['user', 'model']).describe("The role of the message sender, either 'user' or 'model' (for AI)."),
-  parts: z.array(z.object({ text: z.string() })).describe("The content parts of the message, typically a single text part."),
+  content: z.array(z.object({ text: z.string() })).describe("The content of the message, typically a single text part."),
 });
 export type ChatMessage = z.infer<typeof ChatMessageSchema>;
 
@@ -43,7 +43,7 @@ const chatbotFlow = ai.defineFlow(
   async (input) => {
     const messagesForLlm = [
       ...input.history,
-      { role: 'user' as const, parts: [{ text: input.newMessage }] },
+      { role: 'user' as const, content: [{ text: input.newMessage }] },
     ];
 
     // Log the messages being sent to the LLM for debugging

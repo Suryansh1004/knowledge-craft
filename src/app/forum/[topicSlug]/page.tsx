@@ -12,9 +12,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 
 interface ForumTopicPageParams {
-  params: {
+  params: Promise<{
     topicSlug: string;
-  };
+  }>;
 }
 
 // Mock function to get topic by slug
@@ -33,7 +33,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ForumTopicPage({ params }: ForumTopicPageParams) {
+export default async function ForumTopicPage(props: ForumTopicPageParams) {
+  const params = await props.params;
   const topic = await getTopicBySlug(params.topicSlug);
 
   if (!topic) {
@@ -82,7 +83,8 @@ export default async function ForumTopicPage({ params }: ForumTopicPageParams) {
   );
 }
 
-export async function generateMetadata({ params }: ForumTopicPageParams) {
+export async function generateMetadata(props: ForumTopicPageParams) {
+  const params = await props.params;
   const topic = await getTopicBySlug(params.topicSlug);
   if (!topic) return { title: "Topic Not Found" };
 
