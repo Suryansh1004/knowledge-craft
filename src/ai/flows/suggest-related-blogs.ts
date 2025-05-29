@@ -1,3 +1,4 @@
+
 // src/ai/flows/suggest-related-blogs.ts
 'use server';
 /**
@@ -48,6 +49,12 @@ const suggestRelatedBlogsFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    // Safely handle cases where output might be null or undefined, or not match the schema
+    if (output && Array.isArray(output.relatedBlogTitles)) {
+      return output;
+    }
+    // Return a default valid output if AI fails to produce one
+    return { relatedBlogTitles: [] };
   }
 );
+
