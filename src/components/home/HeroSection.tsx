@@ -32,7 +32,7 @@ export function HeroSection() {
           </div>
           <div className="hidden md:block">
             <Image
-              src="https://placehold.co/600x500/64B5F6/FFFFFF?text=Knowledge+Craft+Illustration"
+              src="https://placehold.co/600x500.png"
               alt="Knowledge Craft Illustration"
               width={600}
               height={500}
