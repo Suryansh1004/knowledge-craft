@@ -8,11 +8,13 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BlogListItem } from '@/components/blog/BlogListItem';
 import { Clock, BarChart3, Users, PlayCircle } from 'lucide-react';
+import type { Metadata } from 'next';
 
-interface CoursePageParams {
+interface CoursePageProps {
   params: {
     courseSlug: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Mock function to get course by slug
@@ -31,7 +33,21 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function CoursePage({ params }: CoursePageParams) {
+export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
+  const course = await getCourseBySlug(params.courseSlug);
+  if (!course) {
+    return {
+      title: "Course Not Found | Knowledge Craft",
+      description: "The course you are looking for could not be found."
+    }
+  }
+  return {
+    title: `${course.title} | Knowledge Craft`,
+    description: course.description,
+  };
+}
+
+export default async function CoursePage({ params }: CoursePageProps) {
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {
@@ -53,7 +69,7 @@ export default async function CoursePage({ params }: CoursePageParams) {
               fill
               className="object-cover"
               priority
-              data-ai-hint={course.data_ai_hint as string}
+              data-ai-hint={course.data_ai_hint as string || course.title.toLowerCase().split(" ").slice(0,2).join(" ")}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <Badge variant="secondary" className="mb-2 w-fit text-sm bg-opacity-80 backdrop-blur-sm">{course.category}</Badge>
@@ -82,7 +98,7 @@ export default async function CoursePage({ params }: CoursePageParams) {
         </div>
 
         {/* Sidebar / Course Info Card */}
-        <aside className="lg:col-span-1 space-y-6">
+        <aside className="lg:col-span-1 space-y-6 sticky top-24 self-start">
            <div className="p-6 border rounded-lg shadow-lg bg-card">
             {IconComponent && (
               <div className="text-primary mb-4">
