@@ -2,6 +2,9 @@
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 "use client";
 
+import React, { useEffect, useRef, useState } from 'react'; // Ensure React is imported for useState
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { courses as allCourses } from '@/data/courses';
 import { blogs as allBlogs } from '@/data/blogs';
 import type { Course, Blog as BlogType } from '@/types';
@@ -14,11 +17,9 @@ import { format } from 'date-fns';
 import { CalendarDays, User, Tag, Edit3, MessageSquare, Loader2, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useActionState, useEffect, useRef } from 'react';
-import { createBlogComment } from '@/app/actions/blog';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Ensured CardHeader, CardTitle are imported
 import { useToast } from '@/hooks/use-toast';
-import { useFormStatus } from 'react-dom';
+import { createBlogComment } from '@/app/actions/blog';
 
 interface BlogPageParams {
   params: {
@@ -37,17 +38,7 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
   return allBlogs.find(blog => blog.slug === slug && blog.courseId === courseId);
 }
 
-// This function will be removed or modified when data fetching is dynamic
-export async function generateStaticParams() {
-  const params: Array<{ courseSlug: string, blogSlug: string }> = [];
-  for (const course of allCourses) {
-    const courseBlogs = allBlogs.filter(b => b.courseId === course.id);
-    for (const blog of courseBlogs) {
-      params.push({ courseSlug: course.slug, blogSlug: blog.slug });
-    }
-  }
-  return params;
-}
+// generateStaticParams function REMOVED as it conflicts with "use client"
 
 function CommentSubmitButton() {
   const { pending } = useFormStatus();
@@ -59,12 +50,10 @@ function CommentSubmitButton() {
   );
 }
 
-// Note: This page uses `useState` and `useEffect` for client-side interactions (comment form).
-// Data fetching is currently static; for dynamic data, consider server components or client-side fetching.
 export default function BlogPage({ params }: { params: BlogPageParams['params'] }) {
-  const [course, setCourse] = React.useState<Course | null | undefined>(undefined);
-  const [blog, setBlog] = React.useState<BlogType | null | undefined>(undefined);
-  const [loading, setLoading] = React.useState(true);
+  const [course, setCourse] = useState<Course | null | undefined>(undefined);
+  const [blog, setBlog] = useState<BlogType | null | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   const formRef = useRef<HTMLFormElement>(null);
   const [commentState, commentFormAction] = useActionState(createBlogComment, null);
@@ -118,6 +107,8 @@ export default function BlogPage({ params }: { params: BlogPageParams['params'] 
   const courseBlogsForSuggestions = allBlogs.filter(b => b.courseId === course.id);
 
   const renderMarkdown = (markdown: string) => {
+    // Basic markdown to HTML conversion
+    // For a production app, use a robust library like 'marked' or 'react-markdown'
     let html = markdown
       .replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold my-3 text-foreground">$1</h3>')
       .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold my-4 text-primary">$1</h2>')
@@ -127,7 +118,7 @@ export default function BlogPage({ params }: { params: BlogPageParams['params'] 
       .replace(/```javascript\n([\s\S]*?)\n```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code class="language-javascript">$1</code></pre>')
       .replace(/```([\s\S]*?)```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code>$1</code></pre>')
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
-      .replace(/\n/g, '<br />');
+      .replace(/\n/g, '<br />'); // Simple newline to <br>
     return { __html: html };
   };
 
@@ -232,8 +223,6 @@ export default function BlogPage({ params }: { params: BlogPageParams['params'] 
 }
 
 export async function generateMetadata({ params }: { params: BlogPageParams['params']}) {
-  // This needs to be client-side compatible or removed if fully client rendered
-  // For now, we assume it's pre-rendered or the functions are available
   const course = await getCourseBySlug(params.courseSlug);
   if (!course) return { title: "Blog Post Not Found" };
   const blog = await getBlogBySlug(params.blogSlug, course.id);
