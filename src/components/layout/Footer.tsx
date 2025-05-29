@@ -9,7 +9,7 @@ export function Footer() {
 
   return (
     <footer className="bg-muted/50 border-t">
-      <div className="container py-12 px-4 md:px-6">
+      <div className="container mx-auto py-12 px-4 md:px-6">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <Logo className="mb-4" />

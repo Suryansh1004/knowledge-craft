@@ -13,7 +13,7 @@ interface TestimonialsSectionProps {
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
   return (
     <section className="py-16 md:py-24 bg-muted/30">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
             What Our <span className="text-primary">Learners Say</span>

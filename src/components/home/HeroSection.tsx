@@ -8,7 +8,7 @@ import Image from 'next/image';
 export function HeroSection() {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 via-background to-background">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">

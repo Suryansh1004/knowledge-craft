@@ -17,7 +17,7 @@ export default function HomePage() {
       <HeroSection />
 
       <section className="py-16 md:py-24">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
               Featured <span className="text-primary">Courses</span>
@@ -35,7 +35,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-16 md:py-24 bg-background">
-        <div className="container px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
@@ -85,4 +85,3 @@ export default function HomePage() {
     </div>
   );
 }
-
