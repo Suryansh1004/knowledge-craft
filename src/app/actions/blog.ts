@@ -72,6 +72,7 @@ export async function createBlogPost(prevState: any, formData: FormData) {
       authorId: currentUser.uid,
       authorImage: authorImage || currentUser.photoURL || undefined,
       createdAt: serverTimestamp(),
+      data_ai_hint: "",
     };
 
     await addDoc(blogsCollectionRef, blogData);

@@ -14,13 +14,14 @@ import { Button } from '@/components/ui/button';
 import type { Metadata } from 'next'; // Import Metadata type
 
 // Define the full props structure for the page component and metadata function
-interface BlogPageServerProps {
-  params: {
+export interface PageProps {
+  params: Promise<{
     courseSlug: string;
     blogSlug: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined }; // Optional searchParams
+  }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
+
 
 // Mock function to get course by slug (remains the same)
 async function getCourseBySlug(slug: string): Promise<Course | undefined> {
@@ -33,7 +34,10 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
 }
 
 // Server Component for the page
-export default async function BlogPage({ params }: BlogPageServerProps) {
+export default async function BlogPage(props: PageProps) {
+  const params = await props.params;
+  const searchParams = props.searchParams ? await props.searchParams : undefined;
+
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {
@@ -70,7 +74,8 @@ export default async function BlogPage({ params }: BlogPageServerProps) {
   );
 }
 
-export async function generateMetadata({ params }: BlogPageServerProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const course = await getCourseBySlug(params.courseSlug);
   if (!course) return { title: "Blog Post Not Found" }; // Adjusted for early return
   const blog = await getBlogBySlug(params.blogSlug, course.id);

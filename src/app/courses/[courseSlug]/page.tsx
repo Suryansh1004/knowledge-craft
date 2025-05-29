@@ -11,10 +11,10 @@ import { Clock, BarChart3, Users, PlayCircle } from 'lucide-react';
 import type { Metadata } from 'next';
 
 interface CoursePageProps {
-  params: {
+  params: Promise<{
     courseSlug: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 // Mock function to get course by slug
@@ -33,7 +33,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
+export async function generateMetadata(props: CoursePageProps): Promise<Metadata> {
+  const params = await props.params;
   const course = await getCourseBySlug(params.courseSlug);
   if (!course) {
     return {
@@ -47,7 +48,8 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
   };
 }
 
-export default async function CoursePage({ params }: CoursePageProps) {
+export default async function CoursePage(props: CoursePageProps) {
+  const params = await props.params;
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {
@@ -69,7 +71,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
               fill
               className="object-cover"
               priority
-              data-ai-hint={course.data_ai_hint as string || course.title.toLowerCase().split(" ").slice(0,2).join(" ")}
+              data-ai-hint={course.title.toLowerCase().split(" ").slice(0,2).join(" ")}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <Badge variant="secondary" className="mb-2 w-fit text-sm bg-opacity-80 backdrop-blur-sm">{course.category}</Badge>
