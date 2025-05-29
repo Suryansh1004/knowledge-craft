@@ -1,3 +1,4 @@
+
 // src/data/blogs.ts
 import type { Blog } from '@/types';
 
@@ -74,5 +75,35 @@ export const blogs: Blog[] = [
     tags: ['AWS', 'EC2', 'Cloud Computing'],
     image: 'https://placehold.co/800x400/FFCA28/333333?text=AWS+EC2',
     data_ai_hint: 'cloud servers',
+  },
+  // New Blog 1
+  {
+    id: 'web-advanced-css',
+    courseId: 'web-development',
+    slug: 'advanced-css-techniques-for-modern-layouts',
+    title: 'Mastering Advanced CSS: Flexbox, Grid, and Beyond',
+    content: "## CSS Layouts: Flexbox vs. Grid\n\nUnderstanding when to use Flexbox and when to use CSS Grid is key for modern web layouts. Flexbox is ideal for one-dimensional layouts (rows or columns), while Grid excels at two-dimensional layouts.\n\n### Custom Properties (CSS Variables)\n\nCSS Custom Properties allow you to define reusable values throughout your stylesheets, making theming and maintenance much easier.\n\n```css\n:root {\n  --primary-color: #3498db;\n  --secondary-color: #2ecc71;\n}\n\n.button {\n  background-color: var(--primary-color);\n  color: white;\n}\n```\n\nThis post explores modern CSS features like Flexbox, Grid, Custom Properties, and responsive design techniques to create stunning and maintainable user interfaces.",
+    author: 'Alex Williams',
+    authorImage: 'https://placehold.co/50x50/FDD835/000000?text=AW',
+    createdAt: new Date('2024-01-15T11:00:00Z'),
+    excerpt: "Explore modern CSS features like Flexbox, Grid, Custom Properties, and responsive design techniques for stunning UIs.",
+    tags: ['CSS', 'Flexbox', 'Grid', 'Frontend', 'Responsive Design'],
+    image: 'https://placehold.co/800x400/7986CB/FFFFFF?text=Advanced+CSS',
+    data_ai_hint: 'css code',
+  },
+  // New Blog 2
+  {
+    id: 'ai-intro-genkit',
+    courseId: 'data-science', // Or a new 'AI Development' course if it existed
+    slug: 'getting-started-with-genkit-for-ai-applications',
+    title: 'Building AI-Powered Apps with Genkit: A Primer',
+    content: "## What is Genkit?\n\nGenkit is a powerful open-source framework from Google, designed to simplify the development of AI-powered applications. It provides tools and abstractions for working with large language models (LLMs), managing prompts, defining flows, and integrating external tools.\n\n### Key Features:\n\n*   **Model Agnostic:** Easily switch between different LLMs (like Gemini).\n*   **Flows:** Define complex AI workflows with multiple steps.\n*   **Prompt Management:** Organize and version your prompts effectively.\n*   **Tool Use (Function Calling):** Allow your AI models to interact with external systems.\n\n```typescript\n// Example of a simple Genkit flow (conceptual)\nimport { ai } from '@/ai/genkit';\nimport { z } from 'genkit';\n\nconst greetFlow = ai.defineFlow(\n  {\n    name: 'greetFlow',\n    inputSchema: z.object({ name: z.string() }),\n    outputSchema: z.object({ greeting: z.string() }),\n  },\n  async (input) => {\n    const prompt = `Greet ${input.name}.`;\n    const llmResponse = await ai.generate({ prompt });\n    return { greeting: llmResponse.text };\n  }\n);\n```\n\nDive into Genkit and learn how to build sophisticated AI applications by leveraging its core concepts. We cover setting up Genkit, creating basic flows, and understanding its potential.",
+    author: 'Dr. Eva Rostova',
+    authorImage: 'https://placehold.co/50x50/A1887F/FFFFFF?text=ER',
+    createdAt: new Date('2024-02-01T09:30:00Z'),
+    excerpt: "Dive into Genkit, Google's open-source framework for building AI-powered applications. Learn about flows, prompt management, and more.",
+    tags: ['Genkit', 'AI', 'LLM', 'Generative AI', 'JavaScript', 'TypeScript'],
+    image: 'https://placehold.co/800x400/4DB6AC/FFFFFF?text=Genkit+AI',
+    data_ai_hint: 'ai development',
   },
 ];

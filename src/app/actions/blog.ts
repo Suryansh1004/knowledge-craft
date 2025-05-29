@@ -62,3 +62,47 @@ export async function createBlogPost(prevState: any, formData: FormData) {
     return { error: error.message || "Failed to create blog post. Please try again." };
   }
 }
+
+// Zod schema for validating blog comment input
+const CreateBlogCommentSchema = z.object({
+  blogId: z.string().min(1, "Blog ID is required."),
+  content: z.string().min(1, "Comment cannot be empty.").max(1000, "Comment is too long."),
+});
+
+export async function createBlogComment(prevState: any, formData: FormData) {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    return { error: "You must be logged in to comment." };
+  }
+
+  const rawFormData = Object.fromEntries(formData.entries());
+  const validatedFields = CreateBlogCommentSchema.safeParse(rawFormData);
+
+  if (!validatedFields.success) {
+    return {
+      error: "Invalid comment data.",
+      fieldErrors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { blogId, content } = validatedFields.data;
+
+  try {
+    const commentData = {
+      blogId,
+      userId: currentUser.uid,
+      userName: currentUser.displayName || currentUser.email || "Anonymous User",
+      userAvatar: currentUser.photoURL || undefined,
+      content,
+      createdAt: serverTimestamp(),
+    };
+
+    const commentsCollectionRef = collection(db, "blogs", blogId, "comments");
+    await addDoc(commentsCollectionRef, commentData);
+
+    return { message: "Comment posted successfully!" };
+  } catch (error: any) {
+    console.error("Error creating blog comment:", error);
+    return { error: error.message || "Failed to post comment. Please try again." };
+  }
+}
