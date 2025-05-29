@@ -22,7 +22,7 @@ if (!geminiApiKey && process.env.NODE_ENV !== 'production') {
 export const ai = genkit({
   plugins: [
     googleAI({
-      apiKey: geminiApiKey, // Pass the API key explicitly
+      apiKey: "AIzaSyArAE3k-S2mLFZyw8owuVI5iyGZ9NWAVIw", // Pass the API key explicitly
     }),
   ],
   model: 'googleai/gemini-2.0-flash',
