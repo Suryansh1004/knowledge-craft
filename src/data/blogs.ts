@@ -3,7 +3,7 @@
 import type { Blog } from '@/types';
 
 const newAuthorName = "Suryansh Tripathi";
-const newAuthorImage = "https://placehold.co/50x50/64B5F6/FFFFFF?text=ST"; // Primary color bg, white text for "ST"
+const newAuthorImage = "https://placehold.co/50x50.png"; // Updated to guideline
 
 export const blogs: Blog[] = [
   // Web Development Blogs
@@ -18,7 +18,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2023-05-15T10:00:00Z'),
     excerpt: 'A deep dive into React Hooks. We cover useState, useEffect, useContext, and custom hooks. Essential for modern React development.',
     tags: ['React', 'JavaScript', 'Frontend'],
-    image: 'https://placehold.co/800x400/64B5F6/FFFFFF?text=React+Hooks',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'coding react',
   },
   {
@@ -32,7 +32,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2023-06-02T14:30:00Z'),
     excerpt: 'Learn the fundamentals of Node.js for backend development, including Express.js.',
     tags: ['Node.js', 'Backend', 'JavaScript', 'Express'],
-    image: 'https://placehold.co/800x400/AED581/33691E?text=Node.js+Server',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'server code',
   },
   // Data Science Blogs
@@ -47,7 +47,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2023-07-10T09:00:00Z'),
     excerpt: 'Explore the power of Pandas for data manipulation and analysis in Python.',
     tags: ['Python', 'Pandas', 'Data Analysis'],
-    image: 'https://placehold.co/800x400/4DD0E1/FFFFFF?text=Python+Pandas',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'data charts',
   },
   {
@@ -61,7 +61,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2023-08-01T11:00:00Z'),
     excerpt: 'A high-level overview of machine learning concepts and algorithms.',
     tags: ['Machine Learning', 'AI', 'Data Science'],
-    image: 'https://placehold.co/800x400/FF8A65/D84315?text=Machine+Learning',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'artificial intelligence',
   },
   // Cloud Computing Blogs
@@ -76,7 +76,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2023-09-05T16:00:00Z'),
     excerpt: 'Learn how to launch, configure, and manage your first EC2 instance on AWS.',
     tags: ['AWS', 'EC2', 'Cloud Computing'],
-    image: 'https://placehold.co/800x400/FFCA28/333333?text=AWS+EC2',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'cloud servers',
   },
   // New Blog 1
@@ -91,7 +91,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2024-01-15T11:00:00Z'),
     excerpt: "Explore modern CSS features like Flexbox, Grid, Custom Properties, and responsive design techniques for stunning UIs.",
     tags: ['CSS', 'Flexbox', 'Grid', 'Frontend', 'Responsive Design'],
-    image: 'https://placehold.co/800x400/7986CB/FFFFFF?text=Advanced+CSS',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'css code',
   },
   // New Blog 2
@@ -106,7 +106,7 @@ export const blogs: Blog[] = [
     createdAt: new Date('2024-02-01T09:30:00Z'),
     excerpt: "Dive into Genkit, Google's open-source framework for building AI-powered applications. Learn about flows, prompt management, and more.",
     tags: ['Genkit', 'AI', 'LLM', 'Generative AI', 'JavaScript', 'TypeScript'],
-    image: 'https://placehold.co/800x400/4DB6AC/FFFFFF?text=Genkit+AI',
+    image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'ai development',
   },
 ];
