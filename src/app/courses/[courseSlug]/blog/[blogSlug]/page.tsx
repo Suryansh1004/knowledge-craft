@@ -11,7 +11,17 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import type { Metadata } from 'next';
+import type { Metadata } from 'next'; // Import Metadata type
+
+// Define the full props structure for the page component and metadata function
+export interface PageProps {
+  params: Promise<{
+    courseSlug: string;
+    blogSlug: string;
+  }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
 
 // Mock function to get course by slug (remains the same)
 async function getCourseBySlug(slug: string): Promise<Course | undefined> {
@@ -23,13 +33,11 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
   return allBlogs.find(blog => blog.slug === slug && blog.courseId === courseId);
 }
 
-// Server Component for the page using explicit inline prop types
-export default async function BlogPage({
-  params,
-}: {
-  params: { courseSlug: string; blogSlug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+// Server Component for the page
+export default async function BlogPage(props: PageProps) {
+  const params = await props.params;
+  const searchParams = props.searchParams ? await props.searchParams : undefined;
+
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {
@@ -66,16 +74,12 @@ export default async function BlogPage({
   );
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { courseSlug: string; blogSlug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const course = await getCourseBySlug(params.courseSlug);
-  if (!course) return { title: "Blog Post Not Found" };
+  if (!course) return { title: "Blog Post Not Found" }; // Adjusted for early return
   const blog = await getBlogBySlug(params.blogSlug, course.id);
-  if (!blog) return { title: "Blog Post Not Found" };
+  if (!blog) return { title: "Blog Post Not Found" }; // Adjusted for early return
 
   return {
     title: `${blog.title} | Knowledge Craft`,
