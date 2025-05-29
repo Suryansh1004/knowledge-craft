@@ -32,7 +32,7 @@ function SubmitButton({ mode }: { mode: "login" | "signup" }) {
 }
 
 export function AuthForm({ mode, action }: AuthFormProps) {
-  const [state, formAction] = useActionState(action, null); // Updated to useActionState from React
+  const [state, formAction] = useActionState(action, null);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -69,7 +69,12 @@ export function AuthForm({ mode, action }: AuthFormProps) {
       router.push("/");
     } catch (error: any) {
       console.error("Google Sign-In Error: ", error);
-      toast({ title: "Error", description: error.message || "Google Sign-In failed.", variant: "destructive" });
+      let description = error.message || "Google Sign-In failed.";
+      // Check for Firestore offline error
+      if (error.code === 'firestore/unavailable' || (error.message && error.message.toLowerCase().includes("client is offline"))) {
+        description = "Failed to save user data: The application appears to be offline. Please check your internet connection and try again.";
+      }
+      toast({ title: "Error", description, variant: "destructive" });
     }
   };
 
