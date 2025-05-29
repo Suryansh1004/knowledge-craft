@@ -9,6 +9,7 @@ export interface UserProfile extends FirebaseUser {
 }
 
 export interface Course {
+  data_ai_hint: string;
   id: string;
   title: string;
   description: string;
