@@ -20,6 +20,7 @@ export interface Course {
 }
 
 export interface Blog {
+  data_ai_hint: string,
   id: string;
   courseId: string;
   slug: string;
