@@ -3,6 +3,7 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: 'standalone', // Added for potentially better deployment packaging
   typescript: {
     ignoreBuildErrors: true,
   },
