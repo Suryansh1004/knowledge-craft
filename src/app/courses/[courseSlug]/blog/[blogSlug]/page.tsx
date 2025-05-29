@@ -6,15 +6,19 @@ import { blogs as allBlogs } from '@/data/blogs';
 import type { Course, Blog as BlogType } from '@/types';
 import { notFound } from 'next/navigation';
 import { RelatedBlogs } from '@/components/blog/RelatedBlogs';
-import { BlogPageClient } from '@/components/blog/BlogPageClient'; // New Client Component
-import { Skeleton } from '@/components/ui/skeleton'; // For Suspense fallback
+import { BlogPageClient } from '@/components/blog/BlogPageClient';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 
-interface BlogPageParams {
+// Define the props type directly for the page component and metadata function
+type BlogPageProps = {
   params: {
     courseSlug: string;
     blogSlug: string;
   };
-}
+};
 
 // Mock function to get course by slug (remains the same)
 async function getCourseBySlug(slug: string): Promise<Course | undefined> {
@@ -27,9 +31,9 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
 }
 
 // Server Component for the page
-export default async function BlogPage({ params }: BlogPageParams) {
+export default async function BlogPage({ params }: BlogPageProps) {
   const course = await getCourseBySlug(params.courseSlug);
-  
+
   if (!course) {
     notFound();
   }
@@ -50,22 +54,20 @@ export default async function BlogPage({ params }: BlogPageParams) {
         </div>
         <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
           <Suspense fallback={<Skeleton className="h-40 w-full rounded-lg" />}>
-             {/* RelatedBlogs is an async Server Component, can be awaited or suspended */}
-            <RelatedBlogs 
-              currentBlogContent={blog.content} 
+            <RelatedBlogs
+              currentBlogContent={blog.content}
               currentBlogId={blog.id}
               courseSlug={params.courseSlug}
               allBlogsForCourse={courseBlogsForSuggestions}
             />
           </Suspense>
-          {/* The "About The Author" card can be part of BlogPageClient or another server component */}
         </aside>
       </div>
     </div>
   );
 }
 
-export async function generateMetadata({ params }: BlogPageParams) {
+export async function generateMetadata({ params }: BlogPageProps) {
   const course = await getCourseBySlug(params.courseSlug);
   if (!course) return { title: "Blog Post Not Found" };
   const blog = await getBlogBySlug(params.blogSlug, course.id);
