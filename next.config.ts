@@ -5,10 +5,10 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: 'standalone', // Added for potentially better deployment packaging
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false, // Changed to false
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false, // Changed to false
   },
   images: {
     remotePatterns: [
