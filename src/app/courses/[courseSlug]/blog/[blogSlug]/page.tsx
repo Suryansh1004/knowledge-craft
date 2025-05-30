@@ -8,19 +8,16 @@ import { notFound } from 'next/navigation';
 import { RelatedBlogs } from '@/components/blog/RelatedBlogs';
 import { BlogPageClient } from '@/components/blog/BlogPageClient';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import type { Metadata } from 'next';
+import type { Metadata, ResolvingMetadata } from 'next';
 
-// Define the correct props structure for the page component and metadata function
-interface BlogPageServerProps {
+// Define the props structure expected by Next.js dynamic route pages
+type Props = {
   params: {
     courseSlug: string;
     blogSlug: string;
   };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 // Mock function to get course by slug
 async function getCourseBySlug(slug: string): Promise<Course | undefined> {
@@ -33,8 +30,11 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
 }
 
 // Server Component for the page
-export default async function BlogPage({ params }: BlogPageServerProps) {
-  const course = await getCourseBySlug(params.courseSlug);
+export default async function BlogPage({ params, searchParams }: Props) {
+  // Destructure params for clarity, though Next.js should resolve them directly
+  const { courseSlug, blogSlug } = params;
+
+  const course = await getCourseBySlug(courseSlug);
 
   if (!course) {
     notFound();
@@ -43,7 +43,7 @@ export default async function BlogPage({ params }: BlogPageServerProps) {
   // Destructure the icon from the course object to make it serializable for the client component
   const { icon, ...serializableCourseData } = course;
 
-  const blog = await getBlogBySlug(params.blogSlug, course.id); // Use course.id
+  const blog = await getBlogBySlug(blogSlug, course.id);
 
   if (!blog) {
     notFound();
@@ -55,14 +55,18 @@ export default async function BlogPage({ params }: BlogPageServerProps) {
     <div className="container mx-auto py-8 px-4 md:px-6">
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8">
-          <BlogPageClient course={serializableCourseData} blog={blog} params={params} />
+          <BlogPageClient
+            course={serializableCourseData}
+            blog={blog}
+            params={params} // Pass the original params object
+          />
         </div>
         <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
           <Suspense fallback={<Skeleton className="h-40 w-full rounded-lg" />}>
             <RelatedBlogs
               currentBlogContent={blog.content}
               currentBlogId={blog.id}
-              courseSlug={params.courseSlug}
+              courseSlug={courseSlug} // Use destructured slug
               allBlogsForCourse={courseBlogsForSuggestions}
             />
           </Suspense>
@@ -72,10 +76,16 @@ export default async function BlogPage({ params }: BlogPageServerProps) {
   );
 }
 
-export async function generateMetadata({ params }: BlogPageServerProps): Promise<Metadata> {
-  const course = await getCourseBySlug(params.courseSlug);
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { courseSlug, blogSlug } = params; // Destructure params
+
+  const course = await getCourseBySlug(courseSlug);
   if (!course) return { title: "Blog Post Not Found" };
-  const blog = await getBlogBySlug(params.blogSlug, course.id);
+
+  const blog = await getBlogBySlug(blogSlug, course.id);
   if (!blog) return { title: "Blog Post Not Found" };
 
   return {
