@@ -1,7 +1,7 @@
 
 // src/data/courses.ts
 import type { Course } from '@/types';
-import { Laptop, Code, Database, Cloud, Palette, BarChart3 } from 'lucide-react';
+import { Laptop, Code, Database, Cloud, Palette, BarChart3, TerminalSquare, Server } from 'lucide-react';
 
 export const courses: Course[] = [
   {
@@ -63,5 +63,15 @@ export const courses: Course[] = [
     data_ai_hint: 'database management',
     icon: Database,
     slug: 'database-management-sql',
+  },
+  {
+    id: 'devops-interview-prep',
+    title: 'DevOps Interview Prep',
+    description: 'Prepare for your next DevOps interview with common questions covering Kubernetes, Docker, AWS, Terraform, and more.',
+    category: 'DevOps',
+    image: 'https://placehold.co/600x400.png',
+    data_ai_hint: 'devops interview',
+    icon: Server, // Using Server icon for DevOps
+    slug: 'devops-interview-prep',
   },
 ];

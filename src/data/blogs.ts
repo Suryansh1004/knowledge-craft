@@ -3,7 +3,7 @@
 import type { Blog } from '@/types';
 
 const newAuthorName = "Suryansh Tripathi";
-const newAuthorImage = "https://placehold.co/50x50/90CAF9/1976D2?text=ST"; // Placeholder for Suryansh Tripathi
+const newAuthorImage = "https://placehold.co/50x50.png"; 
 
 export const blogs: Blog[] = [
   // Web Development Blogs
@@ -84,70 +84,7 @@ export const blogs: Blog[] = [
     courseId: 'cloud-computing',
     slug: 'blue-green-deployment-aws-virtual-services',
     title: 'Seamless Releases: Blue-Green Deployment on AWS with Virtual Services',
-    content: `## What is Blue-Green Deployment?
-
-Blue-Green deployment is a strategy for releasing software updates with minimal downtime and risk. It involves maintaining two identical production environments, traditionally named "Blue" (the current live version) and "Green" (the new version). Once the Green environment is ready and tested, live traffic is switched from Blue to Green. If any issues arise with the Green environment, traffic can be quickly reverted to the Blue environment.
-
-**Benefits include:**
--   Near-zero downtime deployments.
--   Rapid rollback capability.
--   Reduced risk associated with new releases.
--   Ability to test the new version with production-like traffic before full cutover.
-
-## Why Use Blue-Green on AWS?
-
-AWS provides a robust and flexible infrastructure that is well-suited for implementing Blue-Green deployments. Services like Elastic Load Balancing (ELB), Auto Scaling, Route 53, AWS App Mesh, and CodeDeploy offer various mechanisms to manage two separate environments and control traffic flow.
-
-## The Role of Virtual Services in Traffic Routing
-
-While "Virtual Service" isn't a single, specific AWS service, the concept is crucial. It represents an abstraction layer that directs traffic to your application instances. In the context of AWS, this can be implemented using:
-
--   **AWS App Mesh:** A service mesh that provides application-level networking, making it easy to define virtual services, virtual routers, and routes to control traffic between your microservices. You can update a virtual service to point to the new "Green" version of your application.
--   **Application Load Balancer (ALB) Target Groups:** You can have two target groups, one for Blue and one for Green. The ALB listener can be updated to switch traffic, or you can use weighted target groups for a gradual shift.
--   **Amazon Route 53:** DNS-based traffic shifting can be used, especially with weighted routing policies, to direct a percentage of traffic to the Green environment.
-
-The "virtual service" concept allows you to decouple the traffic routing logic from the underlying infrastructure, making the switch seamless.
-
-## Core Steps in a Blue-Green Deployment on AWS:
-
-1.  **Provision the "Green" Environment:**
-    Deploy the new version of your application to a new, separate environment (e.g., a new set of EC2 instances, ECS tasks, a new Elastic Beanstalk environment, or a new Kubernetes deployment in EKS). This Green environment should be identical in configuration to the Blue (live) environment.
-
-2.  **Test the Green Environment:**
-    Thoroughly test the Green environment. This can include health checks, integration tests, performance tests, and even directing a small amount of internal or canary traffic to it.
-
-3.  **Traffic Shifting using Virtual Services (Conceptual):**
-    -   **Using AWS App Mesh:** Update the virtual service configuration to change the target of the route from the Blue version to the Green version.
-    -   **Using ALB:** Modify the listener rules on your ALB to point to the Green target group, or adjust weights if using weighted target groups.
-    -   **Using Route 53:** Update DNS records (e.g., CNAME or Alias records) to point to the Green environment's endpoint, or adjust weights in a weighted routing policy.
-    All user traffic is now directed to the Green environment. The Blue environment is still running but receives no live traffic.
-
-4.  **Monitor the Green Environment:**
-    Closely monitor the Green environment for any errors, performance issues, or unexpected behavior after it goes live.
-
-5.  **Decommission or Keep the "Blue" Environment:**
-    -   If the Green environment is stable, you can decommission the Blue environment to save costs.
-    -   Alternatively, keep the Blue environment for a period as a quick rollback target if needed.
-
-## Example Scenario:
-
-Imagine a web application running on AWS ECS.
--   **Blue:** The current version of your application tasks running in an ECS service, served by an ALB.
--   **Green:** Deploy a new version of your application tasks as a separate ECS service.
--   **Traffic Shift:** Update your AWS App Mesh virtual service to route 100% of traffic to the Green ECS service, or change your ALB's target group to point to the Green service.
-
-## Key AWS Services:
-
--   **Amazon EC2/ECS/EKS/Elastic Beanstalk:** For running your application environments.
--   **Application Load Balancer (ALB):** For distributing traffic and switching between target groups.
--   **Amazon Route 53:** For DNS-level traffic management.
--   **AWS App Mesh:** For fine-grained traffic control in microservice architectures.
--   **AWS CodeDeploy:** Offers built-in Blue/Green deployment strategies for EC2, ECS, and Lambda.
-
-## Conclusion
-
-Blue-Green deployments, facilitated by traffic routing abstractions like virtual services on AWS, significantly reduce the risk and downtime associated with application releases. By carefully planning your environments and traffic management strategy, you can achieve smoother, more reliable updates.
-`,
+    content: `## What is Blue-Green Deployment?\n\nBlue-Green deployment is a strategy for releasing software updates with minimal downtime and risk. It involves maintaining two identical production environments, traditionally named "Blue" (the current live version) and "Green" (the new version). Once the Green environment is ready and tested, live traffic is switched from Blue to Green. If any issues arise with the Green environment, traffic can be quickly reverted to the Blue environment.\n\n**Benefits include:**\n- Near-zero downtime deployments.\n- Rapid rollback capability.\n- Reduced risk associated with new releases.\n- Ability to test the new version with production-like traffic before full cutover.\n\n## Why Use Blue-Green on AWS?\n\nAWS provides a robust and flexible infrastructure that is well-suited for implementing Blue-Green deployments. Services like Elastic Load Balancing (ELB), Auto Scaling, Route 53, AWS App Mesh, and CodeDeploy offer various mechanisms to manage two separate environments and control traffic flow.\n\n## The Role of Virtual Services in Traffic Routing\n\nWhile "Virtual Service" isn't a single, specific AWS service, the concept is crucial. It represents an abstraction layer that directs traffic to your application instances. In the context of AWS, this can be implemented using:\n\n-   **AWS App Mesh:** A service mesh that provides application-level networking, making it easy to define virtual services, virtual routers, and routes to control traffic between your microservices. You can update a virtual service to point to the new "Green" version of your application.\n-   **Application Load Balancer (ALB) Target Groups:** You can have two target groups, one for Blue and one for Green. The ALB listener can be updated to switch traffic, or you can use weighted target groups for a gradual shift.\n-   **Amazon Route 53:** DNS-based traffic shifting can be used, especially with weighted routing policies, to direct a percentage of traffic to the Green environment.\n\nThe "virtual service" concept allows you to decouple the traffic routing logic from the underlying infrastructure, making the switch seamless.\n\n## Core Steps in a Blue-Green Deployment on AWS:\n\n1.  **Provision the "Green" Environment:**\n    Deploy the new version of your application to a new, separate environment (e.g., a new set of EC2 instances, ECS tasks, a new Elastic Beanstalk environment, or a new Kubernetes deployment in EKS). This Green environment should be identical in configuration to the Blue (live) environment.\n\n2.  **Test the Green Environment:**\n    Thoroughly test the Green environment. This can include health checks, integration tests, performance tests, and even directing a small amount of internal or canary traffic to it.\n\n3.  **Traffic Shifting using Virtual Services (Conceptual):**\n    -   **Using AWS App Mesh:** Update the virtual service configuration to change the target of the route from the Blue version to the Green version.\n    -   **Using ALB:** Modify the listener rules on your ALB to point to the Green target group, or adjust weights if using weighted target groups.\n    -   **Using Route 53:** Update DNS records (e.g., CNAME or Alias records) to point to the Green environment's endpoint, or adjust weights in a weighted routing policy.\n    All user traffic is now directed to the Green environment. The Blue environment is still running but receives no live traffic.\n\n4.  **Monitor the Green Environment:**\n    Closely monitor the Green environment for any errors, performance issues, or unexpected behavior after it goes live.\n\n5.  **Decommission or Keep the "Blue" Environment:**\n    -   If the Green environment is stable, you can decommission the Blue environment to save costs.\n    -   Alternatively, keep the Blue environment for a period as a quick rollback target if needed.\n\n## Example Scenario:\n\nImagine a web application running on AWS ECS.\n-   **Blue:** The current version of your application tasks running in an ECS service, served by an ALB.\n-   **Green:** Deploy a new version of your application tasks as a separate ECS service.\n-   **Traffic Shift:** Update your AWS App Mesh virtual service to route 100% of traffic to the Green ECS service, or change your ALB's target group to point to the Green service.\n\n## Key AWS Services:\n\n-   **Amazon EC2/ECS/EKS/Elastic Beanstalk:** For running your application environments.\n-   **Application Load Balancer (ALB):** For distributing traffic and switching between target groups.\n-   **Amazon Route 53:** For DNS-level traffic management.\n-   **AWS App Mesh:** For fine-grained traffic control in microservice architectures.\n-   **AWS CodeDeploy:** Offers built-in Blue/Green deployment strategies for EC2, ECS, and Lambda.\n\n## Conclusion\n\nBlue-Green deployments, facilitated by traffic routing abstractions like virtual services on AWS, significantly reduce the risk and downtime associated with application releases. By carefully planning your environments and traffic management strategy, you can achieve smoother, more reliable updates.\n`,
     author: newAuthorName,
     authorImage: newAuthorImage,
     createdAt: new Date('2024-03-10T11:00:00Z'),
@@ -186,6 +123,92 @@ Blue-Green deployments, facilitated by traffic routing abstractions like virtual
     image: 'https://placehold.co/800x400.png',
     data_ai_hint: 'ai development',
   },
-];
+  {
+    id: 'devops-interview-q1',
+    courseId: 'devops-interview-prep',
+    slug: 'devops-interview-questions-real-world',
+    title: 'Ace Your DevOps Interview: Common Questions from Real Interviews',
+    content: `
+## Preparing for a DevOps Interview?
 
-    
+This guide covers a range of questions encountered in real-world DevOps interviews, spanning Linux, Kubernetes, Docker, AWS, Terraform, Git, and Networking.
+
+---
+
+### Round 1: Online Assessment (At the Office)
+
+The initial round was an online assessment of multiple choice and multiple selection questions. It covered:
+*   Linux Commands and scripting
+*   Network Security & Protocols
+*   Git Development Strategies
+*   Deployment & Rollout Strategies
+
+---
+
+### 💻 Round 2: Technical Interview - 1
+
+Key Questions Asked:
+
+*   Introduce yourself.
+*   What is a Kubernetes Operator?
+*   What is a Custom Resource Definition (CRD)?
+*   What is a Custom Controller?
+*   Explain Operator architecture and how it works.
+*   What are API groups in Kubernetes?
+*   What is etcd?
+*   Explain the OSI model layers and their significance.
+*   What’s the difference between HTTP and HTTPS?
+*   What is DNS?
+*   What happens when you hit www.hashedin.com in a browser?
+*   What is recursive DNS?
+*   Explain Git lifecycle from cloning a repo to pushing code.
+*   What is Git architecture?
+*   What is a kernel? Is Linux an OS or a kernel?
+*   Write ten Linux commands and explain their usage.
+*   Difference between virtualization and containerization.
+*   Which Linux features help Docker work?
+*   What is Docker daemon?
+*   Explain Docker architecture & lifecycle.
+*   Write five Docker commands and explain them.
+*   Write a Jenkins pipeline that builds and pushes a Docker image.
+*   What are namespaces in Kubernetes?
+*   Write a Pod specification YAML file for an NGINX server.
+*   What is VPC in AWS?
+*   Difference between public and private subnets.
+*   What are NAT Gateway and Internet Gateway?
+*   Can a NAT Gateway be created inside a private subnet?
+*   How do instances in private subnets access the internet?
+*   Write and explain Terraform lifecycle commands.
+*   What is a state file in Terraform?
+*   How to manage state files in team collaboration?
+
+---
+
+### 💻 Round 3: Technical Interview – 2
+
+Key Questions:
+
+*   Write a simple Dockerfile to create a Docker image.
+*   Explain Docker workflow.
+*   Why is it essential to make etcd highly available in Kubernetes?
+*   What happens when you hit a website URL?
+*   What is an SSL certificate?
+*   Explain the role of NAT in AWS.
+*   Difference between S3 buckets and EBS volumes.
+*   Amazon AMI vs Snapshot—what’s the difference?
+*   Explain remote state locking in Terraform.
+*   Difference between MySQL and MongoDB.
+*   What is a relational database?
+*   What’s a primary key in SQL?
+
+---
+    `,
+    author: newAuthorName,
+    authorImage: newAuthorImage,
+    createdAt: new Date('2024-05-29T14:00:00Z'),
+    excerpt: 'A comprehensive list of DevOps interview questions covering Kubernetes, Docker, AWS, Terraform, Linux, Git, and Networking, based on real interview experiences.',
+    tags: ['DevOps', 'Interview Questions', 'Kubernetes', 'Docker', 'AWS', 'Terraform', 'Linux', 'Git', 'Networking', 'CI/CD', 'Jenkins'],
+    image: 'https://placehold.co/800x400.png',
+    data_ai_hint: 'interview questions',
+  },
+];
