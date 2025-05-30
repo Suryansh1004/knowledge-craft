@@ -3,7 +3,7 @@
 import type { Blog } from '@/types';
 
 const newAuthorName = "Suryansh Tripathi";
-const newAuthorImage = "https://placehold.co/50x50.png"; // Generic placeholder
+const newAuthorImage = "https://placehold.co/50x50/A0A0A0/FFFFFF?text=ST"; // Placeholder with initials
 
 export const blogs: Blog[] = [
   // Web Development Blogs
@@ -137,14 +137,16 @@ This guide covers a range of questions encountered in real-world DevOps intervie
 
 ---
 
-### Round 1: Online Assessment (At the Office)
+### Round 1: Navigating the Online Assessment
 
-The initial round was an online assessment of multiple choice and multiple selection questions. It covered:
-*   Linux Commands and scripting
-*   Network Security & Protocols
-*   Git Development Strategies
-*   Deployment & Rollout Strategies
-<p><strong>Note:</strong> Online assessments vary greatly. Focus on fundamentals in each area. Practice with sample quizzes online if possible.</p>
+Many DevOps roles begin with an online assessment, often conducted at the office. Expect a mix of multiple-choice and multiple-selection questions designed to gauge your foundational knowledge. Key areas to brush up on typically include:
+
+*   **Linux Mastery:** Be comfortable with common commands and basic shell scripting.
+*   **Network Know-How:** Understand core security concepts and essential network protocols.
+*   **Git Fluency:** Review different development and branching strategies.
+*   **Deployment Tactics:** Familiarize yourself with various rollout and deployment approaches.
+
+<p><strong>A Word of Advice:</strong> These online assessments can differ significantly between companies. The best strategy is to solidify your understanding of the fundamentals in each domain. Don't just memorize; understand the 'why'. To build confidence, seek out practice quizzes online – they're a great way to simulate the test environment and identify areas for further study.</p>
 
 ---
 
@@ -167,7 +169,7 @@ Key Questions Asked:
     3. <strong>Controller (Operator Logic):</strong> Watches for CRs. When a CR is created/updated/deleted, the controller takes action (e.g., creates Deployments, Services, ConfigMaps, performs backups, handles upgrades) to match the desired state specified in the CR.<br/>
     <img src="https://placehold.co/600x300.png" alt="Kubernetes Operator Architecture Placeholder" data-ai-hint="kubernetes operator" /></p>
 *   What are API groups in Kubernetes?
-    <p><strong>Answer:</strong> API groups in Kubernetes are a way to organize and version related API resources. They make it easier to extend Kubernetes with new functionalities and manage different versions of APIs. For example, \`apps/v1\` contains resources like Deployments and StatefulSets, while \`core/v1\` (or just \`v1\`) contains fundamental resources like Pods and Services.</p>
+    <p><strong>Answer:</strong> API groups in Kubernetes are a way to organize and version related API resources. They make it easier to extend Kubernetes with new functionalities and manage different versions of APIs. For example, \\\`apps/v1\\\` contains resources like Deployments and StatefulSets, while \\\`core/v1\\\` (or just \\\`v1\\\`) contains fundamental resources like Pods and Services.</p>
 *   What is etcd?
     <p><strong>Answer:</strong> etcd is a consistent and highly-available key-value store used as Kubernetes' primary datastore for all cluster data. It stores the configuration data, state, and metadata of the Kubernetes cluster, including information about nodes, pods, services, and secrets. Its reliability and consistency are critical for the overall functioning of Kubernetes.</p>
 *   Explain the OSI model layers and their significance.
@@ -188,10 +190,10 @@ Key Questions Asked:
     <p><strong>Answer:</strong> DNS stands for Domain Name System. It's a hierarchical and decentralized naming system used to identify computers, services, and other resources reachable through the Internet or other Internet Protocol (IP) networks. Essentially, it translates human-readable domain names (like www.google.com) into machine-readable IP addresses (like 172.217.160.142). This allows users to access websites and online services using easy-to-remember names instead of numerical IP addresses.</p>
 *   What happens when you hit www.hashedin.com in a browser?
     <p><strong>Answer:</strong> This is a classic networking question. The process involves several steps:<br/>
-    1. <strong>DNS Resolution:</strong> Browser checks local cache for the IP of \`www.hashedin.com\`. If not found, it queries a DNS resolver (typically ISP's or a public one like 8.8.8.8). The resolver performs recursive queries to find the authoritative DNS server for \`hashedin.com\` and gets the IP address.<br/>
+    1. <strong>DNS Resolution:</strong> Browser checks local cache for the IP of \\\`www.hashedin.com\\\`. If not found, it queries a DNS resolver (typically ISP's or a public one like 8.8.8.8). The resolver performs recursive queries to find the authoritative DNS server for \\\`hashedin.com\\\` and gets the IP address.<br/>
     2. <strong>TCP Connection:</strong> Browser initiates a TCP connection to the web server at the resolved IP address on port 80 (for HTTP) or 443 (for HTTPS). This involves a TCP three-way handshake (SYN, SYN-ACK, ACK).<br/>
     3. <strong>TLS Handshake (if HTTPS):</strong> If using HTTPS, a TLS handshake occurs to establish a secure, encrypted connection. This involves exchanging certificates and agreeing on encryption ciphers.<br/>
-    4. <strong>HTTP Request:</strong> Browser sends an HTTP GET request to the server for the root path (\`/\`). The request includes headers (User-Agent, Accept, etc.).<br/>
+    4. <strong>HTTP Request:</strong> Browser sends an HTTP GET request to the server for the root path (\\\`/\`). The request includes headers (User-Agent, Accept, etc.).<br/>
     5. <strong>Server Processing:</strong> The web server (e.g., Nginx, Apache) receives the request, processes it (might involve application servers, databases), and generates an HTTP response.<br/>
     6. <strong>HTTP Response:</strong> Server sends back an HTTP response, including a status code (e.g., 200 OK), headers (Content-Type, Content-Length, etc.), and the response body (HTML, CSS, JS, images).<br/>
     7. <strong>Browser Rendering:</strong> Browser parses the HTML, renders the page, and makes further requests for linked resources (CSS, JS, images), repeating steps 4-6 for each.<br/>
@@ -204,25 +206,25 @@ Key Questions Asked:
     1. <strong>Untracked:</strong> New files in your working directory that Git doesn't know about.<br/>
     2. <strong>Tracked:</strong> Files that Git knows about. Can be unmodified, modified, or staged.<br/>
     3. <strong>Working Directory:</strong> Your local checkout of the project files.<br/>
-    4. <strong>Staging Area (Index):</strong> A snapshot of what will go into your next commit. You use \`git add\` to move changes from the working directory to the staging area.<br/>
-    5. <strong>Local Repository (.git directory):</strong> Where Git stores the history of your project (commits). You use \`git commit\` to move changes from the staging area to your local repository.<br/>
+    4. <strong>Staging Area (Index):</strong> A snapshot of what will go into your next commit. You use \\\`git add\\\` to move changes from the working directory to the staging area.<br/>
+    5. <strong>Local Repository (.git directory):</strong> Where Git stores the history of your project (commits). You use \\\`git commit\\\` to move changes from the staging area to your local repository.<br/>
     6. <strong>Remote Repository:</strong> A version of your project hosted on a server (e.g., GitHub, GitLab).<br/>
     <strong>Workflow:</strong><br/>
-    - \`git clone <repository_url>\`: Copies a remote repository to your local machine (creates working directory, .git directory).<br/>
+    - \\\`git clone <repository_url>\\\`: Copies a remote repository to your local machine (creates working directory, .git directory).<br/>
     - Make changes to files in your working directory.<br/>
-    - \`git status\`: Shows the state of files.<br/>
-    - \`git add <file_or_directory>\` or \`git add .\`: Stages modified/new files.<br/>
-    - \`git commit -m "Commit message"\`: Saves staged changes to your local repository.<br/>
-    - \`git pull\` (optional, but good practice): Fetches changes from the remote repository and merges them into your local branch to avoid conflicts.<br/>
-    - \`git push <remote_name> <branch_name>\` (e.g., \`git push origin main\`): Uploads your local commits to the remote repository.<br/>
+    - \\\`git status\\\`: Shows the state of files.<br/>
+    - \\\`git add <file_or_directory>\\\` or \\\`git add .\\\`: Stages modified/new files.<br/>
+    - \\\`git commit -m "Commit message"\\\`: Saves staged changes to your local repository.<br/>
+    - \\\`git pull\\\` (optional, but good practice): Fetches changes from the remote repository and merges them into your local branch to avoid conflicts.<br/>
+    - \\\`git push <remote_name> <branch_name>\\\` (e.g., \\\`git push origin main\\\`): Uploads your local commits to the remote repository.<br/>
     <img src="https://placehold.co/600x300.png" alt="Git Lifecycle Diagram Placeholder" data-ai-hint="git lifecycle" /></p>
 *   What is Git architecture?
     <p><strong>Answer:</strong> Git has a distributed architecture. Key components include:<br/>
     - <strong>Objects:</strong> Blobs (file content), Trees (directory structure), Commits (snapshots in time pointing to a tree and parent commits), and Tags (pointers to commits). All objects are content-addressable using SHA-1 hashes.<br/>
-    - <strong>Index (Staging Area):</strong> A file in the \`.git\` directory that stores information about what will go into your next commit.<br/>
+    - <strong>Index (Staging Area):</strong> A file in the \\\`.git\\\` directory that stores information about what will go into your next commit.<br/>
     - <strong>HEAD:</strong> A pointer to the current commit, usually the tip of the current branch.<br/>
     - <strong>Branches:</strong> Lightweight movable pointers to commits.<br/>
-    - <strong>Local Repository:</strong> The \`.git\` subdirectory in your project, containing all objects, refs, and history.<br/>
+    - <strong>Local Repository:</strong> The \\\`.git\\\` subdirectory in your project, containing all objects, refs, and history.<br/>
     - <strong>Remote Repositories:</strong> Copies of the repository hosted elsewhere, enabling collaboration.<br/>
     Git's design focuses on speed, data integrity, and support for non-linear distributed workflows.<br/>
     <img src="https://placehold.co/600x300.png" alt="Git Architecture Diagram Placeholder" data-ai-hint="git architecture" /></p>
@@ -230,16 +232,16 @@ Key Questions Asked:
     <p><strong>Answer:</strong> A kernel is the core component of an operating system. It manages the system's resources (CPU, memory, devices) and provides fundamental services for all other parts of the OS and applications. Linux itself is technically a kernel. When people refer to "Linux" as an OS, they usually mean a Linux distribution (e.g., Ubuntu, Fedora, Debian), which bundles the Linux kernel with system software, utilities, and often a desktop environment to form a complete operating system.</p>
 *   Write ten Linux commands and explain their usage.
     <p><strong>Answer:</strong><br/>
-    1.  \`ls\`: Lists directory contents. (e.g., \`ls -l\` for long format).<br/>
-    2.  \`cd\`: Changes the current directory. (e.g., \`cd /home/user\`).<br/>
-    3.  \`pwd\`: Prints the current working directory path.<br/>
-    4.  \`mkdir\`: Creates a new directory. (e.g., \`mkdir new_folder\`).<br/>
-    5.  \`rm\`: Removes files or directories. (e.g., \`rm myfile.txt\`, \`rm -r myfolder\` for recursive delete).<br/>
-    6.  \`cp\`: Copies files or directories. (e.g., \`cp source.txt destination.txt\`).<br/>
-    7.  \`mv\`: Moves or renames files or directories. (e.g., \`mv oldname.txt newname.txt\`, \`mv file.txt /new/location/\`).<br/>
-    8.  \`cat\`: Concatenates and displays file content. (e.g., \`cat myfile.txt\`).<br/>
-    9.  \`grep\`: Searches for patterns in files. (e.g., \`grep "error" logfile.txt\`).<br/>
-    10. \`chmod\`: Changes file permissions. (e.g., \`chmod 755 script.sh\`).</p>
+    1.  \\\`ls\\\`: Lists directory contents. (e.g., \\\`ls -l\\\` for long format).<br/>
+    2.  \\\`cd\\\`: Changes the current directory. (e.g., \\\`cd /home/user\\\`).<br/>
+    3.  \\\`pwd\\\`: Prints the current working directory path.<br/>
+    4.  \\\`mkdir\\\`: Creates a new directory. (e.g., \\\`mkdir new_folder\\\`).<br/>
+    5.  \\\`rm\\\`: Removes files or directories. (e.g., \\\`rm myfile.txt\\\`, \\\`rm -r myfolder\\\` for recursive delete).<br/>
+    6.  \\\`cp\\\`: Copies files or directories. (e.g., \\\`cp source.txt destination.txt\\\`).<br/>
+    7.  \\\`mv\\\`: Moves or renames files or directories. (e.g., \\\`mv oldname.txt newname.txt\\\`, \\\`mv file.txt /new/location/\\\`).<br/>
+    8.  \\\`cat\\\`: Concatenates and displays file content. (e.g., \\\`cat myfile.txt\\\`).<br/>
+    9.  \\\`grep\\\`: Searches for patterns in files. (e.g., \\\`grep "error" logfile.txt\\\`).<br/>
+    10. \\\`chmod\\\`: Changes file permissions. (e.g., \\\`chmod 755 script.sh\\\`).</p>
 *   Difference between virtualization and containerization.
     <p><strong>Answer:</strong><br/>
     - <strong>Virtualization:</strong> Involves creating Virtual Machines (VMs), each with its own full-fledged guest operating system, kernel, and virtualized hardware. A hypervisor (Type 1 or Type 2) manages these VMs. VMs provide strong isolation but are heavier in terms of resource consumption and startup time.<br/>
@@ -252,32 +254,32 @@ Key Questions Asked:
     - <strong>Union File Systems (e.g., OverlayFS, AUFS):</strong> Allow layering of file systems. Docker images are built in layers, and UnionFS enables efficient storage and sharing of these layers.<br/>
     - <strong>Capabilities:</strong> Fine-grained control over privileges a process can have, allowing containers to run with limited root privileges.</p>
 *   What is Docker daemon?
-    <p><strong>Answer:</strong> The Docker daemon (\`dockerd\`) is a persistent background process that manages Docker objects such as images, containers, networks, and volumes. The Docker client (\`docker\` CLI) communicates with the Docker daemon, which does the heavy lifting of building, running, and distributing Docker containers.</p>
+    <p><strong>Answer:</strong> The Docker daemon (\\\`dockerd\\\`) is a persistent background process that manages Docker objects such as images, containers, networks, and volumes. The Docker client (\\\`docker\\\` CLI) communicates with the Docker daemon, which does the heavy lifting of building, running, and distributing Docker containers.</p>
 *   Explain Docker architecture & lifecycle.
     <p><strong>Answer:</strong> Docker uses a client-server architecture:<br/>
-    - <strong>Docker Client:</strong> The \`docker\` CLI or other tools that users interact with to issue commands.<br/>
+    - <strong>Docker Client:</strong> The \\\`docker\\\` CLI or other tools that users interact with to issue commands.<br/>
     - <strong>Docker Daemon (dockerd):</strong> Listens for Docker API requests and manages Docker objects.<br/>
     - <strong>Docker Registry:</strong> Stores Docker images (e.g., Docker Hub, private registries).<br/>
     <strong>Lifecycle of a Container:</strong><br/>
-    1. \`docker pull <image_name>\`: Downloads an image from a registry.<br/>
-    2. \`docker build -t <image_name> .\`: Builds an image from a Dockerfile.<br/>
-    3. \`docker run <image_name>\`: Creates and starts a container from an image. This involves: creating a writable layer on top of the image layers, setting up networking, allocating resources, and running the specified command.<br/>
+    1. \\\`docker pull <image_name>\\\`: Downloads an image from a registry.<br/>
+    2. \\\`docker build -t <image_name> .\\\`: Builds an image from a Dockerfile.<br/>
+    3. \\\`docker run <image_name>\\\`: Creates and starts a container from an image. This involves: creating a writable layer on top of the image layers, setting up networking, allocating resources, and running the specified command.<br/>
     4. Container runs (executing the application).<br/>
-    5. \`docker stop <container_id>\`: Stops a running container.<br/>
-    6. \`docker start <container_id>\`: Restarts a stopped container.<br/>
-    7. \`docker rm <container_id>\`: Removes a stopped container.<br/>
-    8. \`docker rmi <image_id>\`: Removes an image.<br/>
+    5. \\\`docker stop <container_id>\\\`: Stops a running container.<br/>
+    6. \\\`docker start <container_id>\\\`: Restarts a stopped container.<br/>
+    7. \\\`docker rm <container_id>\\\`: Removes a stopped container.<br/>
+    8. \\\`docker rmi <image_id>\\\`: Removes an image.<br/>
     <img src="https://placehold.co/600x300.png" alt="Docker Architecture Placeholder" data-ai-hint="docker architecture" /></p>
 *   Write five Docker commands and explain them.
     <p><strong>Answer:</strong><br/>
-    1.  \`docker ps\`: Lists running containers. (\`docker ps -a\` lists all containers, including stopped ones).<br/>
-    2.  \`docker images\`: Lists all Docker images available locally.<br/>
-    3.  \`docker build -t myapp:latest .\`: Builds a Docker image from the Dockerfile in the current directory (\`.\`) and tags it as \`myapp:latest\`.<br/>
-    4.  \`docker run -d -p 8080:80 myapp:latest\`: Runs the \`myapp:latest\` image as a container in detached mode (\`-d\`), mapping port 8080 on the host to port 80 in the container.<br/>
-    5.  \`docker logs <container_id_or_name>\`: Fetches the logs of a container.</p>
+    1.  \\\`docker ps\\\`: Lists running containers. (\\\`docker ps -a\\\` lists all containers, including stopped ones).<br/>
+    2.  \\\`docker images\\\`: Lists all Docker images available locally.<br/>
+    3.  \\\`docker build -t myapp:latest .\\\`: Builds a Docker image from the Dockerfile in the current directory (\\\`.\\\`) and tags it as \\\`myapp:latest\\\`.<br/>
+    4.  \\\`docker run -d -p 8080:80 myapp:latest\\\`: Runs the \\\`myapp:latest\\\` image as a container in detached mode (\\\`-d\\\`), mapping port 8080 on the host to port 80 in the container.<br/>
+    5.  \\\`docker logs <container_id_or_name>\\\`: Fetches the logs of a container.</p>
 *   Write a Jenkins pipeline that builds and pushes a Docker image.
     <p><strong>Answer:</strong> This is a basic declarative Jenkins pipeline example. (Actual implementation details can vary based on Jenkins setup, credentials, and registry).<br/>
-    \`\`\`groovy
+    \\\`\\\`\\\`groovy
     pipeline {
         agent any
         environment {
@@ -317,13 +319,13 @@ Key Questions Asked:
             }
         }
     }
-    \`\`\`
+    \\\`\\\`\\\`
     <p><strong>Note:</strong> This assumes the Docker plugin is installed and configured in Jenkins, and credentials for the Docker registry are stored in Jenkins.</p></p>
 *   What are namespaces in Kubernetes?
-    <p><strong>Answer:</strong> Namespaces in Kubernetes provide a way to divide cluster resources between multiple users or teams (via resource quotas) or to scope resources for different projects or environments (e.g., development, staging, production) within the same physical cluster. Names of resources need to be unique within a namespace, but not across namespaces. Common namespaces include \`default\`, \`kube-system\` (for Kubernetes system components), and \`kube-public\`.</p>
+    <p><strong>Answer:</strong> Namespaces in Kubernetes provide a way to divide cluster resources between multiple users or teams (via resource quotas) or to scope resources for different projects or environments (e.g., development, staging, production) within the same physical cluster. Names of resources need to be unique within a namespace, but not across namespaces. Common namespaces include \\\`default\\\`, \\\`kube-system\\\` (for Kubernetes system components), and \\\`kube-public\\\`.</p>
 *   Write a Pod specification YAML file for an NGINX server.
     <p><strong>Answer:</strong><br/>
-    \`\`\`yaml
+    \\\`\\\`\\\`yaml
     apiVersion: v1
     kind: Pod
     metadata:
@@ -336,8 +338,8 @@ Key Questions Asked:
         image: nginx:latest # Uses the latest NGINX image from Docker Hub
         ports:
         - containerPort: 80 # NGINX listens on port 80 by default
-    \`\`\`
-    <p>This YAML defines a Pod named \`nginx-pod-example\` with a single container named \`nginx-container\` running the latest NGINX image and exposing port 80.</p></p>
+    \\\`\\\`\\\`
+    <p>This YAML defines a Pod named \\\`nginx-pod-example\\\` with a single container named \\\`nginx-container\\\` running the latest NGINX image and exposing port 80.</p></p>
 *   What is VPC in AWS?
     <p><strong>Answer:</strong> Amazon Virtual Private Cloud (VPC) allows you to provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.</p>
 *   Difference between public and private subnets.
@@ -357,20 +359,20 @@ Key Questions Asked:
     3. <strong>VPC Endpoints:</strong> For accessing specific AWS services (like S3, DynamoDB) without going over the public internet, using VPC Gateway Endpoints or Interface Endpoints (PrivateLink).</p>
 *   Write and explain Terraform lifecycle commands.
     <p><strong>Answer:</strong> Common Terraform workflow commands:<br/>
-    1.  \`terraform init\`: Initializes a working directory containing Terraform configuration files. It downloads provider plugins and sets up the backend for state storage.<br/>
-    2.  \`terraform validate\`: Checks if the configuration files are syntactically valid and internally consistent.<br/>
-    3.  \`terraform plan\`: Creates an execution plan. Terraform determines what actions are necessary to achieve the desired state specified in the configuration files. It shows what will be created, updated, or destroyed.<br/>
-    4.  \`terraform apply\`: Applies the changes required to reach the desired state of the configuration. It executes the actions proposed in the \\\`terraform plan\\\` output (after confirmation, unless \\\`-auto-approve\\\` is used).<br/>
-    5.  \`terraform destroy\`: Destroys all remote objects managed by the current Terraform configuration.<br/>
+    1.  \\\`terraform init\\\`: Initializes a working directory containing Terraform configuration files. It downloads provider plugins and sets up the backend for state storage.<br/>
+    2.  \\\`terraform validate\\\`: Checks if the configuration files are syntactically valid and internally consistent.<br/>
+    3.  \\\`terraform plan\\\`: Creates an execution plan. Terraform determines what actions are necessary to achieve the desired state specified in the configuration files. It shows what will be created, updated, or destroyed.<br/>
+    4.  \\\`terraform apply\\\`: Applies the changes required to reach the desired state of the configuration. It executes the actions proposed in the \\\`terraform plan\\\` output (after confirmation, unless \\\`-auto-approve\\\` is used).<br/>
+    5.  \\\`terraform destroy\\\`: Destroys all remote objects managed by the current Terraform configuration.<br/>
     <img src="https://placehold.co/600x300.png" alt="Terraform Lifecycle Placeholder" data-ai-hint="terraform lifecycle" /></p>
 *   What is a state file in Terraform?
-    <p><strong>Answer:</strong> The Terraform state file (usually \`terraform.tfstate\`) is a JSON file that stores the state of your managed infrastructure. It maps resources defined in your configuration to real-world resources. Terraform uses this file to understand what infrastructure it's managing, to plan changes, and to track metadata. It's crucial for Terraform's operation.</p>
+    <p><strong>Answer:</strong> The Terraform state file (usually \\\`terraform.tfstate\\\`) is a JSON file that stores the state of your managed infrastructure. It maps resources defined in your configuration to real-world resources. Terraform uses this file to understand what infrastructure it's managing, to plan changes, and to track metadata. It's crucial for Terraform's operation.</p>
 *   How to manage state files in team collaboration?
     <p><strong>Answer:</strong> Managing state files in a team requires a remote backend with state locking:<br/>
     - <strong>Remote Backend:</strong> Store the state file remotely (e.g., AWS S3, Azure Blob Storage, HashiCorp Consul, Terraform Cloud/Enterprise) instead of locally. This ensures all team members access the same state.<br/>
-    - <strong>State Locking:</strong> The remote backend should support state locking. This prevents concurrent \`terraform apply\` operations, which could corrupt the state file or lead to inconsistencies. When one user runs \`apply\`, the state is locked, and other users cannot apply changes until the lock is released.<br/>
+    - <strong>State Locking:</strong> The remote backend should support state locking. This prevents concurrent \\\`terraform apply\\\` operations, which could corrupt the state file or lead to inconsistencies. When one user runs \\\`apply\\\`, the state is locked, and other users cannot apply changes until the lock is released.<br/>
     Example configuration using S3 backend:
-    \`\`\`hcl
+    \\\`\\\`\\\`hcl
     terraform {
       backend "s3" {
         bucket         = "your-terraform-state-bucket-name"
@@ -380,7 +382,7 @@ Key Questions Asked:
         encrypt        = true
       }
     }
-    \`\`\`</p>
+    \\\`\\\`\\\`</p>
 
 ---
 
@@ -390,7 +392,7 @@ Key Questions:
 
 *   Write a simple Dockerfile to create a Docker image.
     <p><strong>Answer:</strong> A simple Dockerfile for a Node.js application:<br/>
-    \`\`\`dockerfile
+    \\\`\\\`\\\`dockerfile
     # Use an official Node.js runtime as a parent image
     FROM node:18-alpine
 
@@ -411,7 +413,7 @@ Key Questions:
 
     # Define the command to run the app
     CMD [ "node", "server.js" ]
-    \`\`\`
+    \\\`\\\`\\\`
     This Dockerfile starts from a Node.js base image, sets up a working directory, copies and installs dependencies, copies the application code, exposes a port, and specifies the command to run the application.</p>
 *   Explain Docker workflow.
     <p><strong>Answer:</strong> The Docker workflow generally involves:<br/>
@@ -439,7 +441,7 @@ Key Questions:
     - <strong>AMI (Amazon Machine Image):</strong> A pre-configured template for launching EC2 instances. An AMI includes the operating system, application server, applications, and necessary configuration. It's used to launch new instances with a specific setup. An AMI can be backed by EBS snapshots or an instance store.<br/>
     - <strong>EBS Snapshot:</strong> A point-in-time backup of an EBS volume, stored in S3. Snapshots are incremental and can be used to create new EBS volumes or to restore an existing volume. While an AMI can *use* an EBS snapshot as its root device volume, a snapshot itself is just a backup of a volume, not a complete launch template like an AMI.</p>
 *   Explain remote state locking in Terraform.
-    <p><strong>Answer:</strong> Remote state locking in Terraform prevents multiple users or automated processes from running \`terraform apply\` simultaneously on the same state file, which could lead to state corruption or race conditions. When a user initiates an apply operation, Terraform attempts to acquire a lock via the configured remote backend (e.g., using a DynamoDB table with an S3 backend). If the lock is acquired, the operation proceeds, and the state is locked. Other users attempting to apply changes will have to wait until the lock is released. This ensures that only one process modifies the state at a time, maintaining consistency in collaborative environments.</p>
+    <p><strong>Answer:</strong> Remote state locking in Terraform prevents multiple users or automated processes from running \\\`terraform apply\\\` simultaneously on the same state file, which could lead to state corruption or race conditions. When a user initiates an apply operation, Terraform attempts to acquire a lock via the configured remote backend (e.g., using a DynamoDB table with an S3 backend). If the lock is acquired, the operation proceeds, and the state is locked. Other users attempting to apply changes will have to wait until the lock is released. This ensures that only one process modifies the state at a time, maintaining consistency in collaborative environments.</p>
 *   Difference between MySQL and MongoDB.
     <p><strong>Answer:</strong><br/>
     - <strong>MySQL:</strong> A relational database management system (RDBMS). Data is stored in tables with predefined schemas (rows and columns). It uses SQL (Structured Query Language) for querying. Strong consistency (ACID properties) is a key feature. Good for applications requiring complex joins, transactions, and structured data.<br/>
@@ -461,3 +463,5 @@ Key Questions:
     data_ai_hint: 'interview questions',
   },
 ];
+
+    
