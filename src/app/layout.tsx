@@ -7,16 +7,18 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from "next-themes";
-import { FloatingChatbot } from '@/components/chatbot/FloatingChatbot'; // Added import
+import { FloatingChatbot } from '@/components/chatbot/FloatingChatbot';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -45,11 +47,10 @@ export default function RootLayout({
             </main>
             <Footer />
             <Toaster />
-            <FloatingChatbot /> {/* Added chatbot component */}
+            <FloatingChatbot />
           </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
-
