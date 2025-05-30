@@ -11,10 +11,10 @@ import { Clock, BarChart3, Users, PlayCircle } from 'lucide-react';
 import type { Metadata } from 'next';
 
 interface CoursePageProps {
-  params: Promise<{
+  params: {
     courseSlug: string;
-  }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Mock function to get course by slug
@@ -33,8 +33,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props: CoursePageProps): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata({ params }: CoursePageProps): Promise<Metadata> {
   const course = await getCourseBySlug(params.courseSlug);
   if (!course) {
     return {
@@ -48,8 +47,7 @@ export async function generateMetadata(props: CoursePageProps): Promise<Metadata
   };
 }
 
-export default async function CoursePage(props: CoursePageProps) {
-  const params = await props.params;
+export default async function CoursePage({ params }: CoursePageProps) {
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {

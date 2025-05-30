@@ -1,4 +1,3 @@
-
 // src/app/forum/[topicSlug]/page.tsx
 import { forumTopics as allTopics, forumPosts as allPostsData } from "@/data/forum";
 import type { ForumTopic, ForumPost } from "@/types";
@@ -9,12 +8,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import type { Metadata } from 'next';
 
-
-interface ForumTopicPageParams {
-  params: Promise<{
+interface ForumTopicPageProps {
+  params: {
     topicSlug: string;
-  }>;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Mock function to get topic by slug
@@ -33,8 +33,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ForumTopicPage(props: ForumTopicPageParams) {
-  const params = await props.params;
+export async function generateMetadata({ params }: ForumTopicPageProps): Promise<Metadata> {
+  const topic = await getTopicBySlug(params.topicSlug);
+  if (!topic) return { title: "Topic Not Found" };
+
+  return {
+    title: `${topic.title} | Knowledge Craft Forum`,
+    description: topic.description,
+  };
+}
+
+export default async function ForumTopicPage({ params }: ForumTopicPageProps) {
   const topic = await getTopicBySlug(params.topicSlug);
 
   if (!topic) {
@@ -82,15 +91,3 @@ export default async function ForumTopicPage(props: ForumTopicPageParams) {
     </div>
   );
 }
-
-export async function generateMetadata(props: ForumTopicPageParams) {
-  const params = await props.params;
-  const topic = await getTopicBySlug(params.topicSlug);
-  if (!topic) return { title: "Topic Not Found" };
-
-  return {
-    title: `${topic.title} | Knowledge Craft Forum`,
-    description: topic.description,
-  };
-}
-

@@ -3,11 +3,9 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getAuth, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAnalytics } from "firebase/analytics";
+// Import getAnalytics and its type, but don't call it yet
+import { getAnalytics, Analytics as FirebaseAnalyticsType } from "firebase/analytics";
 
-// IMPORTANT: Ensure this apiKey is the correct "Web API Key" from your Firebase project settings.
-// Firebase Console > Project Settings (gear icon) > General tab > Your apps > Web API Key.
-// An "invalid API key" error usually means this key is incorrect for the project.
 const firebaseConfig = {
   apiKey: "AIzaSyDyXB1fz0vB2mLcgHlxMvib5K5bfSpTzLg",
   authDomain: "knowledge-craft-fftg2.firebaseapp.com",
@@ -26,5 +24,19 @@ if (!getApps().length) {
 
 const auth: Auth = getAuth(app);
 const db: Firestore = getFirestore(app);
-const analytics = getAnalytics(app);
+
+// Declare analytics but initialize it conditionally
+let analytics: FirebaseAnalyticsType | undefined = undefined;
+
+if (typeof window !== 'undefined') {
+  // This block only runs on the client-side
+  try {
+    analytics = getAnalytics(app);
+  } catch (error) {
+    console.error("Firebase Analytics client-side initialization error:", error);
+    // Optionally, prevent analytics from being used if initialization fails
+    analytics = undefined; 
+  }
+}
+
 export { app, auth, db, analytics };
