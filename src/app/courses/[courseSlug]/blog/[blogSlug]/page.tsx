@@ -11,40 +11,39 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import type { Metadata } from 'next'; // Import Metadata type
+import type { Metadata } from 'next';
 
-// Define the full props structure for the page component and metadata function
-export interface PageProps {
-  params: Promise<{
+// Define the correct props structure for the page component and metadata function
+interface BlogPageServerProps {
+  params: {
     courseSlug: string;
     blogSlug: string;
-  }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-
-// Mock function to get course by slug (remains the same)
+// Mock function to get course by slug
 async function getCourseBySlug(slug: string): Promise<Course | undefined> {
   return allCourses.find(course => course.slug === slug);
 }
 
-// Mock function to get blog by slug and course ID (remains the same)
+// Mock function to get blog by slug and course ID
 async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType | undefined> {
   return allBlogs.find(blog => blog.slug === slug && blog.courseId === courseId);
 }
 
 // Server Component for the page
-export default async function BlogPage(props: PageProps) {
-  const params = await props.params;
-  const searchParams = props.searchParams ? await props.searchParams : undefined;
-
+export default async function BlogPage({ params }: BlogPageServerProps) {
   const course = await getCourseBySlug(params.courseSlug);
 
   if (!course) {
     notFound();
   }
 
-  const blog = await getBlogBySlug(params.blogSlug, course.id);
+  // Destructure the icon from the course object to make it serializable for the client component
+  const { icon, ...serializableCourseData } = course;
+
+  const blog = await getBlogBySlug(params.blogSlug, course.id); // Use course.id
 
   if (!blog) {
     notFound();
@@ -56,7 +55,7 @@ export default async function BlogPage(props: PageProps) {
     <div className="container mx-auto py-8 px-4 md:px-6">
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8">
-          <BlogPageClient course={course} blog={blog} params={params} />
+          <BlogPageClient course={serializableCourseData} blog={blog} params={params} />
         </div>
         <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
           <Suspense fallback={<Skeleton className="h-40 w-full rounded-lg" />}>
@@ -67,19 +66,17 @@ export default async function BlogPage(props: PageProps) {
               allBlogsForCourse={courseBlogsForSuggestions}
             />
           </Suspense>
-           {/* Author card was moved to BlogPageClient, can be here too if static */}
         </aside>
       </div>
     </div>
   );
 }
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata({ params }: BlogPageServerProps): Promise<Metadata> {
   const course = await getCourseBySlug(params.courseSlug);
-  if (!course) return { title: "Blog Post Not Found" }; // Adjusted for early return
+  if (!course) return { title: "Blog Post Not Found" };
   const blog = await getBlogBySlug(params.blogSlug, course.id);
-  if (!blog) return { title: "Blog Post Not Found" }; // Adjusted for early return
+  if (!blog) return { title: "Blog Post Not Found" };
 
   return {
     title: `${blog.title} | Knowledge Craft`,

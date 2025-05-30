@@ -17,10 +17,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { createBlogComment } from '@/app/actions/blog';
 
+// The Course type passed to this client component should not include the icon function
+type SerializableCourse = Omit<Course, 'icon'>;
+
 interface BlogPageClientProps {
-  course: Course;
+  course: SerializableCourse;
   blog: BlogType;
-  params: { // For constructing links or other client-side logic if needed
+  params: {
     courseSlug: string;
     blogSlug: string;
   };
@@ -137,8 +140,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         </Card>
       </section>
 
-      {/* Author card can also be moved here or kept in the parent Server Component if it doesn't need client interactivity */}
-      <div className="mt-8"> {/* Moved author card here, can be styled further */}
+      <div className="mt-8">
         <Card>
           <CardHeader><CardTitle className="text-lg text-primary">About The Author</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-4">
@@ -149,7 +151,6 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
             <div>
               <h4 className="font-semibold text-foreground">{blog.author}</h4>
               <p className="text-xs text-muted-foreground">Tech Enthusiast & Writer @ Knowledge Craft</p>
-              {/* This button would ideally link to an author profile page if one exists */}
               <Button variant="link" size="sm" className="p-0 h-auto text-accent mt-1">View Profile</Button>
             </div>
           </CardContent>
