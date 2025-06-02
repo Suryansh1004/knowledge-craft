@@ -1,6 +1,6 @@
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
+import type { Metadata, ResolvingMetadata } from 'next';
 import { Suspense } from 'react';
 import { RelatedBlogs } from '@/components/blog/RelatedBlogs';
 import { BlogPageClient } from '@/components/blog/BlogPageClient';
@@ -9,8 +9,8 @@ import { courses as allCourses } from '@/data/courses';
 import { blogs as allBlogs } from '@/data/blogs';
 import type { Blog as BlogType, Course } from '@/types';
 
-// ✅ Inline type for compatibility with Next.js dynamic route props
-type RouteParams = {
+// Renamed type to try and force re-evaluation by the build system
+type CurrentBlogPageProps = {
   params: { courseSlug: string; blogSlug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 };
@@ -23,8 +23,8 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
   return allBlogs.find((blog) => blog.slug === slug && blog.courseId === courseId);
 }
 
-export default async function BlogPage({ params }: RouteParams) {
-  const { courseSlug, blogSlug } = params;
+export default async function BlogPage({ params }: CurrentBlogPageProps) {
+  const { courseSlug, blogSlug } = params; // Destructure immediately
 
   const course = await getCourseBySlug(courseSlug);
   if (!course) notFound();
@@ -39,7 +39,11 @@ export default async function BlogPage({ params }: RouteParams) {
     <div className="container mx-auto py-8 px-4 md:px-6">
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8">
-          <BlogPageClient course={serializableCourseData} blog={blog} params={params} />
+          <BlogPageClient
+            course={serializableCourseData}
+            blog={blog}
+            params={{ courseSlug, blogSlug }} // Pass the destructured slugs
+          />
         </div>
         <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
           <Suspense fallback={<Skeleton className="h-40 w-full rounded-lg" />}>
@@ -57,9 +61,10 @@ export default async function BlogPage({ params }: RouteParams) {
 }
 
 export async function generateMetadata(
-  { params }: RouteParams
+  { params }: CurrentBlogPageProps, // Use the renamed type
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { courseSlug, blogSlug } = params;
+  const { courseSlug, blogSlug } = params; // Destructure immediately
 
   const course = await getCourseBySlug(courseSlug);
   if (!course) return { title: 'Blog Post Not Found' };
