@@ -1,4 +1,3 @@
-
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 import { notFound } from 'next/navigation';
 import type { Metadata, ResolvingMetadata } from 'next';
@@ -19,8 +18,16 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
   return allBlogs.find((blog) => blog.slug === slug && blog.courseId === courseId);
 }
 
-// Use inline type for params as recommended
-export default async function BlogPage({ params }: { params: { courseSlug: string; blogSlug: string } }): Promise<JSX.Element> {
+// Explicit PageProps type interface
+interface PageProps {
+  params: {
+    courseSlug: string;
+    blogSlug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default async function BlogPage({ params }: PageProps): Promise<JSX.Element> {
   const { courseSlug, blogSlug } = params;
 
   const course = await getCourseBySlug(courseSlug);
@@ -62,11 +69,11 @@ export default async function BlogPage({ params }: { params: { courseSlug: strin
   );
 }
 
-// Use inline type for params in generateMetadata as well
 export async function generateMetadata(
-  { params }: { params: { courseSlug: string; blogSlug: string } },
+  props: PageProps, // Use the PageProps type here
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const { params } = props; // Destructure params from props
   const { courseSlug, blogSlug } = params;
 
   const course = await getCourseBySlug(courseSlug);
