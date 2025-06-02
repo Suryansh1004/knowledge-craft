@@ -19,14 +19,9 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
   return allBlogs.find((blog) => blog.slug === slug && blog.courseId === courseId);
 }
 
-// Define props for the page component directly using Next.js conventions
-type PageProps = {
-  params: { courseSlug: string; blogSlug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export default async function BlogPage({ params }: PageProps): Promise<JSX.Element> {
-  const { courseSlug, blogSlug } = params; // Destructure immediately
+// Use inline type for params as recommended
+export default async function BlogPage({ params }: { params: { courseSlug: string; blogSlug: string } }): Promise<JSX.Element> {
+  const { courseSlug, blogSlug } = params;
 
   const course = await getCourseBySlug(courseSlug);
   if (!course) {
@@ -49,7 +44,7 @@ export default async function BlogPage({ params }: PageProps): Promise<JSX.Eleme
           <BlogPageClient
             course={serializableCourseData}
             blog={blog}
-            params={{ courseSlug, blogSlug }} // Pass the destructured slugs
+            params={{ courseSlug, blogSlug }}
           />
         </div>
         <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
@@ -67,17 +62,12 @@ export default async function BlogPage({ params }: PageProps): Promise<JSX.Eleme
   );
 }
 
-// Define props for generateMetadata directly, matching PageProps structure
-type MetadataProps = {
-  params: { courseSlug: string; blogSlug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
+// Use inline type for params in generateMetadata as well
 export async function generateMetadata(
-  { params }: MetadataProps,
+  { params }: { params: { courseSlug: string; blogSlug: string } },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { courseSlug, blogSlug } = params; // Destructure immediately
+  const { courseSlug, blogSlug } = params;
 
   const course = await getCourseBySlug(courseSlug);
   if (!course) {
