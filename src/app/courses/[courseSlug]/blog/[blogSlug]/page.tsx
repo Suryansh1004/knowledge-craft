@@ -1,3 +1,4 @@
+
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 import { notFound } from 'next/navigation';
 import type { Metadata, ResolvingMetadata } from 'next';
@@ -9,12 +10,7 @@ import { courses as allCourses } from '@/data/courses';
 import { blogs as allBlogs } from '@/data/blogs';
 import type { Blog as BlogType, Course } from '@/types';
 
-// Renamed type to try and force re-evaluation by the build system
-type CurrentBlogPageProps = {
-  params: { courseSlug: string; blogSlug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
+// Data fetching functions
 async function getCourseBySlug(slug: string): Promise<Course | undefined> {
   return allCourses.find((course) => course.slug === slug);
 }
@@ -23,15 +19,26 @@ async function getBlogBySlug(slug: string, courseId: string): Promise<BlogType |
   return allBlogs.find((blog) => blog.slug === slug && blog.courseId === courseId);
 }
 
-export default async function BlogPage({ params }: CurrentBlogPageProps) {
+// Define props for the page component directly using Next.js conventions
+type PageProps = {
+  params: { courseSlug: string; blogSlug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default async function BlogPage({ params }: PageProps): Promise<JSX.Element> {
   const { courseSlug, blogSlug } = params; // Destructure immediately
 
   const course = await getCourseBySlug(courseSlug);
-  if (!course) notFound();
+  if (!course) {
+    notFound();
+  }
 
   const blog = await getBlogBySlug(blogSlug, course.id);
-  if (!blog) notFound();
+  if (!blog) {
+    notFound();
+  }
 
+  // Ensure only serializable data is passed to Client Components
   const { icon, ...serializableCourseData } = course;
   const courseBlogsForSuggestions = allBlogs.filter((b) => b.courseId === course.id);
 
@@ -60,17 +67,27 @@ export default async function BlogPage({ params }: CurrentBlogPageProps) {
   );
 }
 
+// Define props for generateMetadata directly, matching PageProps structure
+type MetadataProps = {
+  params: { courseSlug: string; blogSlug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
 export async function generateMetadata(
-  { params }: CurrentBlogPageProps, // Use the renamed type
+  { params }: MetadataProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { courseSlug, blogSlug } = params; // Destructure immediately
 
   const course = await getCourseBySlug(courseSlug);
-  if (!course) return { title: 'Blog Post Not Found' };
+  if (!course) {
+    return { title: 'Blog Post Not Found' };
+  }
 
   const blog = await getBlogBySlug(blogSlug, course.id);
-  if (!blog) return { title: 'Blog Post Not Found' };
+  if (!blog) {
+    return { title: 'Blog Post Not Found' };
+  }
 
   return {
     title: `${blog.title} | Knowledge Craft`,
