@@ -1,4 +1,5 @@
 
+'use server';
 import { genkit } from 'genkit';
 import { googleAI } from '@genkit-ai/googleai';
 import { config } from 'dotenv';
@@ -8,9 +9,6 @@ config();
 
 // IMPORTANT: Ensure you have GEMINI_API_KEY or GOOGLE_API_KEY set in your .env file for local development,
 // or as an environment variable in your deployment environment (e.g., Firebase App Hosting secrets).
-// Example .env entry:
-// GEMINI_API_KEY=your_actual_api_key_here
-
 const geminiApiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
 if (!geminiApiKey && process.env.NODE_ENV !== 'production') {
@@ -19,11 +17,13 @@ if (!geminiApiKey && process.env.NODE_ENV !== 'production') {
   );
 }
 
+// Genkit 1.x initialization
 export const ai = genkit({
   plugins: [
-    googleAI({
-      apiKey: "AIzaSyArAE3k-S2mLFZyw8owuVI5iyGZ9NWAVIw", // Pass the API key explicitly
-    }),
+    googleAI(geminiApiKey ? { apiKey: geminiApiKey } : undefined),
   ],
-  model: 'googleai/gemini-2.0-flash',
+  // logLevel: 'debug', // Not a top-level option in genkit() v1.x
+  // enableTracingAndMetrics: true, // Not a top-level option in genkit() v1.x
+  // Consider using @genkit-ai/ βασικά-instrumentation for tracing/metrics if needed,
+  // or check Genkit documentation for v1.x observability.
 });

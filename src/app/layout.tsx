@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+// Removed Geist font imports
 import './globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { Toaster } from '@/components/ui/toaster';
@@ -9,17 +9,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from "next-themes";
 import { FloatingChatbot } from '@/components/chatbot/FloatingChatbot';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-});
+// Removed Geist font instantiations
 
 export const metadata: Metadata = {
   title: 'Knowledge Craft - Master Tech Skills at Your Own Pace',
@@ -33,7 +23,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
+      {/* Removed font variables from className */}
+      <body className={`antialiased flex flex-col min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
