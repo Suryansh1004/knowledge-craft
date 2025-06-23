@@ -1,10 +1,8 @@
-
 // src/components/blog/BlogPageClient.tsx
 "use client";
 
 import React, { useEffect, useRef } from 'react';
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import type { Course, Blog as BlogType } from '@/types';
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -41,7 +39,7 @@ function CommentSubmitButton() {
 
 export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [commentState, commentFormAction] = useActionState(createBlogComment, null);
+  const [commentState, commentFormAction] = useFormState(createBlogComment, null);
   const { toast } = useToast();
   
   useEffect(() => {

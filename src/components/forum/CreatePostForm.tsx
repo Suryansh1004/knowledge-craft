@@ -2,8 +2,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -27,7 +26,7 @@ function SubmitButton() {
 }
 
 export function CreatePostForm({ topicId }: CreatePostFormProps) {
-  const [state, formAction] = useActionState(createForumPost, null);
+  const [state, formAction] = useFormState(createForumPost, null);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 

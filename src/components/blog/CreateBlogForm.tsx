@@ -1,10 +1,8 @@
-
 // src/components/blog/CreateBlogForm.tsx
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,7 +26,7 @@ function SubmitButton() {
 }
 
 export function CreateBlogForm() {
-  const [state, formAction] = useActionState(createBlogPost, null);
+  const [state, formAction] = useFormState(createBlogPost, null);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();

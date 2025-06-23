@@ -2,8 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -47,7 +46,7 @@ function SubmitButton({ status } : { status?: string | null }) {
 export function Compiler({ problem }: CompilerProps) {
   const [code, setCode] = useState<string>(`// Start coding for ${problem.title} in JavaScript...\nfunction solve() {\n  // Your solution here\n  return null;\n}\n`);
   const [language, setLanguage] = useState<string>("javascript");
-  const [state, formAction] = useActionState(submitCodingProblem, null);
+  const [state, formAction] = useFormState(submitCodingProblem, null);
   const { toast } = useToast();
   
   useEffect(() => {
