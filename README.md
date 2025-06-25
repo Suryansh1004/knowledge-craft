@@ -1,7 +1,18 @@
+# Online Code Console
 
-# Knowledge Craft
+This is a Next.js application, bootstrapped with Firebase Studio, designed to function as an online code console and learning platform.
 
-This is a NextJS starter in Firebase Studio.
+## Getting Started
 
-To get started, take a look at src/app/page.tsx.
+First, run the development server:
 
+```bash
+npm run dev
+```
+
+Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
+
+## Repository
+
+The source code for this project is hosted on GitHub:
+[https://github.com/shubh-rgb/online-code-console](https://github.com/shubh-rgb/online-code-console)
