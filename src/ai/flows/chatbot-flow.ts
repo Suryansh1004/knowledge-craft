@@ -41,9 +41,7 @@ const chatbotPrompt = ai.definePrompt({
   // Let's assume simple text input for the prompt for now, history will be passed to generate.
   input: { schema: z.object({ currentMessage: z.string(), history: z.array(ChatMessageSchema) }) },
   output: { schema: ChatbotOutputSchema }, // Expecting a simple string back as aiResponse
-  prompt: (input) => input.currentMessage, // Use a function for dynamic prompt based on input
-  // Or if you want a static template:
-  // prompt: `User: {{{currentMessage}}}`,
+  prompt: '{{{currentMessage}}}', // Use Handlebars template string
   config: {
     model: 'googleai/gemini-pro', // Specify model here for Genkit 1.x
     temperature: 0.7,
