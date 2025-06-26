@@ -22,6 +22,9 @@ const profileSchema = z.object({
   yearOfPassout: z.coerce.number().min(1950).max(new Date().getFullYear() + 5).optional(),
 });
 
+// Hardcoded admin email for testing purposes
+const ADMIN_EMAIL = "admin@knowledgecraft.com";
+
 export async function signupWithEmail(prevState: any, formData: FormData) {
   const validatedFields = emailPasswordSchema.safeParse(
     Object.fromEntries(formData.entries())
@@ -42,11 +45,13 @@ export async function signupWithEmail(prevState: any, formData: FormData) {
     
     // Create user document in Firestore
     const userRef = doc(db, "users", user.uid);
+    const roles = email === ADMIN_EMAIL ? ['user', 'admin'] : ['user']; // Assign admin role if email matches
+
     await setDoc(userRef, {
       uid: user.uid,
       email: user.email,
       displayName: user.email?.split('@')[0] || 'New User', // Default display name
-      roles: ['user'], // Default role
+      roles: roles,
       createdAt: new Date().toISOString(), // Add a creation timestamp
     });
 

@@ -1,4 +1,3 @@
-
 // src/components/chatbot/FloatingChatbot.tsx
 "use client";
 
@@ -53,9 +52,10 @@ export function FloatingChatbot() {
   }, [messages]);
 
   const mapDisplayMessagesToChatMessages = (displayMessages: DisplayMessage[]): ChatMessage[] => {
+    // FIX: Ensure content is a string, not an object.
     return displayMessages.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'model',
-      content: [{ text: msg.text }],
+      content: msg.text,
     }));
   };
 

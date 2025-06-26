@@ -30,6 +30,9 @@ function SubmitButton({ mode }: { mode: "login" | "signup" }) {
   );
 }
 
+// Hardcoded admin email for testing purposes
+const ADMIN_EMAIL = "admin@knowledgecraft.com";
+
 export function AuthForm({ mode, action }: AuthFormProps) {
   const [state, formAction] = useFormState(action, null);
   const router = useRouter();
@@ -58,12 +61,13 @@ export function AuthForm({ mode, action }: AuthFormProps) {
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
       if (!userDoc.exists()) {
+        const roles = user.email === ADMIN_EMAIL ? ['user', 'admin'] : ['user']; // Assign admin role
         await setDoc(userRef, {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName || user.email?.split('@')[0],
           photoURL: user.photoURL,
-          roles: ['user'], // Default role for Google sign-in
+          roles: roles,
           createdAt: new Date().toISOString(), // Add a creation timestamp
         });
       }
