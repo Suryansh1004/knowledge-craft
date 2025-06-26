@@ -10,8 +10,8 @@ import Link from 'next/link';
 import { PlusCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Blog | Knowledge Craft',
-  description: 'Explore all articles and blog posts from Knowledge Craft.',
+  title: 'Tech Blog | Articles & Tutorials | Knowledge Craft',
+  description: 'Explore expert articles, tutorials, and insights on web development, AI, data science, and cloud technology on the Knowledge Craft blog.',
 };
 
 export default function AllBlogsPage() {
@@ -23,9 +23,9 @@ export default function AllBlogsPage() {
     <div className="container mx-auto py-12 px-4 md:px-6">
       <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
         <div className="text-center md:text-left">
-          <h1 className="text-4xl font-bold text-primary mb-2">Knowledge Craft Blog</h1>
+          <h1 className="text-4xl font-bold text-primary mb-2">Knowledge Craft Tech Blog</h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Explore insights, tutorials, and news from our diverse range of tech courses and topics.
+            Dive into the Knowledge Craft blog for expert articles, tutorials, and the latest news on web development, AI, data science, and cloud technology. Stay ahead of the curve.
           </p>
         </div>
         <Button asChild className="shadow-sm">

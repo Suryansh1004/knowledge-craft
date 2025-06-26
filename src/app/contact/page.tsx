@@ -1,3 +1,4 @@
+
 // src/app/contact/page.tsx
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
@@ -7,8 +8,8 @@ import { Label } from '@/components/ui/label';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Knowledge Craft',
-  description: 'Get in touch with the Knowledge Craft team.',
+  title: 'Contact Us | Knowledge Craft Support & Inquiries',
+  description: 'Get in touch with the Knowledge Craft team for support, questions, or partnership inquiries. We are here to help you on your learning journey.',
 };
 
 export default function ContactPage() {

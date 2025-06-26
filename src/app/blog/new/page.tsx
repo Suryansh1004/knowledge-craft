@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Create New Blog Post | Knowledge Craft',
-  description: 'Share your knowledge by creating a new blog post on Knowledge Craft.',
+  description: 'For authorized bloggers. Share your knowledge by creating a new technical article or tutorial for the Knowledge Craft blog.',
 };
 
 export default function NewBlogPostPage() {

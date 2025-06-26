@@ -1,3 +1,4 @@
+
 // src/app/courses/page.tsx
 import { CourseCard } from "@/components/home/CourseCard";
 import { courses as allCourses } from "@/data/courses";
@@ -12,9 +13,9 @@ export default function AllCoursesPage() {
   return (
     <div className="container mx-auto py-12 px-4 md:px-6">
       <div className="mb-12 text-center">
-        <h1 className="text-4xl font-bold text-primary mb-4">Explore Our Courses</h1>
+        <h1 className="text-4xl font-bold text-primary mb-4">Explore Our Online Courses</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Find the perfect course to level up your skills. From web development to data science, we have you covered.
+          Browse our extensive library of online tech courses. Find the perfect program to advance your career, whether you're a beginner or an expert in web development, AI, data science, or cloud computing.
         </p>
       </div>
       

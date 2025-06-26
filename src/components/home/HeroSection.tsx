@@ -15,7 +15,7 @@ export function HeroSection() {
               Unlock Your <span className="text-primary">Tech Potential</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
-              Explore cutting-edge courses in all tech stacks. Learn at your own pace with expert-led content and a supportive community.
+              Propel your career forward with cutting-edge online courses in Web Development, AI, Data Science, and Cloud Computing. Learn at your own pace with expert-led content and a vibrant, supportive community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="shadow-lg hover:shadow-primary/30 transition-shadow">

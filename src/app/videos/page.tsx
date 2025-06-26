@@ -1,3 +1,4 @@
+
 // src/app/videos/page.tsx
 import { collection, query, where, orderBy, limit, getDocs, Timestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -6,8 +7,8 @@ import { VideoCard } from '@/components/video/VideoCard';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Videos | Knowledge Craft',
-  description: 'Watch short, informative videos on the latest in tech and science.',
+  title: 'Knowledge Craft Shorts | AI-Generated Tech Videos',
+  description: 'Watch short, informative, AI-generated videos on the latest in tech, science, and programming. Complex topics simplified in under 60 seconds.',
 };
 
 // We make this dynamic to ensure it refetches data on revalidation
@@ -50,7 +51,7 @@ export default async function VideosPage() {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-primary">KnowledgeCraft Shorts</h1>
         <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Complex topics, simplified. Watch our latest videos on tech, science, and more.
+          Complex topics, simplified. Watch our latest AI-generated videos on tech, science, and more.
         </p>
       </div>
 

@@ -23,7 +23,7 @@ export default function HomePage() {
               Featured <span className="text-primary">Courses</span>
             </h2>
             <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Kickstart your learning journey with our most popular courses.
+              Kickstart your learning journey with our most popular online courses, designed for immediate impact and career growth.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -42,7 +42,7 @@ export default function HomePage() {
                 Why Choose <span className="text-primary">Knowledge Craft?</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Knowledge Craft is dedicated to providing high-quality, accessible, and practical tech education. We empower you to achieve your career goals with skills that matter.
+                We are committed to providing high-quality, accessible, and practical tech education. We empower you to achieve your career goals with skills that are relevant in today's industry.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start">

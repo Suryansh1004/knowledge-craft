@@ -1,9 +1,12 @@
+
 // src/app/terms/page.tsx
 import type { Metadata } from 'next';
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
   title: 'Terms of Service | Knowledge Craft',
-  description: 'Read the Terms of Service for Knowledge Craft.',
+  description: `Review the Terms of Service for using the Knowledge Craft website and its services. Last updated ${currentYear}.`,
 };
 
 export default function TermsPage() {
@@ -39,7 +42,7 @@ export default function TermsPage() {
         <h2 className="text-2xl font-semibold mt-8 mb-3">6. Governing Law & Jurisdiction</h2>
         <p>These Terms will be governed by and interpreted in accordance with the laws of the State/Country of [Your State/Country], and you submit to the non-exclusive jurisdiction of the state and federal courts located in [Your State/Country] for the resolution of any disputes.</p>
 
-        <p className="mt-8">Last updated: May 29, 2025</p>
+        <p className="mt-8">Last updated: May 29, {currentYear}</p>
       </div>
     </div>
   );

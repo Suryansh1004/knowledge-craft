@@ -12,8 +12,8 @@ import { FloatingChatbot } from '@/components/chatbot/FloatingChatbot';
 // Removed Geist font instantiations
 
 export const metadata: Metadata = {
-  title: 'Knowledge Craft - Master Tech Skills at Your Own Pace',
-  description: 'Knowledge Craft offers comprehensive courses in various tech stacks. Start learning today and advance your career.',
+  title: 'Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud',
+  description: 'Master in-demand tech skills with Knowledge Craft. Explore expert-led online courses in Web Development, Data Science, AI, Cloud Computing, and more. Start your learning journey today!',
 };
 
 export default function RootLayout({

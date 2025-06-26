@@ -1,9 +1,12 @@
+
 // src/app/privacy/page.tsx
 import type { Metadata } from 'next';
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
   title: 'Privacy Policy | Knowledge Craft',
-  description: 'Read the Privacy Policy for Knowledge Craft.',
+  description: `Learn how Knowledge Craft collects, uses, and protects your personal information. Our commitment to your privacy. Last updated ${currentYear}.`,
 };
 
 export default function PrivacyPage() {
@@ -50,7 +53,7 @@ export default function PrivacyPage() {
         <h2 className="text-2xl font-semibold mt-8 mb-3">Changes to This Policy</h2>
         <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
 
-        <p className="mt-8">Last updated: May 29, 2025</p>
+        <p className="mt-8">Last updated: May 29, {currentYear}</p>
       </div>
     </div>
   );
