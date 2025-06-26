@@ -24,6 +24,18 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    config.externals = {
+      ...config.externals,
+      handlebars: 'commonjs handlebars',
+    };
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      module: false,
+    };
+    return config;
+  },
 };
 
 module.exports = nextConfig;
