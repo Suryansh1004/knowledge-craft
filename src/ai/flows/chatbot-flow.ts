@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview A Genkit flow for handling chatbot conversations using Genkit v1.x.
@@ -33,17 +32,12 @@ export type ChatbotOutput = z.infer<typeof ChatbotOutputSchema>;
 // Define the prompt using ai.definePrompt
 const chatbotPrompt = ai.definePrompt({
   name: 'chatbotPrompt',
-  // System message can be part of the prompt template or managed in the flow logic
   system: 'You are a helpful AI assistant for Knowledge Craft. Respond to user queries concisely and informatively.',
-  // For chat models, history is usually handled by the model, not directly in prompt template
-  // The main user message will be the primary input.
-  // We'll pass history directly to ai.generate or the prompt invocation.
-  // Let's assume simple text input for the prompt for now, history will be passed to generate.
   input: { schema: z.object({ currentMessage: z.string(), history: z.array(ChatMessageSchema) }) },
-  output: { schema: ChatbotOutputSchema }, // Expecting a simple string back as aiResponse
+  output: { schema: ChatbotOutputSchema },
   prompt: '{{{currentMessage}}}', // Use Handlebars template string
   config: {
-    model: 'googleai/gemini-pro', // Specify model here for Genkit 1.x
+    model: 'googleai/gemini-pro',
     temperature: 0.7,
   }
 });
@@ -65,21 +59,17 @@ const chatbotFlow = ai.defineFlow(
       }));
 
     const newUserPromptText = input.newMessage.trim();
-
-    // console.log('Chatbot Flow (Genkit 1.x): Sanitized history for LLM:', JSON.stringify(sanitizedHistory, null, 2));
-    // console.log('Chatbot Flow (Genkit 1.x): New prompt for LLM:', newUserPromptText);
     
-    // Invoke the prompt directly
-    const llmResponse = await chatbotPrompt.generate({
-      input: { currentMessage: newUserPromptText, history: sanitizedHistory },
-      history: sanitizedHistory, // Pass history to the generate call
-      // config can also be passed here to override prompt's default config
-    });
+    // Invoke the prompt as a function
+    const { output } = await chatbotPrompt(
+      { currentMessage: newUserPromptText, history: sanitizedHistory },
+      { history: sanitizedHistory } // Pass history to the model
+    );
 
-    const responseText = llmResponse.output?.aiResponse; // Access output directly as per defined schema
+    const responseText = output?.aiResponse;
 
     if (typeof responseText !== 'string' || responseText.trim() === '') {
-      console.warn("Chatbot LLM (Genkit 1.x) returned an empty or invalid response. Full response object:", JSON.stringify(llmResponse, null, 2));
+      console.warn("Chatbot LLM (Genkit 1.x) returned an empty or invalid response. Full response object:", JSON.stringify({output}, null, 2));
       return { aiResponse: "I'm sorry, I couldn't generate a response at this moment." };
     }
 

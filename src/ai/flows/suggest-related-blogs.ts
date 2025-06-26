@@ -55,11 +55,8 @@ const suggestRelatedBlogsFlow = ai.defineFlow(
     outputSchema: SuggestRelatedBlogsOutputSchema,
   },
   async (input: SuggestRelatedBlogsInput) => {
-    const llmResponse = await suggestRelatedBlogsPrompt.generate({
-        input: input, // Pass the flow input to the prompt
-    });
-
-    const output = llmResponse.output; // Access output directly
+    // Invoke the prompt as a function
+    const { output } = await suggestRelatedBlogsPrompt(input);
 
     if (output && Array.isArray(output.relatedBlogTitles)) {
       return output;
