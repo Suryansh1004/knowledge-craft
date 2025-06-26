@@ -104,3 +104,22 @@ export interface BloggerApplication {
   status: 'pending' | 'approved' | 'rejected';
   submittedAt: any; // Firestore ServerTimestamp
 }
+
+export interface Video {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  prompt: string;
+  source_video_url: string; // Placeholder URL from a video generation service
+  firebase_storage_url?: string; // URL in Firebase Storage
+  platform_urls: {
+    youtube?: string;
+    tiktok?: string;
+    facebook?: string;
+  };
+  status: 'queued' | 'generating' | 'uploading' | 'published' | 'error';
+  createdAt: any; // Firestore ServerTimestamp
+  publishedAt?: any; // Firestore ServerTimestamp
+  displayOnWebsite: boolean;
+}

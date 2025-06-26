@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit } from 'lucide-react'; // Added FileText, Edit
+import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit, Video } from 'lucide-react'; // Added Video
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -28,6 +28,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
+  { href: '/videos', label: 'Videos' }, // Added Videos link
   { href: '/coding-problems', label: 'Practice' },
   { href: '/forum', label: 'Forum' },
 ];
@@ -62,6 +63,8 @@ export function Header() {
   );
 
   const isBlogger = user?.roles?.includes('blogger');
+  // Simple check for admin role, in real app this would be more robust
+  const isAdmin = user?.roles?.includes('admin'); 
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
@@ -99,6 +102,11 @@ export function Header() {
                 <DropdownMenuItem asChild>
                   <Link href="/profile">Profile</Link>
                 </DropdownMenuItem>
+                {isAdmin && (
+                   <DropdownMenuItem asChild>
+                    <Link href="/admin/create-video"><Video className="mr-2 h-4 w-4" />Create Video</Link>
+                  </DropdownMenuItem>
+                )}
                 {isBlogger && (
                   <DropdownMenuItem asChild>
                     <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
