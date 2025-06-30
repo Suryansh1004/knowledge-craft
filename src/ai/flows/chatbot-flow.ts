@@ -10,6 +10,7 @@
 
 import { ai } from '@/ai/genkit'; // Import the shared 'ai' instance
 import { z } from 'zod';
+import { runPrompt } from 'genkit';
 
 // ChatMessage schema remains the same
 const ChatMessageSchema = z.object({
