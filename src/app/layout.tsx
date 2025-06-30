@@ -1,8 +1,11 @@
 
 import type { Metadata } from 'next';
 // Removed Geist font imports
+"use client";
 import './globals.css';
-import { AuthProvider } from '@/contexts/AuthContext';
+
+import { useAuth } from "@/contexts/AuthContext";
+
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -26,19 +29,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud',
-    description: 'Expert-led online courses to help you master in-demand tech skills.',
-    images: ['/og-image.png'],
-  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+import dynamic from "next/dynamic";
+
+const AuthProvider = dynamic(() => import("@/contexts/AuthContext").then(mod => mod.AuthProvider), {
+  ssr: false,
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       {/* Removed font variables from className */}

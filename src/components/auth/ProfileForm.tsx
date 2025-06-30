@@ -1,5 +1,6 @@
 // src/components/auth/ProfileForm.tsx
 "use client";
+import { useAuth } from "@/contexts/AuthContext";
 
 import { useFormState, useFormStatus } from "react-dom";
 import { useEffect } from "react";

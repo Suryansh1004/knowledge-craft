@@ -1,5 +1,7 @@
 
+
 // src/app/privacy/page.tsx
+
 import type { Metadata } from 'next';
 
 const currentYear = new Date().getFullYear();
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
+  // This page is primarily static content, no client-side hooks needed directly
   return (
     <div className="container mx-auto py-12 px-4 md:px-6">
       <h1 className="text-3xl font-bold text-primary mb-6">Privacy Policy</h1>

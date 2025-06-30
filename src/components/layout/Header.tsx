@@ -1,10 +1,11 @@
 // src/components/layout/Header.tsx
 "use client";
+import { useAuth } from "@/contexts/AuthContext";
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit, Video } from 'lucide-react'; // Added Video
-import { useAuth } from '@/hooks/useAuth';
+
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {

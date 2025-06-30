@@ -1,5 +1,6 @@
 // src/components/layout/ThemeToggleButton.tsx
 "use client"
+import { useAuth } from "@/contexts/AuthContext";
 
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"

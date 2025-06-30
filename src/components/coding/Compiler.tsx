@@ -1,5 +1,6 @@
 // src/components/coding/Compiler.tsx
 "use client";
+import { useAuth } from "@/contexts/AuthContext";
 
 import { useState, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";

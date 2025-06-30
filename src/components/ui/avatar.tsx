@@ -1,4 +1,5 @@
 "use client"
+import { useAuth } from "@/contexts/AuthContext";
 
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"

@@ -26,7 +26,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     config.externals = {
-      ...config.externals,
+      
       handlebars: 'commonjs handlebars',
     };
     config.resolve.fallback = {

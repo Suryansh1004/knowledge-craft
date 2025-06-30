@@ -10,7 +10,6 @@
 
 import { ai } from '@/ai/genkit'; // Import the shared 'ai' instance
 import { z } from 'zod';
-import { runPrompt } from 'genkit';
 
 // ChatMessage schema remains the same
 const ChatMessageSchema = z.object({
@@ -64,7 +63,6 @@ const chatbotFlow = ai.defineFlow(
     // Invoke the prompt as a function
     const { output } = await chatbotPrompt(
       { currentMessage: newUserPromptText, history: sanitizedHistory },
-      { history: sanitizedHistory } // Pass history to the model
     );
 
     const responseText = output?.aiResponse;

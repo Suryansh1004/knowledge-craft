@@ -4,7 +4,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from "@/contexts/AuthContext";
 import { ProfileForm } from '@/components/auth/ProfileForm';
 import { updateUserProfile } from '@/app/actions/auth';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';

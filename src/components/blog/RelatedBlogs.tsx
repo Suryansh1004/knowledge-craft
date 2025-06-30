@@ -1,8 +1,11 @@
 // src/components/blog/RelatedBlogs.tsx
+"use client";
+
 import { suggestRelatedBlogs } from '@/ai/flows/suggest-related-blogs'; // Assuming the path is correct
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from "@/contexts/AuthContext";
 
 interface RelatedBlogsProps {
   currentBlogContent: string;

@@ -1,5 +1,6 @@
 // src/components/chatbot/FloatingChatbot.tsx
 "use client";
+import { useAuth } from "@/contexts/AuthContext";
 
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';

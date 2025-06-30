@@ -1,4 +1,6 @@
 // src/components/forum/ForumTopicItem.tsx
+import { useAuth } from "@/contexts/AuthContext";
+
 import Link from 'next/link';
 import type { ForumTopic } from '@/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';

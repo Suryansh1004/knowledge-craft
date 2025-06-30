@@ -1,10 +1,13 @@
 // src/components/blog/BlogListItem.tsx
+"use client";
+
 import Link from 'next/link';
 import type { Blog } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, CalendarDays, User } from 'lucide-react';
 import { format } from 'date-fns';
+import { useAuth } from "@/contexts/AuthContext";
 
 interface BlogListItemProps {
   blog: Blog;

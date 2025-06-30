@@ -1,6 +1,11 @@
 
 // src/app/terms/page.tsx
+export const dynamic = "force-dynamic";
 import type { Metadata } from 'next';
+"use client";
+
+import { useAuth } from "@/contexts/AuthContext";
+
 
 const currentYear = new Date().getFullYear();
 

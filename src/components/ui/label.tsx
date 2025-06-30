@@ -1,4 +1,5 @@
 "use client"
+import { useAuth } from "@/contexts/AuthContext";
 
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"

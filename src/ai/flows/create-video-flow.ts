@@ -56,7 +56,7 @@ const generateTextContentTool = ai.defineTool(
       }
     });
 
-    const { output } = await contentPrompt.generate({ input });
+    const { output } = await contentPrompt(input);
     if (!output) {
         throw new Error("Failed to generate text content from AI.");
     }

@@ -1,4 +1,8 @@
 // src/components/forum/ForumPostItem.tsx
+"use client";
+
+import { useAuth } from "@/contexts/AuthContext";
+
 import type { ForumPost } from '@/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';

@@ -1,5 +1,6 @@
 // src/components/blogger/ApplyBloggerForm.tsx
 "use client";
+import { useAuth } from "@/contexts/AuthContext";
 
 import React, { useEffect, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -11,7 +12,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, FileText } from "lucide-react";
 import { submitBloggerApplication } from "@/app/actions/bloggerApplication";
-import { useAuth } from "@/hooks/useAuth"; // To prefill user data
 
 function SubmitButton() {
   const { pending } = useFormStatus();

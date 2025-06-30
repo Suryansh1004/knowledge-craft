@@ -101,11 +101,5 @@ export async function generateMetadata(
       authors: [blog.author],
       images: ogImage ? [ogImage] : previousImages,
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: blog.title,
-      description: blog.excerpt || blog.content.substring(0, 160),
-      images: ogImage ? [ogImage.url] : previousImages.map(i => typeof i === 'string' ? i : i.url),
-    },
   };
 }

@@ -1,5 +1,12 @@
 
 // src/app/page.tsx
+"use client";
+
+// src/app/page.tsx
+export const dynamic = "force-dynamic";
+
+import { useAuth } from "@/contexts/AuthContext";
+// src/app/page.tsx
 import { CourseCard } from '@/components/home/CourseCard';
 import { HeroSection } from '@/components/home/HeroSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
