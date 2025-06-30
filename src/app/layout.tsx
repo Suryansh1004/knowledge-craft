@@ -12,8 +12,26 @@ import { FloatingChatbot } from '@/components/chatbot/FloatingChatbot';
 // Removed Geist font instantiations
 
 export const metadata: Metadata = {
-  title: 'Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud',
+  metadataBase: new URL('https://knowledgecraft.com'), // Replace with your production domain
+  title: {
+    default: 'Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud',
+    template: '%s | Knowledge Craft',
+  },
   description: 'Master in-demand tech skills with Knowledge Craft. Explore expert-led online courses in Web Development, Data Science, AI, Cloud Computing, and more. Start your learning journey today!',
+  openGraph: {
+    title: 'Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud',
+    description: 'Expert-led online courses to help you master in-demand tech skills.',
+    images: ['/og-image.png'], // Create a general /public/og-image.png (1200x630)
+    siteName: 'Knowledge Craft',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud',
+    description: 'Expert-led online courses to help you master in-demand tech skills.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({

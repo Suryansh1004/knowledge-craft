@@ -24,7 +24,7 @@ interface PageProps {
     courseSlug: string;
     blogSlug: string;
   };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: { [key:string]: string | string[] | undefined };
 }
 
 export default async function BlogPage({ params }: PageProps): Promise<JSX.Element> {
@@ -86,8 +86,26 @@ export async function generateMetadata(
     return { title: 'Blog Post Not Found' };
   }
 
+  const previousImages = (await parent).openGraph?.images || [];
+  const ogImage = blog.image ? { url: blog.image, width: 1200, height: 630 } : previousImages[0];
+
+
   return {
-    title: `${blog.title} | Knowledge Craft`,
+    title: blog.title, // Title will be composed with template from layout
     description: blog.excerpt || blog.content.substring(0, 160),
+    openGraph: {
+      title: blog.title,
+      description: blog.excerpt || blog.content.substring(0, 160),
+      type: 'article',
+      publishedTime: new Date(blog.createdAt).toISOString(),
+      authors: [blog.author],
+      images: ogImage ? [ogImage] : previousImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.excerpt || blog.content.substring(0, 160),
+      images: ogImage ? [ogImage.url] : previousImages.map(i => typeof i === 'string' ? i : i.url),
+    },
   };
 }
