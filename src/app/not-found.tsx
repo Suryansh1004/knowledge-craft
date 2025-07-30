@@ -1,8 +1,4 @@
-export const dynamic = "force-dynamic";
-
 "use client";
-
-import { useAuth } from "@/contexts/AuthContext";
 
 import Link from 'next/link';
 

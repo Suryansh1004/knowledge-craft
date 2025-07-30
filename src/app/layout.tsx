@@ -1,10 +1,9 @@
 
 import type { Metadata } from 'next';
 // Removed Geist font imports
-"use client";
 import './globals.css';
 
-import { useAuth } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/layout/Header';
@@ -30,12 +29,6 @@ export const metadata: Metadata = {
     locale: 'en_US',
   },
 };
-
-import dynamic from "next/dynamic";
-
-const AuthProvider = dynamic(() => import("@/contexts/AuthContext").then(mod => mod.AuthProvider), {
-  ssr: false,
-});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
