@@ -1,14 +1,12 @@
 
-// src/app/terms/page.tsx
-export const dynamic = "force-dynamic";
-import type { Metadata } from 'next';
 "use client";
 
-import { useAuth } from "@/contexts/AuthContext";
-
+// src/app/terms/page.tsx
+import type { Metadata } from 'next';
 
 const currentYear = new Date().getFullYear();
 
+// Note: Metadata is still used for static generation, even in a client component.
 export const metadata: Metadata = {
   title: 'Terms of Service | Knowledge Craft',
   description: `Review the Terms of Service for using the Knowledge Craft website and its services. Last updated ${currentYear}.`,
