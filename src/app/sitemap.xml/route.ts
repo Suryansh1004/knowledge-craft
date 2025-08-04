@@ -1,10 +1,9 @@
 // src/app/sitemap.xml/route.ts
+"use client";
 import { courses } from '@/data/courses';
 import { blogs } from '@/data/blogs';
-"use client";
 
 import { useAuth } from "@/contexts/AuthContext";
-
 
 // IMPORTANT: Replace this with your actual website domain
 const URL = 'https://knowledgecraft.com';

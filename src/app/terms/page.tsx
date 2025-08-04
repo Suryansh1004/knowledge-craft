@@ -1,7 +1,5 @@
-
-"use client";
-
 // src/app/terms/page.tsx
+
 import type { Metadata } from 'next';
 
 const currentYear = new Date().getFullYear();
@@ -9,7 +7,7 @@ const currentYear = new Date().getFullYear();
 // Note: Metadata is still used for static generation, even in a client component.
 export const metadata: Metadata = {
   title: 'Terms of Service | Knowledge Craft',
-  description: `Review the Terms of Service for using the Knowledge Craft website and its services. Last updated ${currentYear}.`,
+  description: 'Review the Terms of Service for using the Knowledge Craft website and its services. Last updated 2025.',
 };
 
 export default function TermsPage() {
