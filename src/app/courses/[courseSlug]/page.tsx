@@ -64,7 +64,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
         <div className="lg:col-span-2">
           <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl mb-8">
             <Image
-              src={course.image}
+              src={`https://placehold.co/800x600.png`}
               alt={course.title}
               fill
               className="object-cover"

@@ -18,7 +18,7 @@ export function CourseCard({ course }: CourseCardProps) {
     <Card className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
       <CardHeader className="p-0 relative">
         <Image
-          src={course.image}
+          src={`https://placehold.co/600x400.png`}
           alt={course.title}
           width={600}
           height={300}

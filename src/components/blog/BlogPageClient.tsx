@@ -63,6 +63,24 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
       .replace(/\*(.*)\*/gim, '<em>$1</em>')
       .replace(/```javascript\n([\s\S]*?)\n```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code class="language-javascript">$1</code></pre>')
       .replace(/```([\s\S]*?)```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code>$1</code></pre>')
+      .replace(/!\[(.*?)\]\((.*?)\)/gim, (match, alt, src) => {
+        // Find data-ai-hint in the original markdown if it exists
+        const dataAiHintRegex = new RegExp(`!\\[${alt}\\]\\(${src}\\s*(?:data-ai-hint="(.*?)")?\\)`);
+        const markdownMatch = markdown.match(dataAiHintRegex);
+        const hint = markdownMatch && markdownMatch[1] ? `data-ai-hint="${markdownMatch[1]}"` : 'data-ai-hint="blog image"';
+        // Replace with placehold.co
+        const placeholderSrc = `https://placehold.co/${src.split('/').slice(-2).join('/')}.png`;
+        return `<img src="${placeholderSrc}" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
+      })
+      .replace(/<img src="https:\/\/placehold.co\/(.*?)"(.*?)>/gim, (match, path, rest) => {
+          // Re-process image tags I may have created from markdown
+          const [width, height] = path.split('x');
+          const altMatch = rest.match(/alt="(.*?)"/);
+          const alt = altMatch ? altMatch[1] : 'blog image';
+          const hintMatch = rest.match(/data-ai-hint="(.*?)"/);
+          const hint = hintMatch ? `data-ai-hint="${hintMatch[1]}"` : 'data-ai-hint="blog image"';
+          return `<img src="https://placehold.co/${width}x${height}.png" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
+      })
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\n/g, '<br />');
     return { __html: html };
@@ -79,7 +97,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
               fill
               className="object-cover"
               priority
-              data-ai-hint={(blog as any).data_ai_hint || "blog post image"}
+              data-ai-hint={(blog as any).data_ai_hint || "blog post"}
             />
           </div>
         )}
@@ -89,7 +107,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6 border-y py-3">
           <div className="flex items-center">
             <Avatar className="h-8 w-8 mr-2">
-              <AvatarImage src={blog.authorImage} alt={blog.author} />
+              <AvatarImage src={blog.authorImage} alt={blog.author} data-ai-hint="person avatar" />
               <AvatarFallback>{blog.author.substring(0,1)}</AvatarFallback>
             </Avatar>
             <span>{blog.author}</span>
@@ -144,7 +162,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
           <CardHeader><CardTitle className="text-lg text-primary">About The Author</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
-              <AvatarImage src={blog.authorImage} alt={blog.author} />
+              <AvatarImage src={blog.authorImage} alt={blog.author} data-ai-hint="person avatar"/>
               <AvatarFallback className="text-2xl">{blog.author.substring(0,1)}</AvatarFallback>
             </Avatar>
             <div>

@@ -19,7 +19,7 @@ export function ForumPostItem({ post }: ForumPostItemProps) {
     <Card className="shadow-sm">
       <CardHeader className="flex flex-row items-start space-x-4 p-4 pb-2">
         <Avatar className="h-10 w-10 border">
-          <AvatarImage src={post.userAvatar} alt={post.userName} data-ai-hint="person avatar" />
+          <AvatarImage src={`https://placehold.co/50x50.png`} alt={post.userName} data-ai-hint="person avatar" />
           <AvatarFallback>{post.userName.charAt(0).toUpperCase()}</AvatarFallback>
         </Avatar>
         <div className="flex-1">
