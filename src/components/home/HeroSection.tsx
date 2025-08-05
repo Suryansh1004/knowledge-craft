@@ -32,7 +32,7 @@ export function HeroSection() {
           </div>
           <div className="hidden md:block">
             <Image
-              src="https://placehold.co/600x500.png"
+              src="https://picsum.photos/seed/learning/600/500"
               alt="Knowledge Craft Illustration"
               width={600}
               height={500}

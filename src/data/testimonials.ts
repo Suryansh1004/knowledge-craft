@@ -7,7 +7,7 @@ export const testimonials: Testimonial[] = [
     name: 'Alice Johnson',
     role: 'Software Engineer @ TechCorp',
     quote: 'Knowledge Craft provided me with the exact skills I needed to advance my career. The courses are well-structured and up-to-date.',
-    avatar: 'https://placehold.co/100x100.png', 
+    avatar: 'https://picsum.photos/seed/alice/100/100', 
     data_ai_hint: 'person portrait',
   },
   {
@@ -15,7 +15,7 @@ export const testimonials: Testimonial[] = [
     name: 'Bob Smith',
     role: 'Data Analyst @ DataSolutions',
     quote: 'The Data Science track was phenomenal. I loved the hands-on projects and the supportive community.',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://picsum.photos/seed/bob/100/100',
     data_ai_hint: 'professional headshot',
   },
   {
@@ -23,7 +23,7 @@ export const testimonials: Testimonial[] = [
     name: 'Carol Davis',
     role: 'UX Designer @ CreativeMinds',
     quote: 'I switched careers thanks to Knowledge Craft. The UI/UX course was comprehensive and practical. Highly recommended!',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://picsum.photos/seed/carol/100/100',
     data_ai_hint: 'smiling person',
   },
 ];
