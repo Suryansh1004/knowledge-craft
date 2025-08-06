@@ -1,11 +1,9 @@
 // src/app/signup/page.tsx
+"use client";
 
 import { AuthForm } from "@/components/auth/AuthForm";
 import { signupWithEmail } from "@/app/actions/auth";
 import { Logo } from "@/components/Logo";
-"use client";
-
-import { useAuth } from "@/contexts/AuthContext";
 
 export default function SignupPage() {
   return (
