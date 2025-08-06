@@ -1,5 +1,4 @@
 "use client"
-import { useAuth } from "@/contexts/AuthContext";
 
 import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"

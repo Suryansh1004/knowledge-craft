@@ -1,6 +1,5 @@
 // src/components/blog/BlogPageClient.tsx
 "use client";
-import { useAuth } from "@/contexts/AuthContext";
 
 import React, { useEffect, useRef } from 'react';
 import { useFormState, useFormStatus } from "react-dom";

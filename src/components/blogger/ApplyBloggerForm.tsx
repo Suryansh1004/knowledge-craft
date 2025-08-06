@@ -1,6 +1,6 @@
 // src/components/blogger/ApplyBloggerForm.tsx
 "use client";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 
 import React, { useEffect, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";

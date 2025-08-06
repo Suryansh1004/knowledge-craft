@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, CalendarDays, User } from 'lucide-react';
 import { format } from 'date-fns';
-import { useAuth } from "@/contexts/AuthContext";
 
 interface BlogListItemProps {
   blog: Blog;
