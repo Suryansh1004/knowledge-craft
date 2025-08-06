@@ -14,6 +14,7 @@ import { createForumTopic } from "@/app/actions/forum";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -26,7 +27,7 @@ function SubmitButton() {
 }
 
 export default function NewTopicPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [state, formAction] = useFormState(createForumTopic, null);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
@@ -46,6 +47,28 @@ export default function NewTopicPage() {
       toast({ title: "Error", description: state.error, variant: "destructive" });
     }
   }, [state, toast, router]);
+
+  if (loading) {
+    return (
+       <div className="container mx-auto py-12 px-4 md:px-6">
+        <Card className="w-full max-w-2xl mx-auto shadow-xl">
+          <CardHeader>
+            <Skeleton className="h-8 w-1/2" />
+            <Skeleton className="h-4 w-3/4" />
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-24 w-full" />
+          </CardContent>
+          <CardFooter className="border-t pt-6 flex justify-end">
+            <Skeleton className="h-10 w-32" />
+          </CardFooter>
+        </Card>
+      </div>
+    )
+  }
+
 
   if (!user) {
     return (

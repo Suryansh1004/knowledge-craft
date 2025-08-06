@@ -11,9 +11,11 @@ import { format } from 'date-fns';
 import { CalendarDays, User, Tag, MessageSquare, Loader2, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { createBlogComment } from '@/app/actions/blog';
+import { useAuth } from '@/hooks/useAuth';
+import Link from 'next/link';
 
 // The Course type passed to this client component should not include the icon function
 type SerializableCourse = Omit<Course, 'icon'>;
@@ -41,6 +43,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [commentState, commentFormAction] = useFormState(createBlogComment, null);
   const { toast } = useToast();
+  const { user } = useAuth();
   
   useEffect(() => {
     if (commentState?.message) {
@@ -137,20 +140,25 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         </h2>
         <Card className="bg-muted/30">
           <CardContent className="p-6">
-            <form action={commentFormAction} ref={formRef}>
-              <input type="hidden" name="blogId" value={blog.id} />
-              <Textarea 
-                name="content" 
-                placeholder="Write your comment here..." 
-                className="mb-3 bg-background" 
-                rows={4} 
-                required 
-              />
-              {commentState?.fieldErrors?.content && <p className="text-xs text-destructive mb-2">{commentState.fieldErrors.content.join(", ")}</p>}
-              {commentState?.error && !commentState?.fieldErrors && <p className="text-sm text-destructive mb-2">{commentState.error}</p>}
-              <CommentSubmitButton />
-            </form>
-            <p className="text-xs text-muted-foreground mt-2">Please be respectful and constructive.</p>
+            {user ? (
+              <form action={commentFormAction} ref={formRef}>
+                <input type="hidden" name="blogId" value={blog.id} />
+                <Textarea 
+                  name="content" 
+                  placeholder="Write your comment here..." 
+                  className="mb-3 bg-background" 
+                  rows={4} 
+                  required 
+                />
+                {commentState?.fieldErrors?.content && <p className="text-xs text-destructive mb-2">{commentState.fieldErrors.content.join(", ")}</p>}
+                {commentState?.error && !commentState?.fieldErrors && <p className="text-sm text-destructive mb-2">{commentState.error}</p>}
+                <CommentSubmitButton />
+              </form>
+            ) : (
+              <CardDescription>
+                <Link href="/login" className="text-primary underline">Log in</Link> to post a comment.
+              </CardDescription>
+            )}
             {/* Comment display area would go here in a future update */}
           </CardContent>
         </Card>

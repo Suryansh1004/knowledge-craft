@@ -6,10 +6,12 @@ import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send } from "lucide-react";
 import { createForumPost } from "@/app/actions/forum";
+import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
 
 interface CreatePostFormProps {
   topicId: string;
@@ -28,6 +30,7 @@ function SubmitButton() {
 export function CreatePostForm({ topicId }: CreatePostFormProps) {
   const [state, formAction] = useFormState(createForumPost, null);
   const { toast } = useToast();
+  const { user } = useAuth();
   const formRef = useRef<HTMLFormElement>(null);
 
 
@@ -40,6 +43,21 @@ export function CreatePostForm({ topicId }: CreatePostFormProps) {
       toast({ title: "Error", description: state.error, variant: "destructive" });
     }
   }, [state, toast]);
+
+  if (!user) {
+    return (
+        <Card className="mt-8 shadow-md">
+            <CardHeader>
+                <CardTitle className="text-xl text-primary">Write a Reply</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <CardDescription>
+                <Link href="/login" className="text-primary underline">Log in</Link> to post a reply.
+                </CardDescription>
+            </CardContent>
+        </Card>
+    )
+  }
 
   return (
     <Card className="mt-8 shadow-md">
