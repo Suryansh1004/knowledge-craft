@@ -28,11 +28,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [initialProfileCheckDone, setInitialProfileCheckDone] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const fetchUserProfile = useCallback(async (firebaseUser: FirebaseUser) => {
     try {
@@ -54,11 +49,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.error("Failed to fetch Firestore user profile:", err);
       setUser(firebaseUser as UserProfile);
     } finally {
-       setLoading(false);
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // prevent running on server
+
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         fetchUserProfile(firebaseUser);
@@ -71,34 +68,41 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return () => unsubscribe();
   }, [fetchUserProfile]);
-  
-  const value = { user, loading, initialProfileCheckDone, setInitialProfileCheckDone };
 
-  if (!isClient || loading) {
-    return (
-       <AuthContext.Provider value={value}>
-        <div className="flex flex-col items-center justify-center min-h-screen bg-background">
-            <div className="space-y-4 p-8 w-full max-w-md">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-8 w-3/4" />
-            <Skeleton className="h-32 w-full" />
-            </div>
-        </div>
-       </AuthContext.Provider>
-    );
-  }
+  const value: AuthContextType = {
+    user,
+    loading,
+    initialProfileCheckDone,
+    setInitialProfileCheckDone,
+  };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {loading ? (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+          <div className="space-y-4 p-8 w-full max-w-md">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-8 w-3/4" />
+            <Skeleton className="h-32 w-full" />
+          </div>
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+  // Instead of throwing during prerender, return a safe fallback
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    return {
+      user: null,
+      loading: true,
+      initialProfileCheckDone: false,
+      setInitialProfileCheckDone: () => {},
+    };
   }
   return context;
 };

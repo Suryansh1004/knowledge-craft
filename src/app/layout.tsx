@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 // Removed Geist font imports
 import './globals.css';
