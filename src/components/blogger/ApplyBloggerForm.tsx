@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, FileText } from "lucide-react";
 import { submitBloggerApplication } from "@/app/actions/bloggerApplication";
+import Link from 'next/link';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -48,7 +49,7 @@ export function ApplyBloggerForm() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                  <p className="text-muted-foreground">Please <a href="/login" className="underline text-primary">log in</a> to apply to become a blogger.</p>
+                  <p className="text-muted-foreground">Please <Link href="/login" className="underline text-primary">log in</Link> to apply to become a blogger.</p>
               </CardContent>
           </Card>
       )
