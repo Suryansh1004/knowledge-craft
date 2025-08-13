@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientLayout from "./ClientLayout";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://knowledgecraft.com"),
@@ -31,7 +32,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased flex flex-col min-h-screen">
-        <ClientLayout>{children}</ClientLayout>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
