@@ -1,3 +1,4 @@
+// src/app/ClientLayout.tsx
 "use client";
 
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -20,11 +21,13 @@ export default function ClientLayout({
         enableSystem
         disableTransitionOnChange
       >
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <Toaster />
-        <FloatingChatbot />
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <Toaster />
+          <FloatingChatbot />
+        </div>
       </ThemeProvider>
     </AuthProvider>
   );
