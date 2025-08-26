@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ThemeProvider } from "next-themes";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Toaster } from "@/components/ui/toaster";
+import { FloatingChatbot } from "@/components/chatbot/FloatingChatbot";
 import "./globals.css";
-import ClientLayout from "./ClientLayout"; // Import the new client layout
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://knowledgecraft.com"),
@@ -31,7 +36,22 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <ClientLayout>{children}</ClientLayout>
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+              <Toaster />
+              <FloatingChatbot />
+            </div>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
