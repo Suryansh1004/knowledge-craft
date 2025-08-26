@@ -1,4 +1,3 @@
-
 // src/app/(marketing)/page.tsx
 "use client";
 
@@ -77,7 +76,7 @@ export default function HomePage() {
             </div>
             <div className="relative h-80 md:h-96">
                <Image 
-                src="https://placehold.co/500x400.png"
+                src="https://placehold.co/250x250.png"
                 alt="Why Knowledge Craft" 
                 fill
                 className="object-cover rounded-xl shadow-xl"

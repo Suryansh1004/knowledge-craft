@@ -1,4 +1,3 @@
-
 // src/components/home/TestimonialsSection.tsx
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
@@ -27,7 +26,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
             <Card key={testimonial.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden flex flex-col">
               <CardContent className="p-6 flex-grow flex flex-col items-center text-center">
                 <Avatar className="w-20 h-20 mb-4 border-4 border-primary/50">
-                  <AvatarImage src={`https://placehold.co/100x100.png`} alt={testimonial.name} data-ai-hint={testimonial.data_ai_hint as string} />
+                  <AvatarImage src={`https://placehold.co/250x250.png`} alt={testimonial.name} data-ai-hint={testimonial.data_ai_hint as string} />
                   <AvatarFallback>{testimonial.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-xl font-semibold text-foreground mb-1">{testimonial.name}</h3>

@@ -71,17 +71,16 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         const markdownMatch = markdown.match(dataAiHintRegex);
         const hint = markdownMatch && markdownMatch[1] ? `data-ai-hint="${markdownMatch[1]}"` : 'data-ai-hint="blog image"';
         // Replace with placehold.co
-        const placeholderSrc = `https://placehold.co/${src.split('/').slice(-2).join('/')}.png`;
+        const placeholderSrc = `https://placehold.co/250x250.png`;
         return `<img src="${placeholderSrc}" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
       })
       .replace(/<img src="https:\/\/placehold.co\/(.*?)"(.*?)>/gim, (match, path, rest) => {
           // Re-process image tags I may have created from markdown
-          const [width, height] = path.split('x');
           const altMatch = rest.match(/alt="(.*?)"/);
           const alt = altMatch ? altMatch[1] : 'blog image';
           const hintMatch = rest.match(/data-ai-hint="(.*?)"/);
           const hint = hintMatch ? `data-ai-hint="${hintMatch[1]}"` : 'data-ai-hint="blog image"';
-          return `<img src="https://placehold.co/${width}x${height}.png" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
+          return `<img src="https://placehold.co/250x250.png" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
       })
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\n/g, '<br />');
@@ -96,7 +95,8 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
             <Image
               src={blog.image}
               alt={blog.title}
-              fill
+              width={250}
+              height={250}
               className="object-cover"
               priority
               data-ai-hint={(blog as any).data_ai_hint || "blog post"}

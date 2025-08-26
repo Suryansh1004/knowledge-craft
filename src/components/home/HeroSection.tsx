@@ -1,4 +1,3 @@
-
 // src/components/home/HeroSection.tsx
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -32,10 +31,10 @@ export function HeroSection() {
           </div>
           <div className="hidden md:block">
             <Image
-              src="https://placehold.co/600x500.png"
+              src="https://placehold.co/250x250.png"
               alt="Knowledge Craft Illustration"
-              width={600}
-              height={500}
+              width={250}
+              height={250}
               className="rounded-xl shadow-2xl object-cover"
               data-ai-hint="learning technology"
               priority
