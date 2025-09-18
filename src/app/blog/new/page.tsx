@@ -1,3 +1,4 @@
+
 // src/app/blog/new/page.tsx
 import type { Metadata } from 'next';
 import { NewBlogPostClientPage } from '@/components/blog/NewBlogPostClientPage';
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function NewBlogPostPage() {
-  return <NewBlogPostClientPage />;
+  return (
+    <div className="py-12">
+      <NewBlogPostClientPage />
+    </div>
+  );
 }

@@ -20,7 +20,7 @@ export default function AllBlogsPage() {
   allCourses.forEach(course => coursesMap.set(course.id, course));
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
         <div className="text-center md:text-left">
           <h1 className="text-4xl font-bold text-primary mb-2">Knowledge Craft Tech Blog</h1>

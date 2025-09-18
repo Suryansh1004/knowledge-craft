@@ -1,3 +1,4 @@
+
 // src/app/apply-blogger/page.tsx
 import type { Metadata } from 'next';
 import { ApplyBloggerClientPage } from '@/components/blogger/ApplyBloggerClientPage';
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function ApplyBloggerPage() {
-  return <ApplyBloggerClientPage />;
+  return (
+    <div className="py-12">
+      <ApplyBloggerClientPage />
+    </div>
+  );
 }

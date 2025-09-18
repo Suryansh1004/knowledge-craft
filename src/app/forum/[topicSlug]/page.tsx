@@ -1,3 +1,4 @@
+
 // src/app/forum/[topicSlug]/page.tsx
 import { forumTopics as allTopics, forumPosts as allPostsData } from "@/data/forum";
 import type { ForumTopic, ForumPost } from "@/types";
@@ -54,7 +55,7 @@ export default async function ForumTopicPage({ params }: ForumTopicPageProps) {
   const IconComponent = topic.icon;
 
   return (
-    <div className="container mx-auto py-10 px-4 md:px-6">
+    <div className="py-10">
       <div className="mb-8">
         <Button variant="outline" asChild className="mb-6 shadow-sm">
           <Link href="/forum">

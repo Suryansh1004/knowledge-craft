@@ -1,3 +1,4 @@
+
 // src/app/terms/page.tsx
 
 import type { Metadata } from 'next';
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <h1 className="text-3xl font-bold text-primary mb-6">Terms of Service</h1>
       <div className="prose dark:prose-invert max-w-none">
         <p>Welcome to Knowledge Craft! These terms and conditions outline the rules and regulations for the use of Knowledge Craft's Website, located at [Your Website URL].</p>

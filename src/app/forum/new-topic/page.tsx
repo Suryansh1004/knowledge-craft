@@ -1,3 +1,4 @@
+
 // src/app/forum/new-topic/page.tsx
 "use client";
 
@@ -50,7 +51,7 @@ export default function NewTopicPage() {
 
   if (loading) {
     return (
-       <div className="container mx-auto py-12 px-4 md:px-6">
+       <div className="py-12">
         <Card className="w-full max-w-2xl mx-auto shadow-xl">
           <CardHeader>
             <Skeleton className="h-8 w-1/2" />
@@ -72,7 +73,7 @@ export default function NewTopicPage() {
 
   if (!user) {
     return (
-      <div className="container mx-auto py-12 px-4 md:px-6">
+      <div className="py-12">
         <Card className="w-full max-w-lg mx-auto shadow-xl">
             <CardHeader>
               <CardTitle className="text-2xl text-primary flex items-center">
@@ -88,7 +89,7 @@ export default function NewTopicPage() {
   }
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <Card className="w-full max-w-2xl mx-auto shadow-xl">
         <CardHeader>
           <CardTitle className="text-2xl text-primary flex items-center">

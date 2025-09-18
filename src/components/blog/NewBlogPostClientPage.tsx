@@ -1,3 +1,4 @@
+
 // src/components/blog/NewBlogPostClientPage.tsx
 "use client";
 
@@ -26,7 +27,7 @@ export function NewBlogPostClientPage() {
 
   if (loading || !isBlogger) {
     return (
-       <div className="container mx-auto py-12 px-4 md:px-6">
+       <div className="py-12">
         <Card className="w-full max-w-lg mx-auto shadow-xl">
             <CardHeader>
               <CardTitle className="text-2xl text-primary flex items-center">
@@ -46,8 +47,6 @@ export function NewBlogPostClientPage() {
   }
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
-      <CreateBlogForm />
-    </div>
+    <CreateBlogForm />
   );
 }

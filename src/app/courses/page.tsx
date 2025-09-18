@@ -11,7 +11,7 @@ export default function AllCoursesPage() {
   const courses = allCourses;
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-primary mb-4">Explore Our Online Courses</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

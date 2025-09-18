@@ -1,3 +1,4 @@
+
 // src/app/coding-problems/page.tsx
 "use client";
 
@@ -45,7 +46,7 @@ export default function CodingProblemsPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 md:px-6">
+    <div className="py-8">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold text-primary mb-3">Coding Practice Zone</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

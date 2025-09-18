@@ -1,3 +1,4 @@
+
 // src/app/support/page.tsx
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function SupportPage() {
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <h1 className="text-3xl font-bold text-primary mb-6">Support Center</h1>
       <div className="prose dark:prose-invert max-w-none mb-8">
         <p>If you need help, please fill out the form below, and our support team will get back to you as soon as possible. You can also check our <a href="/faq" className="text-accent hover:underline">FAQ page</a> for common questions.</p>

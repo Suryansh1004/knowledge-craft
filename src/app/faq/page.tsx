@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6 max-w-3xl">
+    <div className="py-12 max-w-3xl mx-auto">
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-primary mb-4">Frequently Asked Questions</h1>
         <p className="text-lg text-muted-foreground">Have questions? We have answers. If you can't find what you're looking for, feel free to <a href="/contact" className="text-accent hover:underline">contact us</a>.</p>

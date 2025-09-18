@@ -1,3 +1,4 @@
+
 // src/app/courses/[courseSlug]/blog/[blogSlug]/page.tsx
 import { notFound } from 'next/navigation';
 import type { Metadata, ResolvingMetadata } from 'next';
@@ -45,7 +46,7 @@ export default async function BlogPage({ params }: PageProps): Promise<JSX.Eleme
   const courseBlogsForSuggestions = allBlogs.filter((b) => b.courseId === course.id);
 
   return (
-    <div className="container mx-auto py-8 px-4 md:px-6">
+    <div className="py-8">
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8">
           <BlogPageClient

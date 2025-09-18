@@ -1,5 +1,4 @@
 
-
 // src/app/privacy/page.tsx
 
 import type { Metadata } from 'next';
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   // This page is primarily static content, no client-side hooks needed directly
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <h1 className="text-3xl font-bold text-primary mb-6">Privacy Policy</h1>
       <div className="prose dark:prose-invert max-w-none">
         <p>Your privacy is important to us. It is Knowledge Craft's policy to respect your privacy regarding any information we may collect from you across our website, [Your Website URL], and other sites we own and operate.</p>

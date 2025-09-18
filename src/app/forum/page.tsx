@@ -1,3 +1,4 @@
+
 // src/app/forum/page.tsx
 import { ForumTopicItem } from "@/components/forum/ForumTopicItem";
 import { forumTopics as allTopics } from "@/data/forum";
@@ -11,7 +12,7 @@ export default function ForumPage() {
   const topics = allTopics;
 
   return (
-    <div className="container mx-auto py-10 px-4 md:px-6">
+    <div className="py-10">
       <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
         <div>
           <h1 className="text-4xl font-bold text-primary">Community Forum</h1>
