@@ -25,7 +25,6 @@ import { useState } from 'react';
 import { ThemeToggleButton } from './ThemeToggleButton';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
   { href: '/videos', label: 'Videos' },
@@ -67,10 +66,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         
         {/* Left Section: Logo and Mobile Menu Trigger */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 lg:w-1/4">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon">
@@ -83,6 +82,7 @@ export function Header() {
                 <Logo />
               </div>
               <nav className="flex flex-col space-y-2 p-4">
+                <NavLinkItem href="/" label="Home" className="justify-start w-full" />
                 {navLinks.map((link) => (
                   <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
                 ))}
@@ -118,16 +118,17 @@ export function Header() {
 
         {/* Center Section: Desktop Navigation */}
         <nav className="hidden md:flex flex-1 items-center justify-center space-x-2 lg:space-x-4">
+          <NavLinkItem href="/" label="Home" />
           {navLinks.map((link) => (
             <NavLinkItem key={link.href} href={link.href} label={link.label} />
           ))}
         </nav>
         
         {/* Right Section: Search, Theme Toggle, and User Auth */}
-        <div className="flex items-center space-x-2 md:space-x-3">
+        <div className="flex items-center justify-end space-x-2 md:space-x-3 lg:w-1/4">
           <div className="relative hidden sm:block">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search..." className="pl-8 sm:w-[150px] md:w-[200px] lg:w-[250px] rounded-full" />
+            <Input type="search" placeholder="Search..." className="pl-8 sm:w-full rounded-full" />
           </div>
           <ThemeToggleButton />
           {!loading && user ? (

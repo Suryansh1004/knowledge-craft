@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function CreateVideoAdminPage() {
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12 px-4 md:px-6">
       <CreateVideoForm />
     </div>
   );

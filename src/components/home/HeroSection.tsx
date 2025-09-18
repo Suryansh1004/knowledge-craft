@@ -30,12 +30,11 @@ export function HeroSection() {
               </Button>
             </div>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:block relative h-80 md:h-96">
             <Image
               src={placeholderImages['hero-section']}
               alt="Knowledge Craft Illustration"
-              width={600}
-              height={400}
+              fill
               className="rounded-xl shadow-2xl object-cover"
               data-ai-hint="learning technology"
               priority

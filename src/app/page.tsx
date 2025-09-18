@@ -24,15 +24,15 @@ export default function HomePage() {
       <HeroSection />
 
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Featured <span className="text-primary">Courses</span>
-            </h2>
-            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Kickstart your learning journey with our most popular online courses, designed for immediate impact and career growth.
-            </p>
-          </div>
+        <div className="container mx-auto px-4 md:px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+            Featured <span className="text-primary">Courses</span>
+          </h2>
+          <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Kickstart your learning journey with our most popular online courses, designed for immediate impact and career growth.
+          </p>
+        </div>
+        <div className="container mx-auto px-4 md:px-6 mt-12">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredCourses.map((course) => (
               <CourseCard key={course.id} course={course} />
@@ -79,9 +79,8 @@ export default function HomePage() {
                <Image 
                 src={placeholderImages['why-k-craft']}
                 alt="Why Knowledge Craft" 
-                width={600}
-                height={400}
-                className="object-cover rounded-xl shadow-xl w-full h-full"
+                fill
+                className="object-cover rounded-xl shadow-xl"
                 data-ai-hint="team collaboration"
                 />
             </div>
