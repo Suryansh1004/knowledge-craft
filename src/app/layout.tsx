@@ -45,10 +45,8 @@ export default function RootLayout({
           >
             <div className="flex flex-col min-h-screen">
               <Header />
-              <main className="flex-1 w-full">
-                <div className="container mx-auto">
-                  {children}
-                </div>
+              <main className="flex-1 w-full container mx-auto">
+                {children}
               </main>
               <Footer />
               <Toaster />
