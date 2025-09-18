@@ -1,9 +1,7 @@
 // src/app/page.tsx
 import { HeroSection } from "@/components/home/HeroSection";
 import { CourseCard } from "@/components/home/CourseCard";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { courses as allCourses } from "@/data/courses";
-import { testimonials } from "@/data/testimonials";
 
 export default function HomePage() {
   const featuredCourses = allCourses.slice(0, 4); // Show first 4 courses
@@ -33,8 +31,6 @@ export default function HomePage() {
           )}
         </div>
       </section>
-
-      <TestimonialsSection testimonials={testimonials} />
     </>
   );
 }
