@@ -7,7 +7,7 @@ import placeholderImages from '@/app/lib/placeholder-images.json';
 
 export function HeroSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 via-background to-background">
+    <section className="w-full py-16 md:py-24 bg-gradient-to-br from-primary/10 via-background to-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6 text-center md:text-left">

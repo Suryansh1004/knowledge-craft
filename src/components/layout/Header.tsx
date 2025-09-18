@@ -1,10 +1,9 @@
 // src/components/layout/Header.tsx
 "use client";
 import { useAuth } from "@/contexts/AuthContext";
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit, Video } from 'lucide-react'; // Added Video
+import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit, Video } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -29,7 +28,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
-  { href: '/videos', label: 'Videos' }, // Added Videos link
+  { href: '/videos', label: 'Videos' },
   { href: '/coding-problems', label: 'Practice' },
   { href: '/forum', label: 'Forum' },
 ];
@@ -42,19 +41,19 @@ export function Header() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // User state will be updated by onAuthStateChanged in AuthContext
     } catch (error) {
       console.error("Error signing out: ", error);
     }
   };
   
-  const NavLinkItem = ({ href, label }: { href: string, label: string }) => (
+  const NavLinkItem = ({ href, label, className }: { href: string, label: string, className?: string }) => (
     <Link href={href} passHref>
       <Button
         variant="ghost"
         className={cn(
           "text-foreground/80 hover:text-primary hover:bg-primary/10",
-          pathname === href && "text-primary font-semibold border-b-2 border-primary rounded-none"
+          pathname === href && "text-primary font-semibold border-b-2 border-primary rounded-none",
+          className
         )}
         onClick={() => setMobileMenuOpen(false)}
       >
@@ -64,18 +63,67 @@ export function Header() {
   );
 
   const isBlogger = user?.roles?.includes('blogger');
-  // Simple check for admin role, in real app this would be more robust
   const isAdmin = user?.roles?.includes('admin'); 
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
-      <div className="container mx-auto flex items-center justify-between p-4 md:px-6">
-        <Logo />
-        <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+        
+        {/* Left Section: Logo and Mobile Menu Trigger */}
+        <div className="flex items-center gap-4">
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] sm:w-[350px]">
+              <div className="p-4">
+                <Logo />
+              </div>
+              <nav className="flex flex-col space-y-2 p-4">
+                {navLinks.map((link) => (
+                  <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
+                ))}
+                 <div className="pt-4 border-t">
+                  {isBlogger && (
+                    <Button variant="outline" asChild className="w-full justify-start mt-2" onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
+                    </Button>
+                  )}
+                  {!isBlogger && user && (
+                     <Button variant="outline" asChild className="w-full justify-start mt-2" onClick={() => setMobileMenuOpen(false)}>
+                       <Link href="/apply-blogger"><FileText className="mr-2 h-4 w-4" />Apply for Blogger</Link>
+                     </Button>
+                  )}
+                 </div>
+                {!loading && !user && (
+                  <div className="pt-4 border-t space-y-2">
+                    <Button variant="outline" asChild className="w-full justify-start" onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/login">Login</Link>
+                    </Button>
+                    <Button asChild className="w-full justify-start" onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/signup">Sign Up</Link>
+                    </Button>
+                  </div>
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+          <div className="hidden md:block">
+            <Logo />
+          </div>
+        </div>
+
+        {/* Center Section: Desktop Navigation */}
+        <nav className="hidden md:flex flex-1 items-center justify-center space-x-2 lg:space-x-4">
           {navLinks.map((link) => (
             <NavLinkItem key={link.href} href={link.href} label={link.label} />
           ))}
         </nav>
+        
+        {/* Right Section: Search, Theme Toggle, and User Auth */}
         <div className="flex items-center space-x-2 md:space-x-3">
           <div className="relative hidden sm:block">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -135,49 +183,8 @@ export function Header() {
               </Button>
             </div>
           ) : (
-            // Skeleton or loader for user avatar while loading
              <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
           )}
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[350px]">
-              <nav className="flex flex-col space-y-4 mt-8">
-                {navLinks.map((link) => (
-                  <NavLinkItem key={link.href} href={link.href} label={link.label} />
-                ))}
-                 {isBlogger && (
-                    <Button variant="outline" asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                      <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
-                    </Button>
-                  )}
-                  {!isBlogger && user && ( // Show apply only if logged in and not a blogger
-                     <Button variant="outline" asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                       <Link href="/apply-blogger"><FileText className="mr-2 h-4 w-4" />Apply for Blogger</Link>
-                     </Button>
-                  )}
-                <div className="relative mt-4">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input type="search" placeholder="Search..." className="pl-8 w-full rounded-full" />
-                </div>
-                {!loading && !user && (
-                  <>
-                    <DropdownMenuSeparator />
-                    <Button variant="outline" asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                      <Link href="/login">Login</Link>
-                    </Button>
-                    <Button asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                      <Link href="/signup">Sign Up</Link>
-                    </Button>
-                  </>
-                )}
-              </nav>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
