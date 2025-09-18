@@ -44,14 +44,14 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="text-center md:text-left">
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
                 Why Choose <span className="text-primary">Knowledge Craft?</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto md:mx-0">
                 We are committed to providing high-quality, accessible, and practical tech education. We empower you to achieve your career goals with skills that are relevant in today's industry.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-4 text-left">
                 <li className="flex items-start">
                   <CheckCircle className="h-6 w-6 text-accent mr-3 mt-1 flex-shrink-0" />
                   <div>
