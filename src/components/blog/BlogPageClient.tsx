@@ -4,7 +4,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useFormState, useFormStatus } from "react-dom";
 import type { Course, Blog as BlogType } from '@/types';
-import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -16,7 +15,6 @@ import { useToast } from '@/hooks/use-toast';
 import { createBlogComment } from '@/app/actions/blog';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 // The Course type passed to this client component should not include the icon function
 type SerializableCourse = Omit<Course, 'icon'>;
@@ -66,23 +64,8 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
       .replace(/\*(.*)\*/gim, '<em>$1</em>')
       .replace(/```javascript\n([\s\S]*?)\n```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code class="language-javascript">$1</code></pre>')
       .replace(/```([\s\S]*?)```/gim, '<pre class="bg-muted p-4 rounded-md overflow-x-auto text-sm my-4"><code>$1</code></pre>')
-      .replace(/!\[(.*?)\]\((.*?)\)/gim, (match, alt, src) => {
-        // Find data-ai-hint in the original markdown if it exists
-        const dataAiHintRegex = new RegExp(`!\\[${alt}\\]\\(${src}\\s*(?:data-ai-hint="(.*?)")?\\)`);
-        const markdownMatch = markdown.match(dataAiHintRegex);
-        const hint = markdownMatch && markdownMatch[1] ? `data-ai-hint="${markdownMatch[1]}"` : 'data-ai-hint="blog image"';
-        // Replace with placeholder
-        const placeholderSrc = placeholderImages['blog-post-content'];
-        return `<img src="${placeholderSrc}" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
-      })
-      .replace(/<img src="https:\/\/placehold.co\/(.*?)"(.*?)>/gim, (match, path, rest) => {
-          // Re-process image tags I may have created from markdown
-          const altMatch = rest.match(/alt="(.*?)"/);
-          const alt = altMatch ? altMatch[1] : 'blog image';
-          const hintMatch = rest.match(/data-ai-hint="(.*?)"/);
-          const hint = hintMatch ? `data-ai-hint="${hintMatch[1]}"` : 'data-ai-hint="blog image"';
-          return `<img src="${placeholderImages['blog-post-content']}" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
-      })
+      .replace(/!\[(.*?)\]\((.*?)\)/gim, "") // Remove image tags
+      .replace(/<img (.*?)>/gim, "") // Remove html image tags
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\n/g, '<br />');
     return { __html: html };
@@ -90,29 +73,12 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
 
   return (
     <>
-      <article className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-accent prose-img:rounded-lg prose-img:shadow-md">
-        {blog.image && (
-          <div className="relative w-full h-64 md:h-[450px] rounded-xl overflow-hidden shadow-xl mb-8">
-            <Image
-              src={placeholderImages['blog-hero']}
-              alt={blog.title}
-              width={600}
-              height={400}
-              className="object-cover w-full h-full"
-              priority
-              data-ai-hint={(blog as any).data_ai_hint || "blog post"}
-            />
-          </div>
-        )}
-        
+      <article className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-a:text-accent">
         <h1 className="text-3xl md:text-4xl font-extrabold text-primary mb-4">{blog.title}</h1>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6 border-y py-3">
           <div className="flex items-center">
-            <Avatar className="h-8 w-8 mr-2">
-              <AvatarImage src={placeholderImages['author-avatar']} alt={blog.author} data-ai-hint="person avatar" />
-              <AvatarFallback>{blog.author.substring(0,1)}</AvatarFallback>
-            </Avatar>
+            <User className="h-4 w-4 mr-1.5" />
             <span>{blog.author}</span>
           </div>
           <div className="flex items-center">
@@ -170,7 +136,6 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
           <CardHeader><CardTitle className="text-lg text-primary">About The Author</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
-              <AvatarImage src={placeholderImages['author-avatar']} alt={blog.author} data-ai-hint="person avatar"/>
               <AvatarFallback className="text-2xl">{blog.author.substring(0,1)}</AvatarFallback>
             </Avatar>
             <div>

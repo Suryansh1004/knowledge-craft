@@ -2,12 +2,11 @@
 "use client";
 
 import type { ForumPost } from '@/types';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ThumbsUp, MessageSquare, CornerUpLeft } from 'lucide-react';
+import { ThumbsUp, CornerUpLeft } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 interface ForumPostItemProps {
   post: ForumPost;
@@ -18,7 +17,6 @@ export function ForumPostItem({ post }: ForumPostItemProps) {
     <Card className="shadow-sm">
       <CardHeader className="flex flex-row items-start space-x-4 p-4 pb-2">
         <Avatar className="h-10 w-10 border">
-          <AvatarImage src={placeholderImages['forum-user-avatar']} alt={post.userName} data-ai-hint="person avatar" />
           <AvatarFallback>{post.userName.charAt(0).toUpperCase()}</AvatarFallback>
         </Avatar>
         <div className="flex-1">

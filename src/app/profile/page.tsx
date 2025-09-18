@@ -1,4 +1,3 @@
-
 // src/app/profile/page.tsx
 "use client"; 
 
@@ -8,11 +7,9 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ProfileForm } from '@/components/auth/ProfileForm';
 import { updateUserProfile } from '@/app/actions/auth';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Mail, Building, CalendarDays, UserCircle, Edit3 } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Building, CalendarDays, UserCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 
 export default function ProfilePage() {
@@ -39,7 +36,7 @@ export default function ProfilePage() {
 
   if (loading || !user) {
     return (
-      <div className="container mx-auto py-12 px-4 md:px-6">
+      <div className="py-12">
         <Skeleton className="h-10 w-1/3 mb-6" />
         <div className="grid md:grid-cols-3 gap-8">
           <Skeleton className="md:col-span-1 h-64 rounded-lg" />
@@ -53,13 +50,12 @@ export default function ProfilePage() {
   const updateUserProfileAction = updateUserProfile.bind(null, user.uid);
 
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6">
+    <div className="py-12">
       <h1 className="text-3xl font-bold text-primary mb-8">My Profile</h1>
       <div className="grid md:grid-cols-3 gap-8 items-start">
         <Card className="md:col-span-1 shadow-lg">
           <CardHeader className="items-center text-center">
             <Avatar className="w-28 h-28 mb-4 border-4 border-primary">
-              <AvatarImage src={user.photoURL || undefined} alt={user.displayName || 'User'} />
               <AvatarFallback className="text-4xl">
                   {user.displayName ? user.displayName.charAt(0).toUpperCase() : <UserCircle size={48}/>}
               </AvatarFallback>

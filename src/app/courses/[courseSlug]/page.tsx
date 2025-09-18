@@ -2,14 +2,12 @@
 import { courses as allCourses } from '@/data/courses';
 import { blogs as allBlogs } from '@/data/blogs';
 import type { Course, Blog } from '@/types';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BlogListItem } from '@/components/blog/BlogListItem';
 import { Clock, BarChart3, Users, PlayCircle } from 'lucide-react';
 import type { Metadata } from 'next';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 interface CoursePageProps {
   params: {
@@ -59,24 +57,13 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const IconComponent = course.icon;
 
   return (
-    <div className="container mx-auto py-8 px-4 md:px-6">
+    <div className="py-8">
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Main Course Content */}
         <div className="lg:col-span-2">
-          <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl mb-8">
-            <Image
-              src={placeholderImages['course-hero']}
-              alt={course.title}
-              width={600}
-              height={400}
-              className="object-cover w-full h-full"
-              priority
-              data-ai-hint={course.title.toLowerCase().split(" ").slice(0,2).join(" ")}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
-              <Badge variant="secondary" className="mb-2 w-fit text-sm bg-opacity-80 backdrop-blur-sm">{course.category}</Badge>
-              <h1 className="text-3xl md:text-4xl font-bold text-white shadow-strong">{course.title}</h1>
-            </div>
+          <div className="bg-muted rounded-xl p-8 mb-8">
+              <Badge variant="secondary" className="mb-2 w-fit text-sm">{course.category}</Badge>
+              <h1 className="text-3xl md:text-4xl font-bold text-primary shadow-strong">{course.title}</h1>
           </div>
 
           <div className="mb-8 prose prose-lg max-w-none dark:prose-invert prose-headings:text-primary prose-a:text-accent">

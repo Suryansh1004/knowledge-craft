@@ -3,10 +3,10 @@
 import { useAuth } from "@/contexts/AuthContext";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpenCheck, LogIn, LogOut, UserCircle, Menu, Search, FileText, Edit, Video } from 'lucide-react';
+import { LogOut, UserCircle, Menu, FileText, Edit, Video } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +20,6 @@ import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { Logo } from '@/components/Logo';
 import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { ThemeToggleButton } from './ThemeToggleButton';
 
@@ -50,7 +49,7 @@ export function Header() {
       <Button
         variant="ghost"
         className={cn(
-          "text-foreground/80 hover:text-primary hover:bg-primary/10",
+          "text-foreground/80 hover:text-primary hover:bg-primary/10 text-base",
           pathname === href && "text-primary font-semibold border-b-2 border-primary rounded-none",
           className
         )}
@@ -69,7 +68,7 @@ export function Header() {
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         
         {/* Left Section: Logo and Mobile Menu Trigger */}
-        <div className="flex items-center gap-4 lg:w-1/4">
+        <div className="flex items-center gap-2">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon">
@@ -111,9 +110,7 @@ export function Header() {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="hidden md:block">
-            <Logo />
-          </div>
+          <Logo />
         </div>
 
         {/* Center Section: Desktop Navigation */}
@@ -124,19 +121,14 @@ export function Header() {
           ))}
         </nav>
         
-        {/* Right Section: Search, Theme Toggle, and User Auth */}
-        <div className="flex items-center justify-end space-x-2 md:space-x-3 lg:w-1/4">
-          <div className="relative hidden sm:block">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search..." className="pl-8 sm:w-full rounded-full" />
-          </div>
+        {/* Right Section: Theme Toggle, and User Auth */}
+        <div className="flex items-center justify-end space-x-2 md:space-x-3">
           <ThemeToggleButton />
           {!loading && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10 border-2 border-primary">
-                    <AvatarImage src={user.photoURL || undefined} alt={user.displayName || user.email || 'User'} />
                     <AvatarFallback>
                       {user.displayName ? user.displayName.charAt(0).toUpperCase() : <UserCircle />}
                     </AvatarFallback>
