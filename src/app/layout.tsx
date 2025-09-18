@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | Knowledge Craft",
   },
   description:
-    "Master in-demand tech skills with Knowledge Craft. Explore expert-led online courses in Web Development, Data Science, AI, Cloud Computing, and more. Start your learning journey today!",
+    "Master in-demand tech skills with Knowledge Craft. Explore expert-led online courses in Web Development, Data Science, AI, Cloud Computing, and more.",
   openGraph: {
     title:
       "Knowledge Craft | Online Tech Courses for Web Development, AI & Cloud",
@@ -35,8 +35,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* Force Tailwind bg/text colors */}
-      <body className="bg-background text-foreground antialiased">
+      {/* 👇 let next-themes manage dark/light via class */}
+      <body className="antialiased">
         <AuthProvider>
           <ThemeProvider
             attribute="class"
@@ -44,11 +44,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen bg-background text-foreground">
               <Header />
-              <main className="flex-1 w-full">
-                {children}
-              </main>
+              <main className="flex-1 w-full">{children}</main>
               <Footer />
               <Toaster />
               <FloatingChatbot />
