@@ -17,7 +17,6 @@ function generateSiteMap() {
      <url><loc>${URL}</loc></url>
      <url><loc>${URL}/courses</loc></url>
      <url><loc>${URL}/blog</loc></url>
-     <url><loc>${URL}/videos</loc></url>
      <url><loc>${URL}/coding-problems</loc></url>
      <url><loc>${URL}/forum</loc></url>
      <url><loc>${URL}/contact</loc></url>

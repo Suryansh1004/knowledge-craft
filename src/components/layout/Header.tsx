@@ -26,7 +26,6 @@ import { ThemeToggleButton } from './ThemeToggleButton';
 const navLinks = [
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
-  { href: '/videos', label: 'Videos' },
   { href: '/coding-problems', label: 'Practice' },
   { href: '/forum', label: 'Forum' },
 ];
