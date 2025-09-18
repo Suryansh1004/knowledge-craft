@@ -35,7 +35,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      {/* Force Tailwind bg/text colors */}
+      <body className="bg-background text-foreground antialiased">
         <AuthProvider>
           <ThemeProvider
             attribute="class"
@@ -45,7 +46,6 @@ export default function RootLayout({
           >
             <div className="flex flex-col min-h-screen">
               <Header />
-              {/* Keep container inside page sections, not global */}
               <main className="flex-1 w-full">
                 {children}
               </main>
