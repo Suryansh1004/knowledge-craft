@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { Course } from '@/types';
 import { ArrowRight } from 'lucide-react';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 interface CourseCardProps {
   course: Course;
@@ -18,10 +19,10 @@ export function CourseCard({ course }: CourseCardProps) {
     <Card className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
       <CardHeader className="p-0 relative">
         <Image
-          src={`https://placehold.co/250x250.png`}
+          src={placeholderImages['course-card']}
           alt={course.title}
-          width={250}
-          height={250}
+          width={600}
+          height={400}
           className="object-cover w-full h-48"
           data-ai-hint={course.data_ai_hint as string}
         />

@@ -21,7 +21,6 @@ export interface Course {
   title: string;
   description: string;
   category: string;
-  image: string; // URL to image
   icon?: any; // Lucide icon component or name
   slug: string;
 }
@@ -38,7 +37,6 @@ export interface Blog {
   createdAt: Date; // Should be Firestore Timestamp or Date
   excerpt?: string;
   tags?: string[];
-  image?: string;
 }
 
 export interface Testimonial {
@@ -46,7 +44,6 @@ export interface Testimonial {
   name: string;
   role: string;
   quote: string;
-  avatar: string; // URL to avatar image
   data_ai_hint?: string;
 }
 

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { BlogListItem } from '@/components/blog/BlogListItem';
 import { Clock, BarChart3, Users, PlayCircle } from 'lucide-react';
 import type { Metadata } from 'next';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 interface CoursePageProps {
   params: {
@@ -64,10 +65,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
         <div className="lg:col-span-2">
           <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl mb-8">
             <Image
-              src={`https://placehold.co/250x250.png`}
+              src={placeholderImages['course-hero']}
               alt={course.title}
-              fill
-              className="object-cover"
+              width={600}
+              height={400}
+              className="object-cover w-full h-full"
               priority
               data-ai-hint={course.title.toLowerCase().split(" ").slice(0,2).join(" ")}
             />

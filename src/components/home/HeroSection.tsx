@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 export function HeroSection() {
   return (
@@ -31,10 +32,10 @@ export function HeroSection() {
           </div>
           <div className="hidden md:block">
             <Image
-              src="https://placehold.co/250x250.png"
+              src={placeholderImages['hero-section']}
               alt="Knowledge Craft Illustration"
-              width={250}
-              height={250}
+              width={600}
+              height={400}
               className="rounded-xl shadow-2xl object-cover"
               data-ai-hint="learning technology"
               priority

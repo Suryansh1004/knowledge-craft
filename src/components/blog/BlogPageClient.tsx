@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 import { createBlogComment } from '@/app/actions/blog';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 // The Course type passed to this client component should not include the icon function
 type SerializableCourse = Omit<Course, 'icon'>;
@@ -70,8 +71,8 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         const dataAiHintRegex = new RegExp(`!\\[${alt}\\]\\(${src}\\s*(?:data-ai-hint="(.*?)")?\\)`);
         const markdownMatch = markdown.match(dataAiHintRegex);
         const hint = markdownMatch && markdownMatch[1] ? `data-ai-hint="${markdownMatch[1]}"` : 'data-ai-hint="blog image"';
-        // Replace with placehold.co
-        const placeholderSrc = `https://placehold.co/250x250.png`;
+        // Replace with placeholder
+        const placeholderSrc = placeholderImages['blog-post-content'];
         return `<img src="${placeholderSrc}" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
       })
       .replace(/<img src="https:\/\/placehold.co\/(.*?)"(.*?)>/gim, (match, path, rest) => {
@@ -80,7 +81,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
           const alt = altMatch ? altMatch[1] : 'blog image';
           const hintMatch = rest.match(/data-ai-hint="(.*?)"/);
           const hint = hintMatch ? `data-ai-hint="${hintMatch[1]}"` : 'data-ai-hint="blog image"';
-          return `<img src="https://placehold.co/250x250.png" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
+          return `<img src="${placeholderImages['blog-post-content']}" alt="${alt}" ${hint} class="rounded-lg shadow-md my-4" />`;
       })
       .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\n/g, '<br />');
@@ -93,11 +94,11 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         {blog.image && (
           <div className="relative w-full h-64 md:h-[450px] rounded-xl overflow-hidden shadow-xl mb-8">
             <Image
-              src={blog.image}
+              src={placeholderImages['blog-hero']}
               alt={blog.title}
-              width={250}
-              height={250}
-              className="object-cover"
+              width={600}
+              height={400}
+              className="object-cover w-full h-full"
               priority
               data-ai-hint={(blog as any).data_ai_hint || "blog post"}
             />
@@ -109,7 +110,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6 border-y py-3">
           <div className="flex items-center">
             <Avatar className="h-8 w-8 mr-2">
-              <AvatarImage src={blog.authorImage} alt={blog.author} data-ai-hint="person avatar" />
+              <AvatarImage src={placeholderImages['author-avatar']} alt={blog.author} data-ai-hint="person avatar" />
               <AvatarFallback>{blog.author.substring(0,1)}</AvatarFallback>
             </Avatar>
             <span>{blog.author}</span>
@@ -169,7 +170,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
           <CardHeader><CardTitle className="text-lg text-primary">About The Author</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-4">
             <Avatar className="h-16 w-16">
-              <AvatarImage src={blog.authorImage} alt={blog.author} data-ai-hint="person avatar"/>
+              <AvatarImage src={placeholderImages['author-avatar']} alt={blog.author} data-ai-hint="person avatar"/>
               <AvatarFallback className="text-2xl">{blog.author.substring(0,1)}</AvatarFallback>
             </Avatar>
             <div>

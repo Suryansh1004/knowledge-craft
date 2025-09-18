@@ -13,6 +13,7 @@ import { courses as allCourses } from '@/data/courses'; // Mock data
 import { testimonials as allTestimonials } from '@/data/testimonials'; // Mock data
 import { CheckCircle, Zap, Users } from 'lucide-react';
 import Image from 'next/image';
+import placeholderImages from '@/app/lib/placeholder-images.json';
 
 export default function HomePage() {
   // For demonstration, taking first 3 courses for the homepage
@@ -76,10 +77,11 @@ export default function HomePage() {
             </div>
             <div className="relative h-80 md:h-96">
                <Image 
-                src="https://placehold.co/250x250.png"
+                src={placeholderImages['why-k-craft']}
                 alt="Why Knowledge Craft" 
-                fill
-                className="object-cover rounded-xl shadow-xl"
+                width={600}
+                height={400}
+                className="object-cover rounded-xl shadow-xl w-full h-full"
                 data-ai-hint="team collaboration"
                 />
             </div>
