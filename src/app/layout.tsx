@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/layout/Header";
@@ -6,6 +7,12 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { FloatingChatbot } from "@/components/chatbot/FloatingChatbot";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://knowledgecraft.com"),
@@ -35,8 +42,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* 👇 let next-themes manage dark/light via class */}
-      <body className="antialiased">
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
         <AuthProvider>
           <ThemeProvider
             attribute="class"
@@ -44,13 +55,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex flex-col min-h-screen bg-background text-foreground">
+            <div className="relative flex min-h-screen flex-col">
               <Header />
-              <main className="flex-1 w-full">{children}</main>
+              <main className="flex-1">{children}</main>
               <Footer />
-              <Toaster />
-              <FloatingChatbot />
             </div>
+            <Toaster />
+            <FloatingChatbot />
           </ThemeProvider>
         </AuthProvider>
       </body>
