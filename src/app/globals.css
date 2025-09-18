@@ -25,7 +25,6 @@
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
 
-    /* Chart colors */
     --chart-1: 222.2 47.4% 11.2%;
     --chart-2: 210 40% 96.1%;
     --chart-3: 210 40% 86.1%;
@@ -54,7 +53,6 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
-    /* Chart dark colors */
     --chart-1: 210 40% 98%;
     --chart-2: 217.2 32.6% 17.5%;
     --chart-3: 217.2 32.6% 27.5%;
@@ -69,6 +67,5 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
