@@ -1,26 +1,40 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+// src/app/page.tsx
+import { HeroSection } from "@/components/home/HeroSection";
+import { CourseCard } from "@/components/home/CourseCard";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { courses as allCourses } from "@/data/courses";
+import { testimonials } from "@/data/testimonials";
 
 export default function HomePage() {
+  const featuredCourses = allCourses.slice(0, 4); // Show first 4 courses
+
   return (
-    <section className="w-full py-16 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-primary">
-              Unlock Your Tech Potential
-            </h1>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-              Propel your career forward with cutting-edge online courses. Learn at your own pace with expert-led content.
+    <>
+      <HeroSection />
+
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+              Featured <span className="text-primary">Courses</span>
+            </h2>
+            <p className="mt-3 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Start your learning journey with our most popular courses.
             </p>
           </div>
-          <div className="space-x-4">
-            <Button asChild>
-              <Link href="/courses">Explore Courses</Link>
-            </Button>
-          </div>
+          {featuredCourses.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {featuredCourses.map((course) => (
+                <CourseCard key={course.id} course={course} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground">No featured courses available.</p>
+          )}
         </div>
-      </div>
-    </section>
+      </section>
+
+      <TestimonialsSection testimonials={testimonials} />
+    </>
   );
 }
