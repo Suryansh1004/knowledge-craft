@@ -31,9 +31,11 @@ export function ProfileForm({ user, action }: ProfileFormProps) {
   useEffect(() => {
     if (state?.message) {
       console.log("Success:", state.message);
+      // Maybe show a success toast or message here
     }
     if (state?.error) {
       console.error("Error:", state.error);
+      // Maybe show an error toast or message here
     }
   }, [state]);
 
@@ -49,18 +51,6 @@ export function ProfileForm({ user, action }: ProfileFormProps) {
             <Label htmlFor="displayName">Display Name</Label>
             <Input id="displayName" name="displayName" defaultValue={user.displayName || ""} />
             {state?.fieldErrors?.displayName && <p className="text-xs text-destructive">{state.fieldErrors.displayName.join(", ")}</p>}
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="organization">Organization (Optional)</Label>
-              <Input id="organization" name="organization" defaultValue={user.organization || ""} />
-              {state?.fieldErrors?.organization && <p className="text-xs text-destructive">{state.fieldErrors.organization.join(", ")}</p>}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="yearOfPassout">Year of Passout (Optional)</Label>
-              <Input id="yearOfPassout" name="yearOfPassout" type="number" defaultValue={user.yearOfPassout || ""} />
-              {state?.fieldErrors?.yearOfPassout && <p className="text-xs text-destructive">{state.fieldErrors.yearOfPassout.join(", ")}</p>}
-            </div>
           </div>
            {state?.error && !state?.fieldErrors && <p className="text-sm text-destructive mt-2">{state.error}</p>}
         </CardContent>

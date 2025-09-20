@@ -26,7 +26,6 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
-  { href: '/forum', label: 'Forum' },
 ];
 
 export function Header() {
@@ -101,51 +100,46 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+        <div className="flex items-center gap-4">
+          {/* Logo */}
+          <Logo />
+        </div>
         
-        {/* Mobile Menu Trigger */}
-        <div className="flex items-center md:hidden">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[350px]">
-              <div className="p-4 border-b">
-                <Logo />
-              </div>
-              <nav className="flex flex-col space-y-2 p-4">
-                {navLinks.map((link) => (
-                  <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {/* Desktop Left: Logo */}
-        <div className="hidden md:flex">
-           <Logo />
-        </div>
-
-        {/* Mobile Center: Logo */}
-        <div className="flex md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Logo />
-        </div>
-
         {/* Desktop Center: Navigation */}
-        <nav className="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="flex items-center space-x-2 lg:space-x-4">
-            {navLinks.map((link) => (
-              <NavLinkItem key={link.href} href={link.href} label={link.label} />
-            ))}
-          </div>
+        <nav className="hidden md:flex items-center gap-4">
+          {navLinks.map((link) => (
+            <NavLinkItem key={link.href} href={link.href} label={link.label} />
+          ))}
         </nav>
 
-        {/* Right Section: User Menu / Auth Buttons */}
-        <div className="flex items-center justify-end">
-          {userMenu}
+        {/* Right Section: User Menu & Mobile Menu Trigger */}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex">
+            {userMenu}
+          </div>
+          <div className="flex md:hidden">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] sm:w-[350px]">
+                <div className="p-4 border-b">
+                  <Logo />
+                </div>
+                <nav className="flex flex-col space-y-2 p-4">
+                  {navLinks.map((link) => (
+                    <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
+                  ))}
+                </nav>
+                 <div className="p-4 border-t">
+                  {userMenu}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

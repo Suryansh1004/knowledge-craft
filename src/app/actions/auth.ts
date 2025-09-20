@@ -18,8 +18,6 @@ const emailPasswordSchema = z.object({
 
 const profileSchema = z.object({
   displayName: z.string().min(2, "Display name must be at least 2 characters").optional(),
-  organization: z.string().optional(),
-  yearOfPassout: z.coerce.number().min(1950).max(new Date().getFullYear() + 5).optional(),
 });
 
 export async function signupWithEmail(prevState: any, formData: FormData) {
@@ -97,14 +95,12 @@ export async function updateUserProfile(userId: string, prevState: any, formData
     };
   }
 
-  const { displayName, organization, yearOfPassout } = validatedFields.data;
+  const { displayName } = validatedFields.data;
   
   try {
     const updateData: Partial<EditableUserProfile> = {};
     if (displayName) updateData.displayName = displayName;
-    if (organization) updateData.organization = organization;
-    if (yearOfPassout) updateData.yearOfPassout = yearOfPassout;
-
+    
     // Update Firebase Auth profile (for displayName and photoURL if applicable)
     if (displayName && auth.currentUser) {
       await updateFirebaseProfile(auth.currentUser, { displayName });

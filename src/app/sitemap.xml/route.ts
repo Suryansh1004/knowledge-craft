@@ -17,9 +17,6 @@ function generateSiteMap() {
      <url><loc>${URL}</loc></url>
      <url><loc>${URL}/courses</loc></url>
      <url><loc>${URL}/blog</loc></url>
-     <url><loc>${URL}/forum</loc></url>
-     <url><loc>${URL}/contact</loc></url>
-     <url><loc>${URL}/faq</loc></url>
      
      <!-- Dynamic Course Pages -->
      ${courses
