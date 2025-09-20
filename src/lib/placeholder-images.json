@@ -1,6 +1,11 @@
 
 [
   {
+    "slug": "hero-background",
+    "imageUrl": "https://picsum.photos/seed/100/1920/1080",
+    "data_ai_hint": "abstract knowledge"
+  },
+  {
     "slug": "web-development-basics",
     "imageUrl": "https://picsum.photos/seed/1/600/400",
     "data_ai_hint": "code editor"

@@ -3,8 +3,6 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Course } from "@/types";
@@ -16,21 +14,21 @@ interface CourseCardProps {
 
 const CourseCard = ({ course }: CourseCardProps) => {
   return (
-    <Card className="flex flex-col overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-xl">
-      <CardContent className="p-4 flex-grow">
-        <CardTitle className="text-lg font-bold mb-2 leading-tight">
+    <Card className="flex flex-col overflow-hidden transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/20 border-transparent hover:border-primary/50">
+      <CardContent className="p-6 flex-grow">
+        <h3 className="text-xl font-bold mb-2 leading-tight">
           <Link href={`/courses/${course.slug}`}>{course.title}</Link>
-        </CardTitle>
+        </h3>
         <p className="text-sm text-muted-foreground">{course.description}</p>
       </CardContent>
-      <CardFooter className="p-4 border-t flex justify-between items-center">
-        <div className="flex items-center space-x-2">
+      <CardFooter className="p-6 border-t flex justify-between items-center">
+        <div className="flex items-center space-x-4">
             <div className="flex items-center text-sm">
-                <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 mr-1" />
+                <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 mr-1.5" />
                 <span className="font-semibold">{course.rating.toFixed(1)}</span>
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
-                <Clock className="w-4 h-4 mr-1" />
+                <Clock className="w-4 h-4 mr-1.5" />
                 <span>{course.duration}</span>
             </div>
         </div>
