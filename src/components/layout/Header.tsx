@@ -3,7 +3,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, UserCircle, Menu } from 'lucide-react';
+import { LogOut, UserCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -15,12 +15,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { Logo } from '@/components/Logo';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -31,7 +29,6 @@ const navLinks = [
 export function Header() {
   const { user, loading } = useAuth();
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -41,16 +38,14 @@ export function Header() {
     }
   };
   
-  const NavLinkItem = ({ href, label, className }: { href: string, label: string, className?: string }) => (
+  const NavLinkItem = ({ href, label }: { href: string, label: string }) => (
     <Link href={href} passHref>
-      <Button
+       <Button
         variant="ghost"
         className={cn(
           "text-foreground/80 hover:text-primary hover:bg-primary/10 text-base font-medium",
-          pathname === href && "text-primary font-semibold border-b-2 border-primary rounded-none",
-          className
+          pathname === href && "text-primary font-semibold"
         )}
-        onClick={() => setMobileMenuOpen(false)}
       >
         {label}
       </Button>
@@ -100,46 +95,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-20 items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-4">
-          {/* Logo */}
-          <Logo />
-        </div>
+        <Logo />
         
-        {/* Desktop Center: Navigation */}
-        <nav className="hidden md:flex items-center gap-4">
+        <nav className="flex items-center gap-4">
           {navLinks.map((link) => (
             <NavLinkItem key={link.href} href={link.href} label={link.label} />
           ))}
         </nav>
 
-        {/* Right Section: User Menu & Mobile Menu Trigger */}
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex">
-            {userMenu}
-          </div>
-          <div className="flex md:hidden">
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] sm:w-[350px]">
-                <div className="p-4 border-b">
-                  <Logo />
-                </div>
-                <nav className="flex flex-col space-y-2 p-4">
-                  {navLinks.map((link) => (
-                    <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
-                  ))}
-                </nav>
-                 <div className="p-4 border-t">
-                  {userMenu}
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+          {userMenu}
         </div>
       </div>
     </header>
