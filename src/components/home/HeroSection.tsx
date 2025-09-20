@@ -1,4 +1,4 @@
-// components/home/HeroSection.tsx
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,7 +19,7 @@ const HeroSection = () => {
           data-ai-hint={heroImage.data_ai_hint}
         />
       )}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20" />
       <div className="relative container max-w-4xl mx-auto">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg mb-4">
           Unlock Your Potential
@@ -31,7 +31,7 @@ const HeroSection = () => {
           <Button asChild size="lg">
             <Link href="/courses">Explore Courses</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+          <Button asChild size="lg" variant="outline" className="text-white border-white bg-transparent hover:bg-white/10 hover:text-white">
             <Link href="/signup">Get Started</Link>
           </Button>
         </div>
