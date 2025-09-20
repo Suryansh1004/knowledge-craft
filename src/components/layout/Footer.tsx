@@ -1,7 +1,6 @@
-
 // src/components/layout/Footer.tsx
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, BookOpenCheck } from 'lucide-react';
+import { Github, Linkedin, Twitter } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 
 export function Footer() {
@@ -10,14 +9,14 @@ export function Footer() {
   return (
     <footer className="bg-muted/50 border-t">
       <div className="container mx-auto py-12 px-4 md:px-6">
-        <div className="grid gap-8 md:grid-cols-3">
-          <div>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="lg:col-span-1">
             <Logo className="mb-4" />
             <p className="text-sm text-muted-foreground max-w-xs">
               Empowering learners with cutting-edge tech skills. Learn at your own pace, anytime, anywhere.
             </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 md:col-span-2 md:grid-cols-3">
+          <div className="space-y-8 sm:col-span-1 lg:col-span-3 sm:grid sm:grid-cols-3 sm:space-y-0 sm:gap-8">
             <div>
               <h4 className="text-md font-semibold mb-3 text-foreground">Quick Links</h4>
               <ul className="space-y-2 text-sm">

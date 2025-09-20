@@ -65,10 +65,9 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         
-        {/* Left Section: Mobile Menu Trigger */}
-        <div className="flex items-center gap-2 md:w-1/3">
+        <div className="flex items-center md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild className="md:hidden">
+            <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
@@ -105,18 +104,17 @@ export function Header() {
           </Sheet>
         </div>
 
-        {/* Center Section: Logo and Desktop Navigation */}
-        <div className="hidden md:flex flex-1 items-center justify-center gap-6">
-          <Logo />
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-            {navLinks.map((link) => (
-              <NavLinkItem key={link.href} href={link.href} label={link.label} />
-            ))}
-          </nav>
+        <div className="hidden md:flex flex-1 items-center justify-start gap-6">
+           <Logo />
         </div>
+
+        <nav className="hidden md:flex flex-1 items-center justify-center space-x-1 lg:space-x-2">
+          {navLinks.map((link) => (
+            <NavLinkItem key={link.href} href={link.href} label={link.label} />
+          ))}
+        </nav>
         
-        {/* Right Section: User Auth */}
-        <div className="flex items-center justify-end space-x-2 md:space-x-3 md:w-1/3">
+        <div className="flex flex-1 items-center justify-end space-x-2 md:space-x-3">
           {!loading && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
