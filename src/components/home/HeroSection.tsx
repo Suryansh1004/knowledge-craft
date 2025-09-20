@@ -1,32 +1,18 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
-import placeholderImages from "@/lib/placeholder-images.json";
 
 const HeroSection = () => {
-  const heroImage = placeholderImages.find(p => p.slug === "hero-background");
-
   return (
-    <section className="relative bg-background h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center justify-center text-center">
-      {heroImage && (
-        <Image
-          src={heroImage.imageUrl}
-          alt="Abstract background"
-          fill
-          priority
-          className="object-cover z-0 opacity-20"
-          data-ai-hint={heroImage.data_ai_hint}
-        />
-      )}
-      <div className="container relative z-10 mx-auto px-4 md:px-6">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tighter text-foreground mb-4 drop-shadow-lg">
+    <section className="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 h-[70vh] md:h-[80vh] lg:h-[90vh] flex items-center justify-center text-center px-4">
+      <div className="container relative z-10 mx-auto max-w-4xl">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white drop-shadow-lg mb-4">
           Unlock Your Potential
         </h1>
-        <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8 drop-shadow-md">
+        <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 drop-shadow-md">
           Welcome to Knowledge Craft, where learning knows no bounds. Discover
           courses designed to help you master new skills and achieve your goals.
         </p>
-        <div className="flex justify-center space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button size="lg" asChild>
             <Link href="/courses">Explore Courses</Link>
           </Button>
@@ -35,6 +21,9 @@ const HeroSection = () => {
           </Button>
         </div>
       </div>
+
+      {/* Optional decorative overlay */}
+      <div className="absolute inset-0 bg-black/10 pointer-events-none"></div>
     </section>
   );
 };
