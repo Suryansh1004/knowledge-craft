@@ -1,0 +1,33 @@
+
+[
+  {
+    "slug": "web-development-basics",
+    "imageUrl": "https://picsum.photos/seed/1/600/400",
+    "data_ai_hint": "code editor"
+  },
+  {
+    "slug": "advanced-javascript",
+    "imageUrl": "https://picsum.photos/seed/2/600/400",
+    "data_ai_hint": "abstract javascript"
+  },
+  {
+    "slug": "react-for-beginners",
+    "imageUrl": "https://picsum.photos/seed/3/600/400",
+    "data_ai_hint": "react logo"
+  },
+  {
+    "slug": "data-structures-and-algorithms",
+    "imageUrl": "https://picsum.photos/seed/4/600/400",
+    "data_ai_hint": "flow chart"
+  },
+  {
+    "slug": "ux-design-fundamentals",
+    "imageUrl": "https://picsum.photos/seed/5/600/400",
+    "data_ai_hint": "wireframe sketch"
+  },
+  {
+    "slug": "machine-learning-introduction",
+    "imageUrl": "https://picsum.photos/seed/6/600/400",
+    "data_ai_hint": "robot brain"
+  }
+]
