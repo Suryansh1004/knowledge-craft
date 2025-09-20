@@ -7,12 +7,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, ChromeIcon } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import Link from "next/link";
 
 interface AuthFormProps {
   mode: "login" | "signup";
@@ -29,8 +28,16 @@ function SubmitButton({ mode }: { mode: "login" | "signup" }) {
   );
 }
 
-// Hardcoded admin email for testing purposes
-const ADMIN_EMAIL = "admin@knowledgecraft.com";
+function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg role="img" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M12.48 10.92v3.28h7.84c-.24 1.84-.85 3.18-1.73 4.1-1.02 1.02-2.3 1.62-3.87 1.62-3.03 0-5.49-2.3-5.49-5.09s2.46-5.09 5.49-5.09c1.38 0 2.52.45 3.41 1.31l2.22-2.19C18.23 3.41 15.86 2.5 13.05 2.5c-4.46 0-8.15 3.53-8.15 7.91s3.69 7.91 8.15 7.91c2.31 0 3.95-.74 5.25-2.03 1.34-1.34 1.9-3.18 1.9-5.18 0-.58-.05-1.12-.14-1.62H12.48z"
+      ></path>
+    </svg>
+  );
+}
 
 export function AuthForm({ mode, action }: AuthFormProps) {
   const [state, formAction] = useFormState(action, null);
@@ -38,7 +45,6 @@ export function AuthForm({ mode, action }: AuthFormProps) {
 
   useEffect(() => {
     if (state?.message) {
-      console.log("Success:", state.message);
       router.push(state.redirectTo || "/"); // Redirect to home or specified page
     }
     if (state?.error && !state?.fieldErrors) {
@@ -52,44 +58,26 @@ export function AuthForm({ mode, action }: AuthFormProps) {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       
-      // Speculative delay: Wait for a moment before Firestore operations
-      await new Promise(resolve => setTimeout(resolve, 500)); 
-
-      // Check if user exists in Firestore, if not, create them
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
       if (!userDoc.exists()) {
-        const roles = user.email === ADMIN_EMAIL ? ['user', 'admin'] : ['user']; // Assign admin role
         await setDoc(userRef, {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName || user.email?.split('@')[0],
           photoURL: user.photoURL,
-          roles: roles,
-          createdAt: new Date().toISOString(), // Add a creation timestamp
+          createdAt: new Date().toISOString(),
         });
       }
       console.log("Logged in with Google successfully!");
       router.push("/");
     } catch (error: any) {
       console.error("Google Sign-In Error: ", error);
-      let description = error.message || "Google Sign-In failed.";
-      // Check for Firestore offline error
-      if (error.code === 'firestore/unavailable' || (error.message && error.message.toLowerCase().includes("client is offline"))) {
-        description = "Failed to save user data: The application appears to be offline. Please check your internet connection and try again.";
-      }
-      console.error(description);
     }
   };
 
   return (
-    <Card className="w-full max-w-md shadow-xl">
-      <CardHeader>
-        <CardTitle className="text-2xl text-primary">{mode === "login" ? "Welcome Back!" : "Create an Account"}</CardTitle>
-        <CardDescription>
-          {mode === "login" ? "Enter your credentials to access your account." : "Fill in the details below to get started."}
-        </CardDescription>
-      </CardHeader>
+    <Card className="w-full max-w-md shadow-none border-0">
       <form action={formAction}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -117,26 +105,9 @@ export function AuthForm({ mode, action }: AuthFormProps) {
             </div>
           </div>
           <Button variant="outline" className="w-full" type="button" onClick={handleGoogleSignIn}>
-            <ChromeIcon className="mr-2 h-4 w-4" /> {/* Using ChromeIcon as a stand-in for Google icon */}
+            <GoogleIcon className="mr-2 h-4 w-4" />
             Google
           </Button>
-           <div className="mt-2 text-center text-sm">
-            {mode === 'login' ? (
-              <>
-                Don&apos;t have an account?{' '}
-                <Link href="/signup" className="underline text-primary hover:text-primary/80">
-                  Sign up
-                </Link>
-              </>
-            ) : (
-              <>
-                Already have an account?{' '}
-                <Link href="/login" className="underline text-primary hover:text-primary/80">
-                  Log in
-                </Link>
-              </>
-            )}
-          </div>
         </CardFooter>
       </form>
     </Card>
