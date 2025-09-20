@@ -3,7 +3,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, UserCircle, Menu, FileText, Edit, Video } from 'lucide-react';
+import { LogOut, UserCircle, Menu, Edit, Video } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -89,11 +89,6 @@ export function Header() {
                       <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
                     </Button>
                   )}
-                  {!isBlogger && user && (
-                     <Button variant="outline" asChild className="w-full justify-start mt-2" onClick={() => setMobileMenuOpen(false)}>
-                       <Link href="/apply-blogger"><FileText className="mr-2 h-4 w-4" />Apply for Blogger</Link>
-                     </Button>
-                  )}
                  </div>
                 {!loading && !user && (
                   <div className="pt-4 border-t space-y-2">
@@ -149,11 +144,6 @@ export function Header() {
                 {isBlogger && (
                   <DropdownMenuItem asChild>
                     <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
-                  </DropdownMenuItem>
-                )}
-                {!isBlogger && (
-                  <DropdownMenuItem asChild>
-                    <Link href="/apply-blogger"><FileText className="mr-2 h-4 w-4" />Apply for Blogger</Link>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />

@@ -90,18 +90,6 @@ export interface CodingSubmission {
   language: string;
 }
 
-// Added for blogger application
-export interface BloggerApplication {
-  id?: string; // Firestore ID
-  userId: string;
-  userName: string; // Applicant's display name
-  userEmail: string; // Applicant's email
-  linkedinProfile: string;
-  reason: string;
-  status: 'pending' | 'approved' | 'rejected';
-  submittedAt: any; // Firestore ServerTimestamp
-}
-
 export interface Video {
   id: string;
   title: string;

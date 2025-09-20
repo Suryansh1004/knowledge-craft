@@ -1,4 +1,3 @@
-
 // src/components/blog/NewBlogPostClientPage.tsx
 "use client";
 
@@ -21,7 +20,7 @@ export function NewBlogPostClientPage() {
       router.push('/login');
     } else if (!loading && user && !isBlogger) {
       // Redirect if the user is logged in but is not a blogger
-      router.push('/apply-blogger');
+      router.push('/');
     }
   }, [user, loading, isBlogger, router]);
 
@@ -38,7 +37,7 @@ export function NewBlogPostClientPage() {
                 {loading ? (
                     <p className="text-muted-foreground">Checking authorization...</p>
                 ) : (
-                    <p className="text-muted-foreground">You are not authorized to create posts. Please <Link href="/apply-blogger" className="underline text-primary">apply to be a blogger</Link>.</p>
+                    <p className="text-muted-foreground">You are not authorized to create posts. Please contact an administrator.</p>
                 )}
             </CardContent>
         </Card>
