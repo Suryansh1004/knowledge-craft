@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send } from "lucide-react";
 import { createForumPost } from "@/app/actions/forum";
 import { useAuth } from "@/hooks/useAuth";
@@ -29,20 +28,19 @@ function SubmitButton() {
 
 export function CreatePostForm({ topicId }: CreatePostFormProps) {
   const [state, formAction] = useFormState(createForumPost, null);
-  const { toast } = useToast();
   const { user } = useAuth();
   const formRef = useRef<HTMLFormElement>(null);
 
 
   useEffect(() => {
     if (state?.message) {
-      toast({ title: "Success", description: state.message });
+      console.log("Success:", state.message);
       formRef.current?.reset(); // Reset form on success
     }
     if (state?.error) {
-      toast({ title: "Error", description: state.error, variant: "destructive" });
+      console.error("Error:", state.error);
     }
-  }, [state, toast]);
+  }, [state]);
 
   if (!user) {
     return (

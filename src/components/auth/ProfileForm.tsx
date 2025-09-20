@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import type { UserProfile } from "@/types";
 import { Loader2 } from "lucide-react";
 
@@ -28,16 +27,15 @@ function SubmitButton() {
 
 export function ProfileForm({ user, action }: ProfileFormProps) {
   const [state, formAction] = useFormState(action, undefined);
-  const { toast } = useToast();
 
   useEffect(() => {
     if (state?.message) {
-      toast({ title: "Success", description: state.message });
+      console.log("Success:", state.message);
     }
     if (state?.error) {
-      toast({ title: "Error", description: state.error, variant: "destructive" });
+      console.error("Error:", state.error);
     }
-  }, [state, toast]);
+  }, [state]);
 
   return (
     <Card className="w-full max-w-lg shadow-lg">

@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, BookPlus } from "lucide-react";
 import { createBlogPost } from "@/app/actions/blog";
 import { courses as allCourses } from "@/data/courses"; // For course selection
@@ -27,21 +26,20 @@ function SubmitButton() {
 
 export function CreateBlogForm() {
   const [state, formAction] = useFormState(createBlogPost, null);
-  const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
 
   useEffect(() => {
     if (state?.message) {
-      toast({ title: "Success", description: state.message });
+      console.log("Success:", state.message);
       formRef.current?.reset();
       // Optionally redirect after successful creation
       // router.push('/blog'); 
     }
     if (state?.error && !state?.fieldErrors) { // General error
-      toast({ title: "Error", description: state.error, variant: "destructive" });
+      console.error("Error:", state.error);
     }
-  }, [state, toast, router]);
+  }, [state, router]);
 
   // Function to generate slug from title
   const generateSlug = (title: string) => {

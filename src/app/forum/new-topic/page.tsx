@@ -1,4 +1,3 @@
-
 // src/app/forum/new-topic/page.tsx
 "use client";
 
@@ -9,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2, Send, PlusCircle } from "lucide-react";
 import { createForumTopic } from "@/app/actions/forum";
 import { useAuth } from "@/hooks/useAuth";
@@ -30,13 +28,12 @@ function SubmitButton() {
 export default function NewTopicPage() {
   const { user, loading } = useAuth();
   const [state, formAction] = useFormState(createForumTopic, null);
-  const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
 
   useEffect(() => {
     if (state?.message) {
-      toast({ title: "Success", description: state.message });
+      console.log("Success:", state.message);
       formRef.current?.reset();
       if (state.topicSlug) {
         router.push(`/forum/${state.topicSlug}`);
@@ -45,9 +42,9 @@ export default function NewTopicPage() {
       }
     }
     if (state?.error) {
-      toast({ title: "Error", description: state.error, variant: "destructive" });
+      console.error("Error:", state.error);
     }
-  }, [state, toast, router]);
+  }, [state, router]);
 
   if (loading) {
     return (

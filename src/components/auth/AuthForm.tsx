@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2, ChromeIcon } from "lucide-react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
@@ -36,17 +35,16 @@ const ADMIN_EMAIL = "admin@knowledgecraft.com";
 export function AuthForm({ mode, action }: AuthFormProps) {
   const [state, formAction] = useFormState(action, null);
   const router = useRouter();
-  const { toast } = useToast();
 
   useEffect(() => {
     if (state?.message) {
-      toast({ title: "Success", description: state.message });
+      console.log("Success:", state.message);
       router.push(state.redirectTo || "/"); // Redirect to home or specified page
     }
     if (state?.error && !state?.fieldErrors) {
-      toast({ title: "Error", description: state.error, variant: "destructive" });
+      console.error("Error:", state.error);
     }
-  }, [state, router, toast]);
+  }, [state, router]);
   
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -71,7 +69,7 @@ export function AuthForm({ mode, action }: AuthFormProps) {
           createdAt: new Date().toISOString(), // Add a creation timestamp
         });
       }
-      toast({ title: "Success", description: "Logged in with Google successfully!" });
+      console.log("Logged in with Google successfully!");
       router.push("/");
     } catch (error: any) {
       console.error("Google Sign-In Error: ", error);
@@ -80,7 +78,7 @@ export function AuthForm({ mode, action }: AuthFormProps) {
       if (error.code === 'firestore/unavailable' || (error.message && error.message.toLowerCase().includes("client is offline"))) {
         description = "Failed to save user data: The application appears to be offline. Please check your internet connection and try again.";
       }
-      toast({ title: "Error", description, variant: "destructive" });
+      console.error(description);
     }
   };
 

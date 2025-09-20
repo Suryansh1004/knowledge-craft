@@ -11,7 +11,6 @@ import { CalendarDays, User, Tag, MessageSquare, Loader2, Send } from 'lucide-re
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
 import { createBlogComment } from '@/app/actions/blog';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
@@ -41,18 +40,17 @@ function CommentSubmitButton() {
 export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [commentState, commentFormAction] = useFormState(createBlogComment, null);
-  const { toast } = useToast();
   const { user } = useAuth();
   
   useEffect(() => {
     if (commentState?.message) {
-      toast({ title: "Success", description: commentState.message });
+      console.log("Success:", commentState.message);
       formRef.current?.reset();
     }
     if (commentState?.error && !commentState?.fieldErrors) {
-      toast({ title: "Error", description: commentState.error, variant: "destructive" });
+      console.error("Error:", commentState.error);
     }
-  }, [commentState, toast]);
+  }, [commentState]);
 
   const renderMarkdown = (markdown: string) => {
     // Basic markdown to HTML conversion - consider a more robust library for complex needs
