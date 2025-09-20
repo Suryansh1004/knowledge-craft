@@ -1,7 +1,7 @@
 // src/data/blogs.ts
 import type { Blog } from '@/types';
 
-const newAuthorName = "Suryansh Tripathi";
+const newAuthorName = "Knowledge Craft Admin";
 
 export const blogs: Blog[] = [
   // Web Development Blogs
