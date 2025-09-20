@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { AuthProvider } from "@/contexts/AuthContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
@@ -45,13 +44,11 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <AuthProvider>
-            <Header />
-            <main className="flex-1 w-full container mx-auto px-4 md:px-6">
-                {children}
-            </main>
-            <Footer />
-        </AuthProvider>
+        <Header />
+        <main className="flex-1 w-full container mx-auto px-4 md:px-6">
+            {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

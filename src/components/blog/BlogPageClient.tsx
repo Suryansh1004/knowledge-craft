@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import { CalendarDays, User, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAuth } from '@/contexts/AuthContext';
 
 // The Course type passed to this client component should not include the icon function
 type SerializableCourse = Omit<Course, 'icon'>;
@@ -24,7 +23,6 @@ interface BlogPageClientProps {
 }
 
 export function BlogPageClient({ course, blog }: BlogPageClientProps) {
-  const { user } = useAuth();
 
   const renderMarkdown = (markdown: string) => {
     // Basic markdown to HTML conversion - consider a more robust library for complex needs
