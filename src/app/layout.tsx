@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
@@ -50,12 +49,6 @@ export default function RootLayout({
         )}
       >
         <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
             <div className="container mx-auto flex min-h-screen flex-col px-4 md:px-6">
               <Header />
               <main className="flex-1">{children}</main>
@@ -63,7 +56,6 @@ export default function RootLayout({
             </div>
             <Toaster />
             <FloatingChatbot />
-          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

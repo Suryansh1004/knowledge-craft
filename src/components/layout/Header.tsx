@@ -21,7 +21,6 @@ import { auth } from '@/lib/firebase';
 import { Logo } from '@/components/Logo';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { ThemeToggleButton } from './ThemeToggleButton';
 
 const navLinks = [
   { href: '/courses', label: 'Courses' },
@@ -120,9 +119,8 @@ export function Header() {
           ))}
         </nav>
         
-        {/* Right Section: Theme Toggle, and User Auth */}
+        {/* Right Section: User Auth */}
         <div className="flex items-center justify-end space-x-2 md:space-x-3">
-          <ThemeToggleButton />
           {!loading && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
