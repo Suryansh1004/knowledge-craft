@@ -7,7 +7,7 @@ import type { Blog as BlogType } from '@/types';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { CalendarDays, User, Tag } from 'lucide-react';
+import { CalendarDays, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -44,7 +44,6 @@ export function BlogPageClient({ blog }: BlogPageClientProps) {
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6 border-y py-3">
           <div className="flex items-center">
-            <User className="h-4 w-4 mr-1.5" />
             <span>{blog.author}</span>
           </div>
           <div className="flex items-center">

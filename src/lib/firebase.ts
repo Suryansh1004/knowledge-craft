@@ -1,7 +1,6 @@
 
 // src/lib/firebase.ts
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
-import { getFirestore, Firestore } from 'firebase/firestore';
 // Import getAnalytics and its type, but don't call it yet
 import { getAnalytics, Analytics as FirebaseAnalyticsType } from "firebase/analytics";
 
@@ -21,8 +20,6 @@ if (!getApps().length) {
   app = getApps()[0];
 }
 
-const db: Firestore = getFirestore(app);
-
 // Declare analytics but initialize it conditionally
 let analytics: FirebaseAnalyticsType | undefined = undefined;
 
@@ -37,4 +34,4 @@ if (typeof window !== 'undefined') {
   }
 }
 
-export { app, db, analytics };
+export { app, analytics };
