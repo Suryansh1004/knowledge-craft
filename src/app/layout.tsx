@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -43,20 +42,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased flex flex-col",
           fontSans.variable
         )}
       >
         <AuthProvider>
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1">
-                 <div className="container mx-auto px-4 py-8 md:px-6">
-                    {children}
-                 </div>
-              </main>
-              <Footer />
-            </div>
+            <Header />
+            <main className="flex-1 w-full">
+                {children}
+            </main>
+            <Footer />
             <Toaster />
         </AuthProvider>
       </body>

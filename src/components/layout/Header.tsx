@@ -65,7 +65,8 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         
-        <div className="flex items-center md:hidden">
+        {/* Mobile Menu Trigger */}
+        <div className="md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -104,67 +105,123 @@ export function Header() {
           </Sheet>
         </div>
 
-        <div className="hidden md:flex flex-1 items-center justify-start gap-6">
-           <Logo />
+        {/* Desktop Layout */}
+        <div className="hidden md:flex flex-1 items-center justify-between">
+           {/* Left Section */}
+          <div className="flex items-center gap-6">
+             <Link href="/" className="md:hidden lg:block"><Logo /></Link>
+             <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+              {navLinks.slice(0, 2).map((link) => (
+                <NavLinkItem key={link.href} href={link.href} label={link.label} />
+              ))}
+            </nav>
+          </div>
+
+          {/* Center Section (Logo on medium screens) */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
+            <Link href="/" className="lg:hidden"><Logo /></Link>
+          </div>
+
+           {/* Right Section */}
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+              {navLinks.slice(2).map((link) => (
+                <NavLinkItem key={link.href} href={link.href} label={link.label} />
+              ))}
+            </nav>
+
+             <div className="flex items-center justify-end space-x-2 md:space-x-3">
+              {!loading && user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                      <Avatar className="h-10 w-10 border-2 border-primary">
+                        <AvatarFallback>
+                          {user.displayName ? user.displayName.charAt(0).toUpperCase() : <UserCircle />}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>
+                      <p className="font-medium">{user.displayName || 'User Profile'}</p>
+                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile">Profile</Link>
+                    </DropdownMenuItem>
+                    {isAdmin && (
+                       <DropdownMenuItem asChild>
+                        <Link href="/admin/create-video"><Video className="mr-2 h-4 w-4" />Create Video</Link>
+                      </DropdownMenuItem>
+                    )}
+                    {isBlogger && (
+                      <DropdownMenuItem asChild>
+                        <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
+                      </DropdownMenuItem>
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout} className="text-red-500 hover:!text-red-500 hover:!bg-red-500/10 cursor-pointer">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : !loading ? (
+                <div className="flex items-center space-x-2">
+                  <Button variant="outline" asChild>
+                    <Link href="/login">Login</Link>
+                  </Button>
+                  <Button asChild>
+                    <Link href="/signup">Sign Up</Link>
+                  </Button>
+                </div>
+              ) : (
+                 <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
+              )}
+            </div>
+          </div>
         </div>
 
-        <nav className="hidden md:flex flex-1 items-center justify-center space-x-1 lg:space-x-2">
-          {navLinks.map((link) => (
-            <NavLinkItem key={link.href} href={link.href} label={link.label} />
-          ))}
-        </nav>
-        
-        <div className="flex flex-1 items-center justify-end space-x-2 md:space-x-3">
+        {/* User menu on mobile */}
+        <div className="md:hidden">
           {!loading && user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                  <Avatar className="h-10 w-10 border-2 border-primary">
-                    <AvatarFallback>
-                      {user.displayName ? user.displayName.charAt(0).toUpperCase() : <UserCircle />}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>
-                  <p className="font-medium">{user.displayName || 'User Profile'}</p>
-                  <p className="text-xs text-muted-foreground">{user.email}</p>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/profile">Profile</Link>
-                </DropdownMenuItem>
-                {isAdmin && (
-                   <DropdownMenuItem asChild>
-                    <Link href="/admin/create-video"><Video className="mr-2 h-4 w-4" />Create Video</Link>
-                  </DropdownMenuItem>
-                )}
-                {isBlogger && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                    <Avatar className="h-10 w-10 border-2 border-primary">
+                      <AvatarFallback>
+                        {user.displayName ? user.displayName.charAt(0).toUpperCase() : <UserCircle />}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>
+                    <p className="font-medium">{user.displayName || 'User Profile'}</p>
+                    <p className="text-xs text-muted-foreground">{user.email}</p>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
+                    <Link href="/profile">Profile</Link>
                   </DropdownMenuItem>
-                )}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-500 hover:!text-red-500 hover:!bg-red-500/10 cursor-pointer">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : !loading ? (
-            <div className="hidden md:flex items-center space-x-2">
-              <Button variant="outline" asChild>
-                <Link href="/login">Login</Link>
-              </Button>
-              <Button asChild>
+                  <DropdownMenuItem onClick={handleLogout} className="text-red-500 hover:!text-red-500 hover:!bg-red-500/10 cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : !loading ? (
+              <Button asChild size="sm">
                 <Link href="/signup">Sign Up</Link>
               </Button>
-            </div>
-          ) : (
-             <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
-          )}
+            ) : (
+               <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
+            )}
         </div>
+
+
       </div>
     </header>
   );
