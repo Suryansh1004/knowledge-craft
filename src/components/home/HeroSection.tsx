@@ -1,4 +1,3 @@
-
 // src/components/home/HeroSection.tsx
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
