@@ -1,19 +1,15 @@
 // src/components/blog/BlogPageClient.tsx
 "use client";
 
-import React, { useEffect, useRef } from 'react';
-import { useFormState, useFormStatus } from "react-dom";
+import React from 'react';
 import type { Course, Blog as BlogType } from '@/types';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { CalendarDays, User, Tag, MessageSquare, Loader2, Send } from 'lucide-react';
+import { CalendarDays, User, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { createBlogComment } from '@/app/actions/blog';
-import { useAuth } from '@/hooks/useAuth';
-import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
 
 // The Course type passed to this client component should not include the icon function
 type SerializableCourse = Omit<Course, 'icon'>;
@@ -27,30 +23,8 @@ interface BlogPageClientProps {
   };
 }
 
-function CommentSubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
-      Post Comment
-    </Button>
-  );
-}
-
-export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [commentState, commentFormAction] = useFormState(createBlogComment, null);
+export function BlogPageClient({ course, blog }: BlogPageClientProps) {
   const { user } = useAuth();
-  
-  useEffect(() => {
-    if (commentState?.message) {
-      console.log("Success:", commentState.message);
-      formRef.current?.reset();
-    }
-    if (commentState?.error && !commentState?.fieldErrors) {
-      console.error("Error:", commentState.error);
-    }
-  }, [commentState]);
 
   const renderMarkdown = (markdown: string) => {
     // Basic markdown to HTML conversion - consider a more robust library for complex needs
@@ -99,37 +73,7 @@ export function BlogPageClient({ course, blog, params }: BlogPageClientProps) {
         <div dangerouslySetInnerHTML={renderMarkdown(blog.content)} />
       </article>
 
-      <section className="mt-12 border-t pt-8">
-        <h2 className="text-2xl font-semibold text-primary mb-6 flex items-center">
-          <MessageSquare className="mr-2 h-6 w-6" /> Comments
-        </h2>
-        <Card className="bg-muted/30">
-          <CardContent className="p-6">
-            {user ? (
-              <form action={commentFormAction} ref={formRef}>
-                <input type="hidden" name="blogId" value={blog.id} />
-                <Textarea 
-                  name="content" 
-                  placeholder="Write your comment here..." 
-                  className="mb-3 bg-background" 
-                  rows={4} 
-                  required 
-                />
-                {commentState?.fieldErrors?.content && <p className="text-xs text-destructive mb-2">{commentState.fieldErrors.content.join(", ")}</p>}
-                {commentState?.error && !commentState?.fieldErrors && <p className="text-sm text-destructive mb-2">{commentState.error}</p>}
-                <CommentSubmitButton />
-              </form>
-            ) : (
-              <CardDescription>
-                <Link href="/login" className="text-primary underline">Log in</Link> to post a comment.
-              </CardDescription>
-            )}
-            {/* Comment display area would go here in a future update */}
-          </CardContent>
-        </Card>
-      </section>
-
-      <div className="mt-8">
+      <div className="mt-12 border-t pt-8">
         <Card>
           <CardHeader><CardTitle className="text-lg text-primary">About The Author</CardTitle></CardHeader>
           <CardContent className="flex items-center gap-4">

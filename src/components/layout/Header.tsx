@@ -1,10 +1,9 @@
-
 // src/components/layout/Header.tsx
 "use client";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, UserCircle, Menu, Edit, Video } from 'lucide-react';
+import { LogOut, UserCircle, Menu } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -59,9 +58,6 @@ export function Header() {
     </Link>
   );
 
-  const isBlogger = user?.roles?.includes('blogger');
-  const isAdmin = user?.roles?.includes('admin'); 
-
   const userMenu = !loading && user ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -82,16 +78,6 @@ export function Header() {
         <DropdownMenuItem asChild>
           <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
-        {isAdmin && (
-            <DropdownMenuItem asChild>
-            <Link href="/admin/create-video"><Video className="mr-2 h-4 w-4" />Create Video</Link>
-          </DropdownMenuItem>
-        )}
-        {isBlogger && (
-          <DropdownMenuItem asChild>
-            <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
-          </DropdownMenuItem>
-        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="text-red-500 hover:!text-red-500 hover:!bg-red-500/10 cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
@@ -114,9 +100,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
-        {/* Left Section: Logo & Mobile Menu Trigger */}
-        <div className="flex items-center gap-4 md:hidden">
+      <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+        
+        {/* Mobile Menu Trigger */}
+        <div className="flex items-center md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -132,58 +119,22 @@ export function Header() {
                 {navLinks.map((link) => (
                   <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
                 ))}
-                
-                <div className="pt-4 border-t">
-                  {isBlogger && (
-                    <Button variant="outline" asChild className="w-full justify-start mt-2" onClick={() => setMobileMenuOpen(false)}>
-                      <Link href="/blog/new"><Edit className="mr-2 h-4 w-4" />Create New Post</Link>
-                    </Button>
-                  )}
-                  {isAdmin && (
-                    <Button variant="outline" asChild className="w-full justify-start mt-2" onClick={() => setMobileMenuOpen(false)}>
-                       <Link href="/admin/create-video"><Video className="mr-2 h-4 w-4" />Create Video</Link>
-                    </Button>
-                  )}
-                </div>
               </nav>
-
-              <div className="absolute bottom-0 left-0 w-full p-4 border-t">
-                {!loading && user ? (
-                  <div className="flex items-center gap-3">
-                     <Avatar className="h-10 w-10 border-2 border-primary">
-                        <AvatarFallback>
-                          {user.displayName ? user.displayName.charAt(0).toUpperCase() : <UserCircle />}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium text-sm">{user.displayName}</p>
-                        <p className="text-xs text-muted-foreground">{user.email}</p>
-                      </div>
-                      <Button variant="ghost" size="icon" onClick={handleLogout} className="ml-auto">
-                        <LogOut className="h-5 w-5 text-red-500" />
-                      </Button>
-                  </div>
-                ) : !loading && (
-                  <div className="flex gap-2">
-                    <Button variant="outline" asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                      <Link href="/login">Login</Link>
-                    </Button>
-                    <Button asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                      <Link href="/signup">Sign Up</Link>
-                    </Button>
-                  </div>
-                )}
-              </div>
             </SheetContent>
           </Sheet>
         </div>
 
-        {/* Desktop: Logo on the left */}
+        {/* Desktop Left: Logo */}
         <div className="hidden md:flex">
            <Logo />
         </div>
 
-        {/* Desktop: Center Navigation */}
+        {/* Mobile Center: Logo */}
+        <div className="flex md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Logo />
+        </div>
+
+        {/* Desktop Center: Navigation */}
         <nav className="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="flex items-center space-x-2 lg:space-x-4">
             {navLinks.map((link) => (

@@ -4,7 +4,6 @@ import type { User as FirebaseUser } from 'firebase/auth';
 export interface UserProfile extends FirebaseUser {
   organization?: string;
   yearOfPassout?: number;
-  roles?: string[]; // Added for blogger role
   // Any other custom fields
 }
 
@@ -12,7 +11,6 @@ export type EditableUserProfile = {
   displayName?: string;
   organization?: string;
   yearOfPassout?: number;
-  roles?: string[];
 };
 
 export interface Course {
@@ -58,23 +56,4 @@ export interface ForumPost {
   content: string;
   createdAt: Date; // Should be Firestore Timestamp or Date
   // replies?: ForumPost[]; // For threaded discussions
-}
-
-export interface Video {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  prompt: string;
-  source_video_url: string; // Placeholder URL from a video generation service
-  firebase_storage_url?: string; // URL in Firebase Storage
-  platform_urls: {
-    youtube?: string;
-    tiktok?: string;
-    facebook?: string;
-  };
-  status: 'queued' | 'generating' | 'uploading' | 'published' | 'error';
-  createdAt: any; // Firestore ServerTimestamp
-  publishedAt?: any; // Firestore ServerTimestamp
-  displayOnWebsite: boolean;
 }

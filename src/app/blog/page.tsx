@@ -5,9 +5,6 @@ import { courses as allCourses } from '@/data/courses';
 import { BlogListItem } from '@/components/blog/BlogListItem';
 import type { Course } from '@/types';
 import type { Metadata } from 'next';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { PlusCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Tech Blog | Articles & Tutorials | Knowledge Craft',
@@ -28,11 +25,6 @@ export default function AllBlogsPage() {
             Dive into the Knowledge Craft blog for expert articles, tutorials, and the latest news on web development, AI, data science, and cloud technology. Stay ahead of the curve.
           </p>
         </div>
-        <Button asChild className="shadow-sm">
-          <Link href="/blog/new">
-            <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
-          </Link>
-        </Button>
       </div>
 
       {allBlogs.length > 0 ? (

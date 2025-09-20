@@ -2,10 +2,8 @@
 // src/app/forum/page.tsx
 import { ForumTopicItem } from "@/components/forum/ForumTopicItem";
 import { forumTopics as allTopics } from "@/data/forum";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PlusCircle, Search } from "lucide-react";
-import Link from "next/link";
+import { Search } from "lucide-react";
 
 export default function ForumPage() {
   // In a real app, topics might be fetched and paginated
@@ -19,14 +17,6 @@ export default function ForumPage() {
           <p className="text-lg text-muted-foreground mt-1">
             Connect, learn, and share with fellow tech enthusiasts.
           </p>
-        </div>
-        <div className="flex gap-2 w-full md:w-auto">
-          {/* This button would likely go to a page or open a modal to create a new topic */}
-          <Button asChild className="shadow-sm">
-            <Link href="/forum/new-topic"> {/* Placeholder link */}
-              <PlusCircle className="mr-2 h-5 w-5" /> New Topic
-            </Link>
-          </Button>
         </div>
       </div>
 
@@ -49,7 +39,7 @@ export default function ForumPage() {
         </div>
       ) : (
         <p className="text-center text-muted-foreground text-lg py-10">
-          No forum topics available yet. Be the first to create one!
+          No forum topics available yet.
         </p>
       )}
     </div>
