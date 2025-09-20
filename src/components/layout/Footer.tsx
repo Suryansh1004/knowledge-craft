@@ -1,12 +1,8 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import Logo from "@/components/Logo";
+import { Linkedin } from "lucide-react";
 
 const Footer = () => {
   const socialLinks = [
-    { name: "Facebook", icon: Facebook, href: "#" },
-    { name: "Twitter", icon: Twitter, href: "#" },
-    { name: "Instagram", icon: Instagram, href: "#" },
     { name: "LinkedIn", icon: Linkedin, href: "#" },
   ];
 
@@ -25,7 +21,6 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
              <div className="flex items-center space-x-2 mb-4">
-               <Logo />
                <span className="font-bold text-lg">Knowledge Craft</span>
              </div>
             <p className="text-muted-foreground text-sm">
