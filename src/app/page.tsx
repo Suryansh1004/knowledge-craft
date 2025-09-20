@@ -1,4 +1,3 @@
-
 // src/app/page.tsx
 import { HeroSection } from "@/components/home/HeroSection";
 import { CourseCard } from "@/components/home/CourseCard";
