@@ -39,14 +39,6 @@ export interface Blog {
   tags?: string[];
 }
 
-export interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  quote: string;
-  data_ai_hint?: string;
-}
-
 export interface ForumTopic {
   id: string;
   title: string;
