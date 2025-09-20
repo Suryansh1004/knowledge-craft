@@ -48,7 +48,7 @@ export default function RootLayout({
       >
         <AuthProvider>
             <Header />
-            <main className="flex-1 w-full">
+            <main className="flex-1 w-full container mx-auto px-4 md:px-6">
                 {children}
             </main>
             <Footer />

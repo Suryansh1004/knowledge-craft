@@ -24,6 +24,7 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
   { href: '/forum', label: 'Forum' },
@@ -99,7 +100,7 @@ export function Header() {
       </DropdownMenuContent>
     </DropdownMenu>
   ) : !loading ? (
-    <div className="hidden md:flex items-center space-x-2">
+    <div className="flex items-center space-x-2">
       <Button variant="outline" asChild>
         <Link href="/login">Login</Link>
       </Button>
@@ -114,28 +115,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
-        {/* Left Section: Logo */}
-        <div className="flex items-center">
-          <Link href="/">
-            <Logo />
-          </Link>
-        </div>
-
-        {/* Center Section: Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
-          <NavLinkItem href="/" label="Home" />
-          {navLinks.map((link) => (
-            <NavLinkItem key={link.href} href={link.href} label={link.label} />
-          ))}
-        </nav>
-
-        {/* Right Section: User Menu / Auth Buttons */}
-        <div className="hidden md:flex items-center justify-end">
-          {userMenu}
-        </div>
-        
-        {/* Mobile Menu Trigger & Content */}
-        <div className="md:hidden">
+        {/* Left Section: Logo & Mobile Menu Trigger */}
+        <div className="flex items-center gap-4 md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -148,7 +129,6 @@ export function Header() {
                 <Logo />
               </div>
               <nav className="flex flex-col space-y-2 p-4">
-                <NavLinkItem href="/" label="Home" className="justify-start w-full" />
                 {navLinks.map((link) => (
                   <NavLinkItem key={link.href} href={link.href} label={link.label} className="justify-start w-full" />
                 ))}
@@ -196,6 +176,25 @@ export function Header() {
               </div>
             </SheetContent>
           </Sheet>
+        </div>
+
+        {/* Desktop: Logo on the left */}
+        <div className="hidden md:flex">
+           <Logo />
+        </div>
+
+        {/* Desktop: Center Navigation */}
+        <nav className="hidden md:flex items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="flex items-center space-x-2 lg:space-x-4">
+            {navLinks.map((link) => (
+              <NavLinkItem key={link.href} href={link.href} label={link.label} />
+            ))}
+          </div>
+        </nav>
+
+        {/* Right Section: User Menu / Auth Buttons */}
+        <div className="flex items-center justify-end">
+          {userMenu}
         </div>
       </div>
     </header>
