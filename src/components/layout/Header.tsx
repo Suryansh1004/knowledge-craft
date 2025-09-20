@@ -97,7 +97,7 @@ export function Header() {
       <div className="container flex h-20 items-center justify-between px-4 md:px-6">
         <Logo />
         
-        <nav className="flex items-center gap-4">
+        <nav className="hidden md:flex items-center gap-4">
           {navLinks.map((link) => (
             <NavLinkItem key={link.href} href={link.href} label={link.label} />
           ))}
