@@ -60,28 +60,6 @@ export interface ForumPost {
   // replies?: ForumPost[]; // For threaded discussions
 }
 
-export interface CodingProblem {
-  id:string;
-  title: string;
-  platform: 'LeetCode' | 'HackerRank' | 'Other';
-  difficulty: 'Easy' | 'Medium' | 'Hard';
-  description: string;
-  tags?: string[];
-  slug: string;
-}
-
-export interface CodingSubmission {
-  id: string;
-  userId: string;
-  problemId: string;
-  problemTitle: string;
-  platform: string;
-  code: string;
-  status: 'Submitted' | 'Accepted' | 'Wrong Answer' | 'Time Limit Exceeded' | 'Runtime Error';
-  submittedAt: Date; // Should be Firestore Timestamp or Date
-  language: string;
-}
-
 export interface Video {
   id: string;
   title: string;

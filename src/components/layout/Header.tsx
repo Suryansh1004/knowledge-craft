@@ -26,7 +26,6 @@ import { useState } from 'react';
 const navLinks = [
   { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
-  { href: '/coding-problems', label: 'Practice' },
   { href: '/forum', label: 'Forum' },
 ];
 
