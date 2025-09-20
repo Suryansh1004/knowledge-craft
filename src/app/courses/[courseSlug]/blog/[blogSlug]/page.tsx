@@ -58,7 +58,6 @@ export default async function BlogPage({ params }: PageProps): Promise<JSX.Eleme
         <aside className="lg:col-span-4 space-y-8 sticky top-24 self-start">
           <Suspense fallback={<Skeleton className="h-40 w-full rounded-lg" />}>
             <RelatedBlogs
-              currentBlogContent={blog.content}
               currentBlogId={blog.id}
               courseSlug={courseSlug}
               allBlogsForCourse={courseBlogsForSuggestions}

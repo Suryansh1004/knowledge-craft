@@ -1,42 +1,24 @@
 // src/components/blog/RelatedBlogs.tsx
 "use client";
 
-import { suggestRelatedBlogs } from '@/ai/flows/suggest-related-blogs'; // Assuming the path is correct
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lightbulb, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 interface RelatedBlogsProps {
-  currentBlogContent: string;
-  currentBlogId: string; // To filter out the current blog from suggestions if needed
-  courseSlug: string; // To construct links
-  allBlogsForCourse: Array<{ id: string; slug: string; title: string }>; // For linking
+  currentBlogId: string;
+  courseSlug: string;
+  allBlogsForCourse: Array<{ id: string; slug: string; title: string }>;
 }
 
-export async function RelatedBlogs({ currentBlogContent, currentBlogId, courseSlug, allBlogsForCourse }: RelatedBlogsProps) {
-  let relatedTitles: string[] = [];
-
-  try {
-    const result = await suggestRelatedBlogs({ currentBlogContent });
-    relatedTitles = result.relatedBlogTitles;
-  } catch (error) {
-    console.error("Error fetching related blogs:", error);
-    // Optionally, display a message or fallback content
-  }
-
-  if (!relatedTitles || relatedTitles.length === 0) {
-    return null; // Or some fallback UI
-  }
-  
-  // Map titles to actual blog objects for linking
-  const relatedBlogLinks = relatedTitles.map(title => {
-    const foundBlog = allBlogsForCourse.find(b => b.title.toLowerCase() === title.toLowerCase() && b.id !== currentBlogId);
-    return foundBlog ? { title, slug: foundBlog.slug } : { title, slug: null };
-  }).filter(b => b.slug); // Filter out blogs not found or current blog
-
+export function RelatedBlogs({ currentBlogId, courseSlug, allBlogsForCourse }: RelatedBlogsProps) {
+  // Filter out the current blog and take the first 3 as suggestions.
+  const relatedBlogLinks = allBlogsForCourse
+    .filter(blog => blog.id !== currentBlogId)
+    .slice(0, 3);
 
   if (relatedBlogLinks.length === 0) {
-     return (
+    return (
       <Card className="shadow-md">
         <CardHeader>
           <CardTitle className="flex items-center text-lg text-primary">
@@ -45,22 +27,11 @@ export async function RelatedBlogs({ currentBlogContent, currentBlogId, courseSl
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">No direct matches found for AI suggestions. Explore other blogs in this course!</p>
-           <ul className="mt-3 space-y-2">
-            {allBlogsForCourse.slice(0,3).filter(b => b.id !== currentBlogId).map(blog => (
-               <li key={blog.id}>
-                <Link href={`/courses/${courseSlug}/blog/${blog.slug}`} className="text-sm text-accent hover:underline flex items-center">
-                  {blog.title}
-                  <ExternalLink className="ml-1 h-3 w-3" />
-                </Link>
-              </li>
-            ))}
-           </ul>
+          <p className="text-sm text-muted-foreground">No other articles in this course yet.</p>
         </CardContent>
       </Card>
     );
   }
-
 
   return (
     <Card className="shadow-md">
@@ -72,9 +43,9 @@ export async function RelatedBlogs({ currentBlogContent, currentBlogId, courseSl
       </CardHeader>
       <CardContent>
         <ul className="space-y-2">
-          {relatedBlogLinks.map((blog, index) => (
-            <li key={index}>
-              <Link href={`/courses/${courseSlug}/blog/${blog.slug!}`} className="text-sm text-accent hover:underline flex items-center">
+          {relatedBlogLinks.map((blog) => (
+            <li key={blog.id}>
+              <Link href={`/courses/${courseSlug}/blog/${blog.slug}`} className="text-sm text-accent hover:underline flex items-center">
                 {blog.title}
                 <ExternalLink className="ml-1 h-3 w-3" />
               </Link>
