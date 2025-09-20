@@ -5,7 +5,6 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
-import { FloatingChatbot } from "@/components/chatbot/FloatingChatbot";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +54,6 @@ export default function RootLayout({
               <Footer />
             </div>
             <Toaster />
-            <FloatingChatbot />
         </AuthProvider>
       </body>
     </html>
