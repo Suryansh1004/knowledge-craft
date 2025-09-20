@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -18,17 +17,6 @@ interface CourseCardProps {
 const CourseCard = ({ course }: CourseCardProps) => {
   return (
     <Card className="flex flex-col overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-xl">
-      <CardHeader className="p-0">
-        <div className="relative h-48 w-full">
-           <Image
-            src={course.imageUrl}
-            alt={course.title}
-            fill
-            style={{ objectFit: 'cover' }}
-            data-ai-hint={course.data_ai_hint}
-           />
-        </div>
-      </CardHeader>
       <CardContent className="p-4 flex-grow">
         <CardTitle className="text-lg font-bold mb-2 leading-tight">
           <Link href={`/courses/${course.slug}`}>{course.title}</Link>
