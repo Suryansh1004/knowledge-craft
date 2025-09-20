@@ -1,17 +1,12 @@
-
 // src/components/Logo.tsx
 import Link from 'next/link';
-import { BookOpenCheck } from 'lucide-react';
+import { Mountain } from 'lucide-react';
 
-interface LogoProps {
-  className?: string;
-}
-
-export function Logo({ className }: LogoProps) {
+export function Logo() {
   return (
-    <Link href="/" className={`flex items-center gap-2 text-2xl font-bold text-primary ${className}`}>
-      <BookOpenCheck className="h-8 w-8" />
-      <span>Knowledge Craft</span>
+    <Link href="/" className="flex items-center gap-2" prefetch={false}>
+      <Mountain className="h-6 w-6 text-primary" />
+      <span className="text-xl font-bold text-foreground">Knowledge Craft</span>
     </Link>
   );
 }
