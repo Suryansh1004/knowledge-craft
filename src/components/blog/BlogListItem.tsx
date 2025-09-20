@@ -1,3 +1,4 @@
+
 // src/components/blog/BlogListItem.tsx
 "use client";
 
@@ -10,10 +11,9 @@ import { format } from 'date-fns';
 
 interface BlogListItemProps {
   blog: Blog;
-  courseSlug: string;
 }
 
-export function BlogListItem({ blog, courseSlug }: BlogListItemProps) {
+export function BlogListItem({ blog }: BlogListItemProps) {
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg flex flex-col h-full">
       <CardHeader>
@@ -27,7 +27,7 @@ export function BlogListItem({ blog, courseSlug }: BlogListItemProps) {
             {blog.author}
           </div>
         </div>
-        <Link href={`/courses/${courseSlug}/blog/${blog.slug}`}>
+        <Link href={`/blog/${blog.slug}`}>
           <CardTitle className="text-xl font-semibold text-primary hover:underline line-clamp-2">
             {blog.title}
           </CardTitle>
@@ -46,7 +46,7 @@ export function BlogListItem({ blog, courseSlug }: BlogListItemProps) {
         )}
       </CardContent>
       <CardFooter>
-        <Link href={`/courses/${courseSlug}/blog/${blog.slug}`} className="text-sm font-medium text-accent hover:text-accent/80 flex items-center group">
+        <Link href={`/blog/${blog.slug}`} className="text-sm font-medium text-accent hover:text-accent/80 flex items-center group">
           Read More <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </CardFooter>

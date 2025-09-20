@@ -1,9 +1,7 @@
 
 // src/app/blog/page.tsx
 import { blogs as allBlogs } from '@/data/blogs';
-import { courses as allCourses } from '@/data/courses';
 import { BlogListItem } from '@/components/blog/BlogListItem';
-import type { Course } from '@/types';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,9 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function AllBlogsPage() {
-  // Create a map for quick course lookup by ID
-  const coursesMap = new Map<string, Course>();
-  allCourses.forEach(course => coursesMap.set(course.id, course));
 
   return (
     <div className="py-12">
@@ -30,13 +25,8 @@ export default function AllBlogsPage() {
       {allBlogs.length > 0 ? (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {allBlogs.map((blog) => {
-            const course = coursesMap.get(blog.courseId);
-            const courseSlug = course ? course.slug : 'unknown'; // Fallback if course not found
-            if (!course && process.env.NODE_ENV === 'development') {
-                console.warn(`Course with ID ${blog.courseId} not found for blog titled "${blog.title}" (ID: ${blog.id})`);
-            }
             return (
-              <BlogListItem key={blog.id} blog={blog} courseSlug={courseSlug} />
+              <BlogListItem key={blog.id} blog={blog} />
             );
           })}
         </div>

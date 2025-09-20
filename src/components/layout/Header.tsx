@@ -1,3 +1,4 @@
+
 // src/components/layout/Header.tsx
 "use client";
 import Link from 'next/link';
@@ -9,7 +10,6 @@ import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/courses', label: 'Courses' },
   { href: '/blog', label: 'Blog' },
 ];
 

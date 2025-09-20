@@ -1,3 +1,4 @@
+
 // src/components/layout/Footer.tsx
 import Link from 'next/link';
 import { Github, Linkedin, Twitter } from 'lucide-react';
@@ -24,7 +25,6 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-md font-semibold text-foreground">Quick Links</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/courses" className="text-muted-foreground hover:text-primary transition-colors">All Courses</Link></li>
               <li><Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
             </ul>
           </div>

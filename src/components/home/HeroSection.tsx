@@ -1,3 +1,4 @@
+
 // src/components/home/HeroSection.tsx
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -12,17 +13,12 @@ export function HeroSection() {
             Unlock Your <span className="text-primary">Tech Potential</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Propel your career forward with cutting-edge online courses in Web Development, AI, Data Science, and Cloud Computing. Learn at your own pace with expert-led content and a vibrant, supportive community.
+            Propel your career forward with cutting-edge articles and tutorials on Web Development, AI, Data Science, and Cloud Computing. Learn at your own pace with expert-led content.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button asChild size="lg" className="shadow-lg hover:shadow-primary/20 transition-shadow">
-              <Link href="/courses">
-                Explore Courses <ChevronRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md transition-shadow">
-              <Link href="/signup">
-                Get Started Free
+              <Link href="/blog">
+                Explore The Blog <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>

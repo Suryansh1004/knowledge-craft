@@ -1,8 +1,9 @@
+
 // src/components/blog/BlogPageClient.tsx
 "use client";
 
 import React from 'react';
-import type { Course, Blog as BlogType } from '@/types';
+import type { Blog as BlogType } from '@/types';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -10,19 +11,14 @@ import { CalendarDays, User, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-// The Course type passed to this client component should not include the icon function
-type SerializableCourse = Omit<Course, 'icon'>;
-
 interface BlogPageClientProps {
-  course: SerializableCourse;
   blog: BlogType;
   params: {
-    courseSlug: string;
     blogSlug: string;
   };
 }
 
-export function BlogPageClient({ course, blog }: BlogPageClientProps) {
+export function BlogPageClient({ blog }: BlogPageClientProps) {
 
   const renderMarkdown = (markdown: string) => {
     // Basic markdown to HTML conversion - consider a more robust library for complex needs

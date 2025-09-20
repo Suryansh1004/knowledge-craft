@@ -1,3 +1,4 @@
+
 // src/components/blog/RelatedBlogs.tsx
 "use client";
 
@@ -7,13 +8,12 @@ import Link from 'next/link';
 
 interface RelatedBlogsProps {
   currentBlogId: string;
-  courseSlug: string;
-  allBlogsForCourse: Array<{ id: string; slug: string; title: string }>;
+  allBlogs: Array<{ id: string; slug: string; title: string }>;
 }
 
-export function RelatedBlogs({ currentBlogId, courseSlug, allBlogsForCourse }: RelatedBlogsProps) {
+export function RelatedBlogs({ currentBlogId, allBlogs }: RelatedBlogsProps) {
   // Filter out the current blog and take the first 3 as suggestions.
-  const relatedBlogLinks = allBlogsForCourse
+  const relatedBlogLinks = allBlogs
     .filter(blog => blog.id !== currentBlogId)
     .slice(0, 3);
 
@@ -27,7 +27,7 @@ export function RelatedBlogs({ currentBlogId, courseSlug, allBlogsForCourse }: R
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">No other articles in this course yet.</p>
+          <p className="text-sm text-muted-foreground">No other articles available yet.</p>
         </CardContent>
       </Card>
     );
@@ -45,7 +45,7 @@ export function RelatedBlogs({ currentBlogId, courseSlug, allBlogsForCourse }: R
         <ul className="space-y-2">
           {relatedBlogLinks.map((blog) => (
             <li key={blog.id}>
-              <Link href={`/courses/${courseSlug}/blog/${blog.slug}`} className="text-sm text-accent hover:underline flex items-center">
+              <Link href={`/blog/${blog.slug}`} className="text-sm text-accent hover:underline flex items-center">
                 {blog.title}
                 <ExternalLink className="ml-1 h-3 w-3" />
               </Link>
